@@ -52,9 +52,4 @@ public class BaseUnit : MonoBehaviour
             isDead = true;
         }
     }
-
-    public virtual void Attack()
-    {
-
-    }
 }

@@ -13,22 +13,15 @@ public class EnemyStateMachine : BaseStateMachine
 
     private Enemy enemy;
 
-    private void Awake()
-    {
-        enemy = GetComponent<Enemy>();
-    }
-
-    private void Start()
-    {
-
-    }
-
     public void Init()
     {
+        enemy = GetComponent<Enemy>();
+
         patrolState = new EnemyPatrolState();
         chaseState = new EnemyChaseState();
 
         patrolState.Init(enemy);
         chaseState.Init(enemy);
+
     }
 }
