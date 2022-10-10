@@ -5,8 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class BaseUnit : MonoBehaviour
 {
-    public Rigidbody2D rb;
-    public Animator anim;
+    [HideInInspector] public Rigidbody2D rb;
+    [HideInInspector] public Animator anim;
 
     private bool isDead;
     public float moveSpeed;

@@ -2,17 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyStateMachine : MonoBehaviour
+
+/// <summary>
+/// 管理和注册所有的状态，以及负责切换状态
+/// </summary>
+public class EnemyStateMachine : BaseStateMachine
 {
-    // Start is called before the first frame update
-    void Start()
+    public EnemyPatrolState patrolState;
+    public EnemyChaseState chaseState;
+
+    private Enemy enemy;
+
+    private void Awake()
     {
-        
+        enemy = GetComponent<Enemy>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+
+    }
+
+    public void Init()
+    {
+        patrolState = new EnemyPatrolState();
+        chaseState = new EnemyChaseState();
+
+        patrolState.Init(enemy);
+        chaseState.Init(enemy);
     }
 }
