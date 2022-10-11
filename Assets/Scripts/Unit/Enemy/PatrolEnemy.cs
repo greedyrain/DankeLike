@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class PatrolEnemy : Enemy
 {
-    public float skillRadius;
-    public float skillCD;
-    [HideInInspector] public float remainSkillCD;
+    public override void Awake()
+    {
+        base.Awake();
+        enemyData = GameDataManager.Instance.EnemyData[0];
+    }
 
     protected override void OnEnable()
     {
@@ -23,9 +25,9 @@ public class PatrolEnemy : Enemy
 
     public void Alert()
     {
-        if (Physics2D.OverlapCircle(transform.position, alertRadius, targetLayer))
+        if (Physics2D.OverlapCircle(transform.position, enemyData.alertRadius, targetLayer))
         {
-            target = Physics2D.OverlapCircle(transform.position, alertRadius, targetLayer).GetComponent<PlayerController>();
+            target = Physics2D.OverlapCircle(transform.position, enemyData.alertRadius, targetLayer).GetComponent<PlayerController>();
             stateMachine.SwitchState(stateMachine.chaseState);
         }
         else if (target != null)
@@ -35,21 +37,12 @@ public class PatrolEnemy : Enemy
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(originPos, patrolRadius);
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.green;
+    //    Gizmos.DrawWireSphere(originPos, patrolRadius);
 
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, alertRadius);
-    }
-
-    public void Attack()
-    {
-        if (Physics2D.OverlapCircle(transform.position, attackRadius, targetLayer))
-        {
-            target = Physics2D.OverlapCircle(transform.position, alertRadius, targetLayer).GetComponent<PlayerController>();
-            stateMachine.SwitchState(stateMachine.chaseState);
-        }
-    }
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawWireSphere(transform.position, alertRadius);
+    //}
 }

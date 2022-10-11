@@ -37,8 +37,8 @@ public class EnemyPatrolState : BaseEnemyState
 
     public void SwitchPatrolTarget()
     {
-        float x = Random.Range(enemy.originPos.x - enemy.patrolRadius, enemy.originPos.x + enemy.patrolRadius);
-        float y = Random.Range(enemy.originPos.y - enemy.patrolRadius, enemy.originPos.y + enemy.patrolRadius);
+        float x = Random.Range(enemy.originPos.x - enemy.enemyData.patrolRadius, enemy.originPos.x + enemy.enemyData.patrolRadius);
+        float y = Random.Range(enemy.originPos.y - enemy.enemyData.patrolRadius, enemy.originPos.y + enemy.enemyData.patrolRadius);
 
         enemy.patrolTarget.position = new Vector2(x, y);
     }

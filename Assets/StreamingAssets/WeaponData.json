@@ -1,0 +1,5 @@
+[
+{"ID":1001,"description":"刀","damage":15,"range":5,"atkCD":3,"remainCD":0},
+{"ID":1002,"description":"手枪","damage":10,"range":10,"atkCD":2,"remainCD":0},
+{"ID":1003,"description":"霰弹枪","damage":20,"range":7,"atkCD":3.5,"remainCD":0}
+]

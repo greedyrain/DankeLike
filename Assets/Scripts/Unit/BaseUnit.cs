@@ -7,15 +7,17 @@ public class BaseUnit : MonoBehaviour
 {
     [HideInInspector] public Rigidbody2D rb;
     [HideInInspector] public Animator anim;
+    SpriteRenderer sr;
 
-    private bool isDead;
-    public float moveSpeed;
-    public float maxHP;
-    public float HP;
+    protected bool isDead;
+    protected float moveSpeed;
+
+    public float lastDir;
 
     public virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
     }
 
     public virtual void Start()
@@ -36,20 +38,18 @@ public class BaseUnit : MonoBehaviour
     public virtual void Move(Vector2 dir)
     {
         rb.velocity = dir.normalized * moveSpeed;
+        if (dir.x > 0)
+        {
+            sr.flipX = true;
+        }
+        else if (dir.x < 0)
+        {
+            sr.flipX = false;
+        }
     }
 
     public virtual void StopMove()
     {
         rb.velocity = Vector2.zero;
-    }
-
-    public virtual void GetHurt(int damage)
-    {
-        HP -= damage;
-        if (HP <= 0 )
-        {
-            HP = 0;
-            isDead = true;
-        }
     }
 }
