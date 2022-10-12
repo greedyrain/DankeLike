@@ -34,7 +34,7 @@ public class Shotgun : Weapon
         {
             obj.transform.position = firePos.position;
             obj.transform.rotation = transform.rotation;
-            obj.GetComponent<Peojectile_Shotgun>().Init(this);
+            obj.GetComponent<Peojectile_Shotgun>().Init(this,transform.right);
         });
     }
 }

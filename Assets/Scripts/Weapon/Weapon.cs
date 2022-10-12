@@ -48,6 +48,5 @@ public class Weapon : MonoBehaviour
     public void SetWeaponDirection(Vector2 dir)
     {
         transform.right = dir;
-        
     }
 }
