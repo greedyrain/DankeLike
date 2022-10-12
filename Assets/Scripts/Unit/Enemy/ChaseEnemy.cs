@@ -8,7 +8,6 @@ public class ChaseEnemy : Enemy
     {
         base.Awake();
         target = FindObjectOfType<PlayerController>();
-        Debug.Log(target.name);
     }
     protected override void OnEnable()
     {

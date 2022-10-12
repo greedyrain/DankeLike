@@ -7,7 +7,7 @@ public class PatrolEnemy : Enemy
     public override void Awake()
     {
         base.Awake();
-        enemyData = GameDataManager.Instance.EnemyData[0];
+        enemyData = GameDataManager.Instance.EnemiesData[0];
     }
 
     protected override void OnEnable()

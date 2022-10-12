@@ -1,18 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public class Peojectile_Shotgun : MonoBehaviour
 {
     Weapon weapon;
     public float buletSpeed;
-    // Start is called before the first frame update
-    void Start()
+    private void OnEnable()
     {
-        
+        UniTask.Delay(6000).ContinueWith(() => PoolManager.Instance.PushObj("Projectile_Shotgun",this.gameObject));
     }
 
-    // Update is called once per frame
     void Update()
     {
         transform.Translate(Vector2.right * buletSpeed * Time.deltaTime, Space.Self);
@@ -22,8 +22,8 @@ public class Peojectile_Shotgun : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            collision.GetComponent<Enemy>().GetHurt(weapon.damage);
-
+            Debug.Log(collision.transform.parent.name);
+            collision.transform.GetComponent<Enemy>().GetHurt(weapon.damage);
         }
     }
 

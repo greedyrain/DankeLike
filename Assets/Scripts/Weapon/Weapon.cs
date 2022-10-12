@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.InputSystem;
 
 public class Weapon : MonoBehaviour
@@ -14,6 +15,8 @@ public class Weapon : MonoBehaviour
     WeaponData data;
     PlayerController player;
     PlayerInput playerInput;
+
+    private Vector3 weaponDir;
 
     protected virtual void Awake()
     {
@@ -35,8 +38,6 @@ public class Weapon : MonoBehaviour
 
     public void InitData()
     {
-
-
         data = GameDataManager.Instance.Weapons[ID - 1];
         description = data.description;
         damage = data.damage;
@@ -46,6 +47,7 @@ public class Weapon : MonoBehaviour
 
     public void SetWeaponDirection(Vector2 dir)
     {
-        transform.rotation.SetLookRotation(dir);
+        transform.right = dir;
+        
     }
 }

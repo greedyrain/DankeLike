@@ -46,14 +46,17 @@ public class Enemy : BaseUnit
         {
             enemyData.HP = 0;
             isDead = true;
+            PoolManager.Instance.PushObj(transform.parent.name,transform.parent.gameObject);
         }
+        Debug.Log($"Enemy takes {damage} damage. Remain HP is: {enemyData.HP}.");
+
     }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player") && remainAtkCD <= 0)
         {
-            Debug.Log("撞到了");
+            Debug.Log("Contact!");
             remainAtkCD = atkCD;
             collision.transform.GetComponent<PlayerController>().GetHurt(enemyData.atk);
         }
@@ -62,7 +65,7 @@ public class Enemy : BaseUnit
 
     public void InitData()
     {
-        enemyData = GameDataManager.Instance.EnemyData[id - 1];
+        enemyData = GameDataManager.Instance.EnemiesData[id - 1];
         moveSpeed = enemyData.moveSpeed;
         objName = enemyData.name;
         description = enemyData.description;
