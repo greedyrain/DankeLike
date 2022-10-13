@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class BaseUnit : MonoBehaviour
@@ -11,8 +12,6 @@ public class BaseUnit : MonoBehaviour
 
     protected bool isDead;
     protected float moveSpeed;
-
-    public float lastDir;
 
     public virtual void Awake()
     {

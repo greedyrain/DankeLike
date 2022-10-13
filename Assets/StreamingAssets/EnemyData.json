@@ -1,5 +1,5 @@
 [
-{"ID":1001,"name":"Enemy1","description":"Enemy1","maxHP":10,"HP":10,"atk":2,"def":0,"moveSpeed":1,"patrolRadius":5,"alertRadius":3},
-{"ID":1002,"name":"Enemy2","description":"Enemy2","maxHP":20,"HP":20,"atk":3,"def":1,"moveSpeed":1,"patrolRadius":5,"alertRadius":3},
-{"ID":1003,"name":"Enemy3","description":"Enemy3","maxHP":30,"HP":30,"atk":4,"def":2,"moveSpeed":1,"patrolRadius":5,"alertRadius":3}
+{"ID":1001,"name":"Enemy1","description":"Enemy1","maxHP":10,"HP":10,"atk":2,"def":0,"moveSpeed":2,"patrolRadius":5,"alertRadius":3,"minDrop":5,"maxDrop":10},
+{"ID":1002,"name":"Enemy2","description":"Enemy2","maxHP":20,"HP":20,"atk":3,"def":1,"moveSpeed":2.5,"patrolRadius":5,"alertRadius":3,"minDrop":8,"maxDrop":13},
+{"ID":1003,"name":"Enemy3","description":"Enemy3","maxHP":30,"HP":30,"atk":4,"def":2,"moveSpeed":3,"patrolRadius":5,"alertRadius":3,"minDrop":10,"maxDrop":15}
 ]

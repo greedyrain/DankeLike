@@ -14,4 +14,6 @@ public class EnemyData
     public float moveSpeed;
     public float patrolRadius;
     public float alertRadius;
+    public int minDrop;
+    public int maxDrop;
 }

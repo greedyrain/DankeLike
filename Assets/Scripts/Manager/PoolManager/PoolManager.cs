@@ -11,7 +11,7 @@ public class PoolManager : Singleton<PoolManager>
     public Dictionary<string, PoolData> poolDic = new Dictionary<string, PoolData>();
     public GameObject poolObj;
 
-    //Method to get object by name from the Dictionary;
+    //Method of getting object by name from the Dictionary;
     public void GetObj(string path,string name, UnityAction<GameObject> callback)
     {
         if (poolDic.ContainsKey(name) && poolDic[name].poolList.Count > 0)
@@ -24,18 +24,19 @@ public class PoolManager : Singleton<PoolManager>
         }
     }
     
-    public void GetObj(string name)
+    public GameObject GetObj(string path,string name)
     {
         if (poolDic.ContainsKey(name) && poolDic[name].poolList.Count > 0)
-            poolDic[name].GetObj();
+            return poolDic[name].GetObj();
         else
         {
-            GameObject obj = Resources.Load<GameObject>(name);
+            GameObject obj = GameObject.Instantiate(Resources.Load<GameObject>(path+"/"+name));
             obj.name = name;
+            return obj;
         }
     }
 
-    //Method to push object into the Dictionary;
+    //Method of pushing object into the Dictionary;
     public void PushObj(string name, GameObject obj)
     {
         if (poolObj == null)

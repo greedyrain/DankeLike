@@ -16,11 +16,14 @@ public class PlayerController : BaseUnit
 
     public PlayerData playerData;
     public PlayerInput input;
+    private PlayerExperience playerExperience;
 
     public override void Awake()
     {
         base.Awake();
         InitData();
+        playerExperience = GetComponent<PlayerExperience>();
+        playerExperience.Init();
     }
 
     public override void Start()

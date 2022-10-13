@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Enemy : BaseUnit
 {
@@ -16,6 +17,9 @@ public class Enemy : BaseUnit
     [HideInInspector] public int def;
     [HideInInspector] public float patrolRadius;
     [HideInInspector] public float alertRadius;
+    
+    private int minDrop;
+    private int maxDrop;
 
     public EnemyData enemyData;
 
@@ -46,17 +50,28 @@ public class Enemy : BaseUnit
         {
             enemyData.HP = 0;
             isDead = true;
+            Drop();
             PoolManager.Instance.PushObj(transform.parent.name,transform.parent.gameObject);
         }
         Debug.Log($"Enemy takes {damage} damage. Remain HP is: {enemyData.HP}.");
-
     }
+
+    public virtual void Drop()
+    {
+        int drop = Random.Range(minDrop, maxDrop);
+        PoolManager.Instance.GetObj("Prefabs","DropItem", (obj) =>
+        {
+            obj.GetComponent<DropItem>().Init(drop);
+            obj.transform.position = transform.position;
+            obj.transform.rotation = transform.rotation;
+        });
+    }
+    
 
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player") && remainAtkCD <= 0)
         {
-            Debug.Log("Contact!");
             remainAtkCD = atkCD;
             collision.transform.GetComponent<PlayerController>().GetHurt(enemyData.atk);
         }
@@ -75,5 +90,7 @@ public class Enemy : BaseUnit
         def = enemyData.def;
         patrolRadius = enemyData.patrolRadius;
         alertRadius = enemyData.alertRadius;
+        minDrop = enemyData.minDrop;
+        maxDrop = enemyData.maxDrop;
     }
 }
