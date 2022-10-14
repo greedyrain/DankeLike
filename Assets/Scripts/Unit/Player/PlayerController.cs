@@ -37,6 +37,13 @@ public class PlayerController : BaseUnit
         base.OnEnable();
         input.onMove += Move;
         input.onStopMove += StopMove;
+        input.onSkill += TestAddSkill;
+    }
+
+    private void TestAddSkill()
+    {
+        SkillManager skillManager = GetComponent<SkillManager>();
+        skillManager.ObtainSkill(1002,5);
     }
 
     protected override void OnDisable()

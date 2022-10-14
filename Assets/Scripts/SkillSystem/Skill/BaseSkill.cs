@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// 存储技能相关数据，实现技能施放后的处理
+/// </summary>
 public abstract class BaseSkill : MonoBehaviour
 {
     public int id;
@@ -20,9 +23,10 @@ public abstract class BaseSkill : MonoBehaviour
         // }
     }
 
+    
     public abstract void Generate();
 
-    public void InitData(PlayerController owner,SkillData data)
+    public virtual void InitData(PlayerController owner,SkillData data)
     {
         this.owner = owner;
         this.data = data;

@@ -8,6 +8,8 @@ public class SkillData
 {
     public int ID;
     public int level;
+    public int count;
+    public int damage;
     public string skillName;
     public string description;
     public float range;

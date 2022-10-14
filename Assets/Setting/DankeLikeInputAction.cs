@@ -35,6 +35,15 @@ public partial class @DankeLikeInputAction : IInputActionCollection2, IDisposabl
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Skill"",
+                    ""type"": ""Button"",
+                    ""id"": ""32e65bd8-8b05-40e1-9ea5-106957b9c6e6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -147,6 +156,28 @@ public partial class @DankeLikeInputAction : IInputActionCollection2, IDisposabl
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6e0cb5ec-1b21-4e0b-903d-a21bdfb2c0b9"",
+                    ""path"": ""<Keyboard>/j"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Skill"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""92de6857-eb66-480b-a9ec-29e134697930"",
+                    ""path"": ""<Keyboard>/k"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Skill"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -156,6 +187,7 @@ public partial class @DankeLikeInputAction : IInputActionCollection2, IDisposabl
         // GamePlay
         m_GamePlay = asset.FindActionMap("GamePlay", throwIfNotFound: true);
         m_GamePlay_Move = m_GamePlay.FindAction("Move", throwIfNotFound: true);
+        m_GamePlay_Skill = m_GamePlay.FindAction("Skill", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -216,11 +248,13 @@ public partial class @DankeLikeInputAction : IInputActionCollection2, IDisposabl
     private readonly InputActionMap m_GamePlay;
     private IGamePlayActions m_GamePlayActionsCallbackInterface;
     private readonly InputAction m_GamePlay_Move;
+    private readonly InputAction m_GamePlay_Skill;
     public struct GamePlayActions
     {
         private @DankeLikeInputAction m_Wrapper;
         public GamePlayActions(@DankeLikeInputAction wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_GamePlay_Move;
+        public InputAction @Skill => m_Wrapper.m_GamePlay_Skill;
         public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -233,6 +267,9 @@ public partial class @DankeLikeInputAction : IInputActionCollection2, IDisposabl
                 @Move.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnMove;
+                @Skill.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnSkill;
+                @Skill.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnSkill;
+                @Skill.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnSkill;
             }
             m_Wrapper.m_GamePlayActionsCallbackInterface = instance;
             if (instance != null)
@@ -240,6 +277,9 @@ public partial class @DankeLikeInputAction : IInputActionCollection2, IDisposabl
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @Skill.started += instance.OnSkill;
+                @Skill.performed += instance.OnSkill;
+                @Skill.canceled += instance.OnSkill;
             }
         }
     }
@@ -247,5 +287,6 @@ public partial class @DankeLikeInputAction : IInputActionCollection2, IDisposabl
     public interface IGamePlayActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnSkill(InputAction.CallbackContext context);
     }
 }
