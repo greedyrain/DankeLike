@@ -12,7 +12,7 @@ using UnityEngine.Events;
 public class SkillManager : MonoBehaviour
 {
     private List<SkillData> skills = new List<SkillData>();
-    private List<SkillData> ownedSkill = new List<SkillData>();
+    private List<SkillDeployer> ownedSkill = new List<SkillDeployer>();
     public PlayerController player;
 
     private void Awake()
@@ -34,40 +34,25 @@ public class SkillManager : MonoBehaviour
     /// 释放技能
     /// </summary>
     /// <param name="data"></param>
-    void GenerateSkill(SkillData data)
+    void GenerateSkill(SkillDeployer deployer)
     {
-        if (PrepareSkill(data))
+        if (PrepareSkill(deployer))
         {
-            for (int i = 0; i < ownedSkill.Count; i++)
-            {
-                if (ownedSkill[i].ID == data.ID)
-                {
-                    int index = i;
-                    //从池子对象池中获取，调用该技能的Generate方法；
-                    PoolManager.Instance.GetObj("Prefabs/Skills", ownedSkill[i].prefabName, (obj) =>
-                    {
-                        BaseSkill skill = obj.GetComponent<BaseSkill>();
-                        Debug.Log(ownedSkill[index].prefabName);
-                        Debug.Log(obj == null);
-                        skill.InitData(player, data);
-                        skill.Generate();
-                        ownedSkill[index].remainCD = ownedSkill[index].skillCD;
-                        CoolDownSkill(ownedSkill[index]); 
-                    });
-
-                }
-            }
+            Debug.Log("123123123123");
+            deployer.Generate();
+            deployer.SkillData.remainCD = deployer.SkillData.skillCD;
+            CoolDownSkill(deployer);
         }
     }
 
     /// <summary>
     /// 判断技能是否满足释放条件
     /// </summary>
-    /// <param name="data"></param>
+    /// <param name="deployer"></param>
     /// <returns></returns>
-    bool PrepareSkill(SkillData data)
+    bool PrepareSkill(SkillDeployer deployer)
     {
-        if (data.remainCD > 0)
+        if (deployer.SkillData.remainCD > 0)
             return false;
         return true;
     }
@@ -75,13 +60,12 @@ public class SkillManager : MonoBehaviour
     /// <summary>
     /// 让技能进入冷却状态
     /// </summary>
-    /// <param name="data"></param>
-    async void CoolDownSkill(SkillData data)
+    /// <param name="deployer"></param>
+    async void CoolDownSkill(SkillDeployer deployer)
     {
-        while (data.remainCD > 0)
+        while (deployer.SkillData.remainCD > 0)
         {
-            await UniTask.DelayFrame(1).ContinueWith(()=>data.remainCD -= Time.deltaTime);
-            
+            await UniTask.DelayFrame(1).ContinueWith(()=>deployer.SkillData.remainCD -= Time.deltaTime);
         }
     }
 
@@ -90,14 +74,23 @@ public class SkillManager : MonoBehaviour
     /// </summary>
     /// <param name="id"></param>
     /// <param name="level"></param>
-    public void ObtainSkill(int id, int level)
+    public void ObtainSkill(int id,int level)
     {
-        for (int i = 0; i < skills.Count; i++)
+        foreach (var data in skills)
         {
-            if (skills[i].ID == id && skills[i].level == level)
+            if (data.ID == id && data.level == level)
             {
-                ownedSkill.Add(skills[i]);
+                SkillDeployer obj = Resources.Load<SkillDeployer>($"Prefabs/Skills/{data.skillName}");
+                obj.SkillData = data;
+                obj.player = player;
+                ownedSkill.Add(obj);
             }
         }
+    }
+
+    private T CreatObject<T>(string className) where T : class
+    {
+        Type type = Type.GetType(className);
+        return Activator.CreateInstance(type) as T;
     }
 }

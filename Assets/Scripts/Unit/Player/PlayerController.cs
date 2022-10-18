@@ -50,11 +50,11 @@ public class PlayerController : BaseUnit
     {
         input.onMove -= Move;
         input.onStopMove -= StopMove;
+        input.onSkill -= TestAddSkill;
     }
 
     public void GetHurt(int damage)
     {
-        Debug.Log(damage);
         damage -= playerData.def;
         if (damage <= 0)
             damage = 0;

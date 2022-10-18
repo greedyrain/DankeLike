@@ -8,6 +8,7 @@ public class SkillData
 {
     public int ID;
     public int level;
+    public List<string> impactTypes;
     public int count;
     public int damage;
     public string skillName;

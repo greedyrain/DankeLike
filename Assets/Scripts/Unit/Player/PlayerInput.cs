@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -10,6 +8,7 @@ public class PlayerInput : ScriptableObject, DankeLikeInputAction.IGamePlayActio
     public event UnityAction<Vector2> onMove;
     public event UnityAction onStopMove;
     public event UnityAction onSkill;
+    public event UnityAction onSkillCancel;
 
     public DankeLikeInputAction inputAction;
 
@@ -24,10 +23,8 @@ public class PlayerInput : ScriptableObject, DankeLikeInputAction.IGamePlayActio
 
     public void OnSkill(InputAction.CallbackContext context)
     {
-        if (Keyboard.current.jKey.wasPressedThisFrame) 
-        {
+        if (context.phase == InputActionPhase.Performed && Keyboard.current.jKey.wasPressedThisFrame)
             onSkill?.Invoke();
-        }
     }
 
     private void OnEnable()
