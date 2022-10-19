@@ -38,7 +38,6 @@ public class SkillManager : MonoBehaviour
     {
         if (PrepareSkill(deployer))
         {
-            Debug.Log("123123123123");
             deployer.Generate();
             deployer.SkillData.remainCD = deployer.SkillData.skillCD;
             CoolDownSkill(deployer);
