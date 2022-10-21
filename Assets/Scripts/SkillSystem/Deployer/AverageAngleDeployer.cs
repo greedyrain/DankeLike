@@ -13,15 +13,11 @@ public class AverageAngleDeployer : SkillDeployer
         {
             PoolManager.Instance.GetObj("Prefabs/SkillObjects", SkillData.prefabName, (obj) =>
             {
-                obj.GetComponent<BaseSkillObject>().SkillData = SkillData;
+                obj.GetComponent<BaseSkillObject>().InitData(SkillData);
                 obj.transform.position = transform.position;
                 obj.transform.rotation = Quaternion.AngleAxis(angle * i, Vector3.forward);
-                UniTask.Delay((int) (SkillData.duration * 1000)).ContinueWith(() =>
-                {
-                    PoolManager.Instance.PushObj(SkillData.prefabName, obj);
-                });
             });
-            await UniTask.Delay((int)(SkillData.interval * 1000)).ContinueWith(()=>{Debug.Log("Delaied");});
+            await UniTask.Delay((int)(SkillData.interval * 1000));
         }
     }
 }

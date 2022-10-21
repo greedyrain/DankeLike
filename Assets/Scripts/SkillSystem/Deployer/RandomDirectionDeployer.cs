@@ -14,13 +14,10 @@ public class RandomDirectionDeployer : SkillDeployer
         {
             PoolManager.Instance.GetObj("Prefabs/SkillObjects", SkillData.prefabName, (obj) =>
             {
+                obj.GetComponent<BaseSkillObject>().InitData(SkillData);
                 obj.transform.position = transform.position;
                 angle = Random.Range(0, 360);
                 obj.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-                UniTask.Delay((int) (SkillData.duration * 1000)).ContinueWith(() =>
-                {
-                    PoolManager.Instance.PushObj(SkillData.prefabName, obj);
-                });
             });
             await UniTask.Delay((int)(SkillData.interval * 1000));
         }

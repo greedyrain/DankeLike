@@ -8,6 +8,11 @@ using Random = UnityEngine.Random;
 public class EnemyGenerator : MonoBehaviour
 {
     private string enemyPrefabName;
+
+    /// <summary>
+    /// 生成敌人
+    /// </summary>
+    /// <param name="id"></param>
     public void GenerateEnemy(int id)
     {
         for (int i = 0; i < GameDataManager.Instance.EnemiesData.Count; i++)
@@ -18,11 +23,10 @@ public class EnemyGenerator : MonoBehaviour
 
             if (!string.IsNullOrEmpty(enemyPrefabName))
             {
-                PoolManager.Instance.GetObj("Prefabs/Enemy",enemyPrefabName, (obj) =>
+                PoolManager.Instance.GetObj("Prefabs/Enemy", enemyPrefabName, (obj) =>
                 {
-                    
-                    float x = Random.Range(-15f, 15f);
-                    float y = Random.Range(-15f, 15f);
+                    float x = Random.Range(-9f, 9f);
+                    float y = Random.Range(-9f, 9f);
                     obj.transform.position = new Vector2(x, y);
                 });
             }
@@ -35,5 +39,10 @@ public class EnemyGenerator : MonoBehaviour
         {
             await UniTask.Delay(5000).ContinueWith(() => GenerateEnemy(1001));
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireCube(Vector2.zero, new Vector3(18, 18, 18));
     }
 }

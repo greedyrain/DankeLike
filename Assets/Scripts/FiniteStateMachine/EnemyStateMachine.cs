@@ -10,6 +10,7 @@ public class EnemyStateMachine : BaseStateMachine
 {
     public EnemyPatrolState patrolState;
     public EnemyChaseState chaseState;
+    public EnemyDeadState deadState;
 
     private Enemy enemy;
 
@@ -19,9 +20,10 @@ public class EnemyStateMachine : BaseStateMachine
 
         patrolState = new EnemyPatrolState();
         chaseState = new EnemyChaseState();
+        deadState = new EnemyDeadState();
 
         patrolState.Init(enemy);
         chaseState.Init(enemy);
-
+        deadState.Init(enemy);
     }
 }

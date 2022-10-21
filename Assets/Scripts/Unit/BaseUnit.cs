@@ -10,7 +10,7 @@ public class BaseUnit : MonoBehaviour
     [HideInInspector] public Animator anim;
     SpriteRenderer sr;
 
-    protected bool isDead;
+    public bool isDead;
     protected float moveSpeed;
 
     public virtual void Awake()

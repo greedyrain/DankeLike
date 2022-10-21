@@ -1,12 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class Enemy : BaseUnit
 {
     protected const float atkCD = 0.2f;
     protected float remainAtkCD = 0f;
+
+    private List<BuffData> buffList = new List<BuffData>();
 
     public int id;
     [HideInInspector] public string objName;
@@ -17,7 +22,7 @@ public class Enemy : BaseUnit
     [HideInInspector] public int def;
     [HideInInspector] public float patrolRadius;
     [HideInInspector] public float alertRadius;
-    
+
     private int minDrop;
     private int maxDrop;
 
@@ -41,32 +46,61 @@ public class Enemy : BaseUnit
     {
         base.OnEnable();
         InitData();
+        GetComponent<Collider2D>().enabled = true;
+    }
+
+    public virtual void Update()
+    {
+        if (buffList.Count > 0)
+            foreach (var buff in buffList)
+                DisposeBuff(buff);
     }
 
     public virtual void GetHurt(int damage)
     {
-        enemyData.HP -= damage;
-        if (enemyData.HP <= 0)
+        HP -= damage;
+        DamagePopupManager.Instance.ShowDamage(damage, transform);
+
+        if (HP <= 0)
         {
-            enemyData.HP = 0;
+            HP = 0;
             isDead = true;
             Drop();
-            PoolManager.Instance.PushObj(transform.parent.name,transform.parent.gameObject);
+            stateMachine.SwitchState(stateMachine.deadState);
         }
-        Debug.Log($"Enemy takes {damage} damage. Remain HP is: {enemyData.HP}.");
+
+        Debug.Log($"Enemy takes {damage} damage. Remain HP is: {HP}.");
+    }
+
+    public async void DisposeBuff(BuffData buff)
+    {
+        while (buff.remainTime > 0)
+        {
+            buff.Dispose();
+            buff.remainTime -= buff.interval;
+            await UniTask.Delay((int) (buff.interval * 1000));
+        }
+    }
+
+    public void AddBuff(BuffData buff)
+    {
+        if (!buffList.Contains(buff))
+        {
+            buffList.Add(buff);
+        }
     }
 
     public virtual void Drop()
     {
         int drop = Random.Range(minDrop, maxDrop);
-        PoolManager.Instance.GetObj("Prefabs","DropItem", (obj) =>
+        PoolManager.Instance.GetObj("Prefabs", "DropItem", (obj) =>
         {
             obj.GetComponent<DropItem>().Init(drop);
             obj.transform.position = transform.position;
             obj.transform.rotation = transform.rotation;
         });
     }
-    
+
 
     private void OnCollisionStay2D(Collision2D collision)
     {
@@ -75,6 +109,7 @@ public class Enemy : BaseUnit
             remainAtkCD = atkCD;
             collision.transform.GetComponent<PlayerController>().GetHurt(enemyData.atk);
         }
+
         remainAtkCD -= Time.deltaTime;
     }
 

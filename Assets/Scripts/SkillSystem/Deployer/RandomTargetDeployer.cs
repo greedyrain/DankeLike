@@ -19,15 +19,10 @@ public class RandomTargetDeployer : SkillDeployer
             {
                 PoolManager.Instance.GetObj("Prefabs/SkillObjects", SkillData.prefabName, (obj) =>
                 {
-                    obj.GetComponent<BaseSkillObject>().SkillData = SkillData;
+                    obj.GetComponent<BaseSkillObject>().InitData(SkillData);
                     float x = colliders[index].transform.position.x;
                     float y = colliders[index].transform.position.y;
                     obj.transform.position = new Vector2(x, y);
-
-                    UniTask.Delay((int) (SkillData.duration * 1000)).ContinueWith(() =>
-                    {
-                        PoolManager.Instance.PushObj(SkillData.prefabName, obj);
-                    });
                 });
                 await UniTask.Delay((int)(SkillData.interval * 1000));
             }
@@ -41,13 +36,8 @@ public class RandomTargetDeployer : SkillDeployer
             {
                 PoolManager.Instance.GetObj("Prefabs/SkillObjects", SkillData.prefabName, (obj) =>
                 {
-                    obj.GetComponent<BaseSkillObject>().SkillData = SkillData;
+                    obj.GetComponent<BaseSkillObject>().InitData(SkillData);
                     obj.transform.position = new Vector2(x,y);
-                    
-                    UniTask.Delay((int) (SkillData.duration * 1000)).ContinueWith(() =>
-                    {
-                        PoolManager.Instance.PushObj(SkillData.prefabName, obj);
-                    });
                 });
                 await UniTask.Delay((int)(SkillData.interval * 1000));
             }

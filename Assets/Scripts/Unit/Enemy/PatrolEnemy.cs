@@ -18,8 +18,9 @@ public class PatrolEnemy : Enemy
         stateMachine.SwitchState(stateMachine.patrolState);
     }
 
-    private void Update()
+    public override void Update()
     {
+        base.Update();
         Alert();
     }
 
@@ -36,13 +37,4 @@ public class PatrolEnemy : Enemy
             stateMachine.SwitchState(stateMachine.patrolState);
         }
     }
-
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.green;
-    //    Gizmos.DrawWireSphere(originPos, patrolRadius);
-
-    //    Gizmos.color = Color.red;
-    //    Gizmos.DrawWireSphere(transform.position, alertRadius);
-    //}
 }
