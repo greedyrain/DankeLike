@@ -17,6 +17,7 @@ public class PlayerController : BaseUnit
     public PlayerData playerData;
     public PlayerInput input;
     private PlayerExperience playerExperience;
+    public SkillManager playerSkillManager;
 
     public override void Awake()
     {
@@ -24,6 +25,7 @@ public class PlayerController : BaseUnit
         InitData();
         playerExperience = GetComponent<PlayerExperience>();
         playerExperience.Init();
+        playerSkillManager = GetComponent<SkillManager>(); 
     }
 
     public override void Start()
@@ -42,8 +44,8 @@ public class PlayerController : BaseUnit
 
     private void TestAddSkill()
     {
-        SkillManager skillManager = GetComponent<SkillManager>();
-        skillManager.ObtainSkill(1002,5);
+        
+        // playerSkillManager.ObtainSkill();
     }
 
     protected override void OnDisable()

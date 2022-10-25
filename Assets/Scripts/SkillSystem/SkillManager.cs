@@ -12,7 +12,7 @@ using UnityEngine.Events;
 public class SkillManager : MonoBehaviour
 {
     private List<SkillData> skills = new List<SkillData>();
-    private List<SkillDeployer> ownedSkill = new List<SkillDeployer>();
+    [HideInInspector] public List<SkillDeployer> ownedSkill = new List<SkillDeployer>();
     public PlayerController player;
 
     private void Awake()
@@ -73,14 +73,14 @@ public class SkillManager : MonoBehaviour
     /// </summary>
     /// <param name="id"></param>
     /// <param name="level"></param>
-    public void ObtainSkill(int id,int level)
+    public void ObtainSkill(SkillData data)
     {
-        foreach (var data in skills)
+        foreach (var skill in skills)
         {
-            if (data.ID == id && data.level == level)
+            if (skill.ID == data.ID && skill.level == data.level)
             {
-                SkillDeployer obj = Resources.Load<SkillDeployer>($"Prefabs/Skills/{data.skillName}");
-                obj.SkillData = data;
+                SkillDeployer obj = Resources.Load<SkillDeployer>($"Prefabs/Skills/{skill.skillName}");
+                obj.SkillData = skill;
                 obj.player = player;
                 ownedSkill.Add(obj);
             }

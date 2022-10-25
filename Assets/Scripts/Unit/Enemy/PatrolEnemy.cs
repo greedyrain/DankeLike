@@ -18,9 +18,8 @@ public class PatrolEnemy : Enemy
         stateMachine.SwitchState(stateMachine.patrolState);
     }
 
-    public override void Update()
+    public  void Update()
     {
-        base.Update();
         Alert();
     }
 

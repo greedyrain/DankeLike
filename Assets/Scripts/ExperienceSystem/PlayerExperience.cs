@@ -19,7 +19,11 @@ public class PlayerExperience : MonoBehaviour
         if (currentExp >= maxExp)
         {
             if (level < maxLevel)
+            {
                 level++;
+                Debug.Log("show level up panel...");
+                UIManager.Instance.ShowPanel<LevelUpPopupPanel>();
+            }
             
             currentExp -= maxExp;
             maxExp = datas[level - 1].maxEXP;

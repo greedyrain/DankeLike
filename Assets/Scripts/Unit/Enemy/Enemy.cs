@@ -11,8 +11,6 @@ public class Enemy : BaseUnit
     protected const float atkCD = 0.2f;
     protected float remainAtkCD = 0f;
 
-    private List<BuffData> buffList = new List<BuffData>();
-
     public int id;
     [HideInInspector] public string objName;
     [HideInInspector] public string description;
@@ -49,15 +47,11 @@ public class Enemy : BaseUnit
         GetComponent<Collider2D>().enabled = true;
     }
 
-    public virtual void Update()
-    {
-        if (buffList.Count > 0)
-            foreach (var buff in buffList)
-                DisposeBuff(buff);
-    }
 
     public virtual void GetHurt(int damage)
     {
+        if (isDead) return;
+        
         HP -= damage;
         DamagePopupManager.Instance.ShowDamage(damage, transform);
 
@@ -72,24 +66,7 @@ public class Enemy : BaseUnit
         Debug.Log($"Enemy takes {damage} damage. Remain HP is: {HP}.");
     }
 
-    public async void DisposeBuff(BuffData buff)
-    {
-        while (buff.remainTime > 0)
-        {
-            buff.Dispose();
-            buff.remainTime -= buff.interval;
-            await UniTask.Delay((int) (buff.interval * 1000));
-        }
-    }
-
-    public void AddBuff(BuffData buff)
-    {
-        if (!buffList.Contains(buff))
-        {
-            buffList.Add(buff);
-        }
-    }
-
+    
     public virtual void Drop()
     {
         int drop = Random.Range(minDrop, maxDrop);

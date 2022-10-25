@@ -15,16 +15,16 @@ public class RandomTargetDeployer : SkillDeployer
         if (colliders.Length > 0)
         {
             int index = Random.Range(0, colliders.Length);
+            float x = colliders[index].transform.position.x;
+            float y = colliders[index].transform.position.y;
             for (int i = 0; i < SkillData.count; i++)
             {
                 PoolManager.Instance.GetObj("Prefabs/SkillObjects", SkillData.prefabName, (obj) =>
                 {
                     obj.GetComponent<BaseSkillObject>().InitData(SkillData);
-                    float x = colliders[index].transform.position.x;
-                    float y = colliders[index].transform.position.y;
                     obj.transform.position = new Vector2(x, y);
                 });
-                await UniTask.Delay((int)(SkillData.interval * 1000));
+                await UniTask.Delay((int)(SkillData.actionInterval * 1000));
             }
         }
         
@@ -39,7 +39,7 @@ public class RandomTargetDeployer : SkillDeployer
                     obj.GetComponent<BaseSkillObject>().InitData(SkillData);
                     obj.transform.position = new Vector2(x,y);
                 });
-                await UniTask.Delay((int)(SkillData.interval * 1000));
+                await UniTask.Delay((int)(SkillData.actionInterval * 1000));
             }
         }
     }

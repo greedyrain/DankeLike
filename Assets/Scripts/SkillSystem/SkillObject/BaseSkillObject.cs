@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BaseSkillObject : MonoBehaviour
 {
+    public LayerMask targetLayer;
     private SkillData skillData;
     public SkillData SkillData
     {

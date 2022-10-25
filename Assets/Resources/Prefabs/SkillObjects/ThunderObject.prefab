@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7893517644962256015}
   - component: {fileID: 1803455444697258258}
+  - component: {fileID: 7752118409722279605}
   m_Layer: 0
   m_Name: ThunderObject
   m_TagString: Untagged
@@ -82,3 +83,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7752118409722279605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7602363042943079461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d15059f0ae9ace478681be290853fd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 128

@@ -4,16 +4,15 @@ using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-public class HitEffect_Fire : BaseSkillObject
+public class SkillObject_Shield : BaseSkillObject
 {
-    private void OnEnable()
+    private  void OnEnable()
     {
         UniTask.WaitUntil(() => initCompleted).ContinueWith(() =>
         {
             transform.localScale = Vector3.one * SkillData.radius * 2;
-            Burn();
+            Guarantee();
             UniTask.Delay((int) (SkillData.duration * 1000)).ContinueWith(() =>
             {
                 PoolManager.Instance.PushObj(gameObject.name, gameObject);
@@ -21,8 +20,9 @@ public class HitEffect_Fire : BaseSkillObject
         });
     }
 
-    public async void Burn()
+    public async void Guarantee()
     {
+        Debug.Log("Radius is :"+SkillData.radius);
         float time = SkillData.duration;
         while (time > 0)
         {
@@ -38,7 +38,7 @@ public class HitEffect_Fire : BaseSkillObject
             });
         }
     }
-
+    
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position,SkillData.radius);

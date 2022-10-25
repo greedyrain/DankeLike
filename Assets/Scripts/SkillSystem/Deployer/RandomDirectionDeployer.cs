@@ -19,7 +19,7 @@ public class RandomDirectionDeployer : SkillDeployer
                 angle = Random.Range(0, 360);
                 obj.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
             });
-            await UniTask.Delay((int)(SkillData.interval * 1000));
+            await UniTask.Delay((int)(SkillData.actionInterval * 1000));
         }
     }
 }

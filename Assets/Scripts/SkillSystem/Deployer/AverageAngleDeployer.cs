@@ -17,7 +17,7 @@ public class AverageAngleDeployer : SkillDeployer
                 obj.transform.position = transform.position;
                 obj.transform.rotation = Quaternion.AngleAxis(angle * i, Vector3.forward);
             });
-            await UniTask.Delay((int)(SkillData.interval * 1000));
+            await UniTask.Delay((int)(SkillData.disposeInterval * 1000));
         }
     }
 }

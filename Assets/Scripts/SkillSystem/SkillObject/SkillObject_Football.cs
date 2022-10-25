@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-public class FootballObject : BaseSkillObject
+public class SkillObject_Football : BaseSkillObject
 {
     private float throwSpeed = 5;
     private void OnEnable()

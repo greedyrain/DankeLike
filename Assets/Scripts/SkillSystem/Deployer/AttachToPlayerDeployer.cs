@@ -15,6 +15,6 @@ public class AttachToPlayerDeployer : SkillDeployer
             obj.transform.rotation = transform.rotation;
             obj.transform.SetParent(player.transform);
         });
-        await UniTask.Delay((int) (SkillData.interval * 1000));
+        await UniTask.Delay((int) (SkillData.actionInterval * 1000));
     }
 }
