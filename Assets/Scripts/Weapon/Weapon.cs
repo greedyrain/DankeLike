@@ -7,14 +7,15 @@ using UnityEngine.InputSystem;
 public class Weapon : MonoBehaviour
 {
     public int ID;
+    public int level;
     [HideInInspector] public string description;
     [HideInInspector] public int damage;
     [HideInInspector] public float atkCD;
     [HideInInspector] public float remainCD;
 
-    WeaponData data;
-    PlayerController player;
-    PlayerInput playerInput;
+    protected WeaponData weaponData;
+    protected PlayerController player;
+    protected PlayerInput playerInput;
 
     private Vector3 weaponDir;
 
@@ -23,26 +24,29 @@ public class Weapon : MonoBehaviour
         player = FindObjectOfType<PlayerController>();
         playerInput = player.input;
         InitData();
-
     }
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         playerInput.onMove += SetWeaponDirection;
     }
 
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         playerInput.onMove -= SetWeaponDirection;
     }
 
     public void InitData()
     {
-        data = GameDataManager.Instance.Weapons[ID - 1];
-        description = data.description;
-        damage = data.damage;
-        atkCD = data.atkCD;
-        remainCD = data.remainCD;
+        for (int i = 0; i < GameDataManager.Instance.Weapons.Count; i++)
+        {
+            if (GameDataManager.Instance.Weapons[i].ID == ID && GameDataManager.Instance.Weapons[i].level == level)
+                weaponData = GameDataManager.Instance.Weapons[i];
+        }
+
+        damage = weaponData.damage;
+        atkCD = weaponData.atkCD;
+        description = weaponData.description;
     }
 
     public void SetWeaponDirection(Vector2 dir)

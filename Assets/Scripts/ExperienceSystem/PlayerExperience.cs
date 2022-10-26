@@ -8,7 +8,7 @@ public class PlayerExperience : MonoBehaviour
     private PlayerController player;
     private List<ExperienceData> datas;
 
-    private int maxLevel = 6;
+    private int maxLevel = 20;
     public int level;
     public int currentExp;
     public int maxExp;

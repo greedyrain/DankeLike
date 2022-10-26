@@ -14,6 +14,7 @@ public class SkillOptionObject : MonoBehaviour
     {
         button.onClick.AddListener(() =>
         {
+            Debug.Log("-----+-+-++++-+--+-+"+UIManager.Instance.GetPanel<LevelUpPopupPanel>() == null);
             UIManager.Instance.GetPanel<LevelUpPopupPanel>().UpdatePanelData(data);
             UIManager.Instance.GetPanel<LevelUpPopupPanel>().currentSelectedSkill = this;
             Debug.Log(UIManager.Instance.GetPanel<LevelUpPopupPanel>().currentSelectedSkill.data.skillName);

@@ -5,36 +5,54 @@ using UnityEngine;
 
 public class Shotgun : Weapon
 {
-    public GameObject projectile;
     public Transform firePos;
-    public int projectileCount;
+    public float angle;
+    private float averageAngle;
 
-    protected override void Awake()
+    protected override void OnEnable()
     {
-        base.Awake();
-        Init();
+        base.OnEnable();
+        SetAngle();
+        Fire();
     }
 
-    private void Update()
+    public async void Fire()
     {
-        if (remainCD > 0)
-            remainCD -= Time.deltaTime;
-        else
-            Fire();
-    }
-
-    public void Init()
-    {
-    }
-
-    public void Fire()
-    {
-        remainCD = atkCD;
-        PoolManager.Instance.GetObj("Prefabs","Projectile_Shotgun", (obj) =>
+        while (true)
         {
-            obj.transform.position = firePos.position;
-            obj.transform.rotation = transform.rotation;
-            obj.GetComponent<Peojectile_Shotgun>().Init(this,transform.right);
-        });
+            for (int i = 0; i < weaponData.count; i++)
+            {
+                PoolManager.Instance.GetObj("Prefabs", "Projectile_Shotgun", (obj) =>
+                {
+                    obj.transform.position = firePos.position;
+                    obj.transform.rotation = transform.rotation;
+                    obj.GetComponent<Peojectile_Shotgun>().Init(this, Quaternion.AngleAxis(-angle/2 + i * averageAngle,transform.forward) * transform.right);
+                });
+            }
+            await UniTask.Delay((int) (weaponData.atkCD * 1000));
+        }
+    }
+
+    public void SetAngle()
+    {
+        switch (weaponData.level)
+        {
+            case 1:
+                angle = 15;
+                break;
+            case 2:
+                angle = 20;
+                break;
+            case 3:
+                angle = 30;
+                break;
+            case 4:
+                angle = 45;
+                break;
+            case 5:
+                angle = 60;
+                break;
+        }
+        averageAngle = angle / (weaponData.count-1);
     }
 }

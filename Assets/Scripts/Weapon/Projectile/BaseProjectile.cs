@@ -23,7 +23,6 @@ public class BaseProjectile : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            Debug.Log(collision.transform.parent.name);
             collision.transform.GetComponent<Enemy>().GetHurt(weapon.damage);
         }
     }

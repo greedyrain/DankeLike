@@ -31,6 +31,8 @@ public class SkillData
     public float skillCD;
     //剩余CD时间
     public float remainCD;
+    //物体的发射速度
+    public float throwSpeed;
     //多数量的技能的释放间隔
     public float disposeInterval;
     //DOT的伤害间隔

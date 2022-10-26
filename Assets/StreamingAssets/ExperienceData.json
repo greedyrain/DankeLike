@@ -1,8 +1,22 @@
 [
-  {"level":1,"maxEXP":10},
-  {"level":2,"maxEXP":20},
-  {"level":3,"maxEXP":35},
-  {"level":4,"maxEXP":55},
-  {"level":5,"maxEXP":80},
-  {"level":6,"maxEXP":110}
+{"level":1,"maxEXP":10},
+{"level":2,"maxEXP":15},
+{"level":3,"maxEXP":25},
+{"level":4,"maxEXP":40},
+{"level":5,"maxEXP":60},
+{"level":6,"maxEXP":85},
+{"level":7,"maxEXP":115},
+{"level":8,"maxEXP":150},
+{"level":9,"maxEXP":190},
+{"level":10,"maxEXP":235},
+{"level":11,"maxEXP":285},
+{"level":12,"maxEXP":340},
+{"level":13,"maxEXP":400},
+{"level":14,"maxEXP":465},
+{"level":15,"maxEXP":535},
+{"level":16,"maxEXP":610},
+{"level":17,"maxEXP":690},
+{"level":18,"maxEXP":775},
+{"level":19,"maxEXP":865},
+{"level":20,"maxEXP":960}
 ]

@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class SkillObject_Football : BaseSkillObject
 {
-    private float throwSpeed = 5;
     private void OnEnable()
     {
         UniTask.WaitUntil(() => initCompleted).ContinueWith(() =>
@@ -20,12 +19,11 @@ public class SkillObject_Football : BaseSkillObject
 
     private void Update()
     {
-        transform.Translate(Vector2.right * Time.deltaTime * throwSpeed, Space.Self);
+        transform.Translate(Vector2.right * Time.deltaTime * SkillData.throwSpeed, Space.Self);
     }
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        Debug.Log(col.transform.name);
         //碰到墙反弹
         if (col.transform.CompareTag("Wall") || col.transform.CompareTag("Enemy"))
         {

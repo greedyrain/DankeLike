@@ -19,10 +19,13 @@ public class PlayerController : BaseUnit
     private PlayerExperience playerExperience;
     public SkillManager playerSkillManager;
 
+    public HealthBar healthBar;
+
     public override void Awake()
     {
         base.Awake();
         InitData();
+        healthBar.ShowHP(maxHP,HP);
         playerExperience = GetComponent<PlayerExperience>();
         playerExperience.Init();
         playerSkillManager = GetComponent<SkillManager>(); 
@@ -57,11 +60,13 @@ public class PlayerController : BaseUnit
 
     public void GetHurt(int damage)
     {
-        damage -= playerData.def;
+        damage -= def;
         if (damage <= 0)
             damage = 0;
-        playerData.HP -= damage;
-        if (playerData.HP <= 0)
+        HP -= damage;
+        
+        healthBar.ShowHP(maxHP,HP);
+        if (HP <= 0)
         {
             isDead = true;
             Dead();
@@ -80,7 +85,7 @@ public class PlayerController : BaseUnit
         userName = playerData.userName;
         level = playerData.level;
         maxHP = playerData.maxHP;
-        HP = playerData.HP;
+        HP = maxHP;
         atk = playerData.atk;
         def = playerData.def;
     }

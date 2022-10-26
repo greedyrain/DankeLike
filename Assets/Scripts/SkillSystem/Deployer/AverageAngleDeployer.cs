@@ -15,7 +15,7 @@ public class AverageAngleDeployer : SkillDeployer
             {
                 obj.GetComponent<BaseSkillObject>().InitData(SkillData);
                 obj.transform.position = transform.position;
-                obj.transform.rotation = Quaternion.AngleAxis(angle * i, Vector3.forward);
+                obj.transform.rotation = Quaternion.AngleAxis(angle * i+90, Vector3.forward);
             });
             await UniTask.Delay((int)(SkillData.disposeInterval * 1000));
         }

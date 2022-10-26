@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class SkillObject_Bottle : BaseSkillObject
 {
-    public float throwSpeed;
     private Vector2 destination;
     private bool isDestinationSet;
 
@@ -25,7 +24,7 @@ public class SkillObject_Bottle : BaseSkillObject
         {
             if (Vector2.Distance(transform.position,destination) > .5f)
             {
-                transform.Translate(Vector2.right * Time.deltaTime * throwSpeed, Space.Self);
+                transform.Translate(Vector2.right * Time.deltaTime * SkillData.throwSpeed, Space.Self);
             }
             else
             {

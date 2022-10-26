@@ -17,7 +17,7 @@ public class LevelUpPopupPanel : BasePanel
     public override void Init()
     {
         player = FindObjectOfType<PlayerController>();
-        playerSkillManager = player.GetComponent<SkillManager>();
+        playerSkillManager = player.playerSkillManager;
         confirmBtn.onClick.AddListener(() =>
         {
             playerSkillManager.ObtainSkill(currentSelectedSkill.data);
