@@ -13,7 +13,7 @@ public class Weapon : MonoBehaviour
     [HideInInspector] public float atkCD;
     [HideInInspector] public float remainCD;
 
-    protected WeaponData weaponData;
+    public WeaponData weaponData;
     protected PlayerController player;
     protected PlayerInput playerInput;
 

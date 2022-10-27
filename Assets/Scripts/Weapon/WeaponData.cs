@@ -6,6 +6,7 @@ public class WeaponData
 {
     public int ID;
     public int level;
+    public string name;
     public string description;
     public int damage;
     public float range;

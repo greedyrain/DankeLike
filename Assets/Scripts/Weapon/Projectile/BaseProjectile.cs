@@ -1,12 +1,18 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public class BaseProjectile : MonoBehaviour
 {
     protected Weapon weapon;
     public float bulletSpeed;
+
+    protected virtual void OnEnable()
+    {
+        UniTask.Delay(6000).ContinueWith(() => PoolManager.Instance.PushObj(gameObject.name,gameObject));
+    }
 
     void Update()
     {
@@ -17,6 +23,7 @@ public class BaseProjectile : MonoBehaviour
     {
         this.weapon = weapon;
         transform.right = dir;
+        bulletSpeed = weapon.weaponData.bulletSpeed;
     }
     
     private void OnTriggerEnter2D(Collider2D collision)

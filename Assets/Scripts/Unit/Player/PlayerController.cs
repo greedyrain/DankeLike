@@ -6,6 +6,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : BaseUnit
 {
+    public Vector2 direction;
+    public GameObject weaponPos;
+    
     public int ID;
     [HideInInspector] public string userName;
     [HideInInspector] public int level;
@@ -20,10 +23,14 @@ public class PlayerController : BaseUnit
     public SkillManager playerSkillManager;
 
     public HealthBar healthBar;
+    
+    public Weapon weapon;
 
     public override void Awake()
     {
         base.Awake();
+        // weapon = weaponPos.GetComponentInChildren<Weapon>();
+        // SetWeapon(1003, 3);
         InitData();
         healthBar.ShowHP(maxHP,HP);
         playerExperience = GetComponent<PlayerExperience>();
@@ -58,6 +65,12 @@ public class PlayerController : BaseUnit
         input.onSkill -= TestAddSkill;
     }
 
+    public override void Move(Vector2 dir)
+    {
+        base.Move(dir);
+        direction = dir;
+    }
+
     public void GetHurt(int damage)
     {
         damage -= def;
@@ -88,5 +101,21 @@ public class PlayerController : BaseUnit
         HP = maxHP;
         atk = playerData.atk;
         def = playerData.def;
+    }
+
+    public void SetWeapon(int id)
+    {
+        string weaponName = "";
+        for (int i = 0; i < GameDataManager.Instance.Weapons.Count; i++)
+        {
+            if (GameDataManager.Instance.Weapons[i].ID == id)
+            {
+                weaponName = GameDataManager.Instance.Weapons[i].name;
+            }
+        }
+        weapon = Instantiate(Resources.Load<Weapon>($"Prefabs/Weapon/{weaponName}"));
+        weapon.transform.SetParent(weaponPos.transform);
+        weapon.transform.localPosition = Vector3.zero;
+        weapon.ID = id;
     }
 }

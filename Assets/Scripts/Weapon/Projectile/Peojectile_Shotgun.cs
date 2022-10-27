@@ -10,5 +10,4 @@ public class Peojectile_Shotgun : BaseProjectile
     {
         UniTask.Delay(6000).ContinueWith(() => PoolManager.Instance.PushObj("Projectile_Shotgun",this.gameObject));
     }
-
 }
