@@ -21,7 +21,7 @@ public class GamePanel : BasePanel
     void UpdateTime()
     {
         time += Time.fixedDeltaTime;
-        LevelManager.Instance.gameTime = time;
+        LevelManager.Instance.gameTime = (int)time;
         timeText.text = System.TimeSpan.FromSeconds(time).ToString(format: @"mm\:ss\:ff");
     }
 }

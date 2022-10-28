@@ -5,20 +5,25 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class EnemyGenerator : MonoBehaviour
+[Serializable]
+public class EnemyGenerator
 {
+    public int enemyID;
+    public float generateTiming;
+    public float duration;
+    public float count;
     private string enemyPrefabName;
 
     /// <summary>
     /// 生成敌人
     /// </summary>
     /// <param name="id"></param>
-    public void GenerateEnemy(int id)
+    public async void GenerateEnemy()
     {
         for (int i = 0; i < GameDataManager.Instance.EnemiesData.Count; i++)
         {
             enemyPrefabName = "";
-            if (GameDataManager.Instance.EnemiesData[i].ID == id)
+            if (GameDataManager.Instance.EnemiesData[i].ID == enemyID)
                 enemyPrefabName = GameDataManager.Instance.EnemiesData[i].name;
 
             if (!string.IsNullOrEmpty(enemyPrefabName))
@@ -30,19 +35,8 @@ public class EnemyGenerator : MonoBehaviour
                     obj.transform.position = new Vector2(x, y);
                 });
             }
-        }
-    }
 
-    private async void Start()
-    {
-        while (true)
-        {
-            await UniTask.Delay(5000).ContinueWith(() => GenerateEnemy(1001));
+            await UniTask.Delay((int) (count / duration) * 1000);
         }
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireCube(Vector2.zero, new Vector3(18, 18, 18));
     }
 }
