@@ -16,9 +16,9 @@ MonoBehaviour:
   generators:
   - enemyID: 1001
     generateTiming: 1
-    duration: 5
-    count: 5
+    count: 30
+    duration: 3
   - enemyID: 1002
     generateTiming: 5
-    duration: 2
     count: 5
+    duration: 5

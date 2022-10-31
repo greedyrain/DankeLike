@@ -20,9 +20,14 @@ public class LevelManager : SingletonUnity<LevelManager>
         }
     }
 
+    private void OnEnable()
+    {
+        CumulateGenerateTiming();
+    }
+
     private void Update()
     {
-         currentLevel.Action(gameTime);
+         // currentLevel.Action(gameTime);
     }
 
     public void SetLevel(int id)
@@ -33,6 +38,15 @@ public class LevelManager : SingletonUnity<LevelManager>
             if (level.ID == id)
                 currentLevel = level;
             currentLevel.Init();
+        }
+    }
+
+    public async void CumulateGenerateTiming()
+    {
+        while (true)
+        {
+            currentLevel.Action(gameTime);
+            await UniTask.Delay(1000).ContinueWith(() => gameTime++);
         }
     }
 }
