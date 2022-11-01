@@ -22,19 +22,11 @@ public class Weapon : MonoBehaviour
     protected virtual void Awake()
     {
         player = FindObjectOfType<PlayerController>();
+        UIManager.Instance.GetPanel<JoyStickPanel>().onDrag += SetWeaponDirection;
         playerInput = player.input;
         InitData();
     }
 
-    protected virtual void OnEnable()
-    {
-        playerInput.onMove += SetWeaponDirection;
-    }
-
-    protected virtual void OnDisable()
-    {
-        playerInput.onMove -= SetWeaponDirection;
-    }
 
     public void InitData()
     {

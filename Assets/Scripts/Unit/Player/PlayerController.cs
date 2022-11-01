@@ -29,8 +29,6 @@ public class PlayerController : BaseUnit
     public override void Awake()
     {
         base.Awake();
-        // weapon = weaponPos.GetComponentInChildren<Weapon>();
-        // SetWeapon(1003, 3);
         InitData();
         healthBar.ShowHP(maxHP,HP);
         playerExperience = GetComponent<PlayerExperience>();
@@ -49,20 +47,13 @@ public class PlayerController : BaseUnit
         base.OnEnable();
         input.onMove += Move;
         input.onStopMove += StopMove;
-        input.onSkill += TestAddSkill;
     }
 
-    private void TestAddSkill()
-    {
-        
-        // playerSkillManager.ObtainSkill();
-    }
 
     protected override void OnDisable()
     {
         input.onMove -= Move;
         input.onStopMove -= StopMove;
-        input.onSkill -= TestAddSkill;
     }
 
     public override void Move(Vector2 dir)

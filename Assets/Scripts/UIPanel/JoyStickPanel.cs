@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks.Triggers;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -12,6 +13,8 @@ public class JoyStickPanel : BasePanel
     public GameObject joyStick;
     public GameObject joyStickController;
     public PlayerController player;
+    public Vector2 direction;
+    public event UnityAction<Vector2> onDrag;
     public override void Init()
     {
         Show();
@@ -54,7 +57,12 @@ public class JoyStickPanel : BasePanel
             joyStickController.transform.localPosition =
                 (joyStickController.transform.position - joyStick.transform.position).normalized * 50;
         }
+
+        direction = joyStickController.transform.position - joyStick.transform.position;
         player.Move(joyStickController.transform.position - joyStick.transform.position);
-        player.weapon.SetWeaponDirection(joyStickController.transform.position - joyStick.transform.position);
+        // player.weapon.SetWeaponDirection(joyStickController.transform.position - joyStick.transform.position);
+        player.direction = joyStickController.transform.position - joyStick.transform.position;
+        
+        onDrag?.Invoke(joyStickController.transform.position - joyStick.transform.position);
     }
 }

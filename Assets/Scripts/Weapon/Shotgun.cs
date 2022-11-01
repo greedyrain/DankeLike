@@ -9,9 +9,8 @@ public class Shotgun : Weapon
     public float angle;
     private float averageAngle;
 
-    protected override void OnEnable()
+    protected  void OnEnable()
     {
-        base.OnEnable();
         SetAngle();
         Fire();
     }

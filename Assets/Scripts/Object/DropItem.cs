@@ -6,7 +6,7 @@ using UnityEngine.PlayerLoop;
 
 public class DropItem : MonoBehaviour
 {
-    private int experience;
+    public int experience;
     
     public void Init(int drop)
     {

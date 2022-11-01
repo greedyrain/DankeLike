@@ -10,9 +10,8 @@ public class Darts : Weapon
     private float averageAngle;
     public LayerMask targetLayer;
 
-    protected override void OnEnable()
+    protected  void OnEnable()
     {
-        base.OnEnable();
         Fire();
     }
 

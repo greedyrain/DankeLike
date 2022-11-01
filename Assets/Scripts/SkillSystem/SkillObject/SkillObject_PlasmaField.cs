@@ -5,34 +5,25 @@ using UnityEngine;
 
 public class SkillObject_PlasmaField : BaseSkillObject
 {
-    private ParticleSystem partical;
-    private CircleCollider2D coll;
 
-    private float radius;
-    public float rate;
-
-    private bool isExtending;
-    private bool isShrinking;
-    
-    private void Awake()
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        partical = GetComponent<ParticleSystem>();
-        coll = GetComponent<CircleCollider2D>();
-    }
-
-    public void Extend()
-    {
-        radius = 0f;
-        while (isExtending)
+        if (col.CompareTag("Enemy"))
         {
-            radius += Time.deltaTime * rate;
-            coll.radius = radius;
-            // partical.shape.radius = radius;
-        
+            col.GetComponent<Enemy>().GetHurt(SkillData.damage);
+        }
+    }
+    
+    private void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.CompareTag("Enemy"))
+        {
+            col.GetComponent<Enemy>().GetHurt(SkillData.damage);
+        }
     }
 
-    public void Shrink()
+    public void Recycle()
     {
-        
+        PoolManager.Instance.PushObj(gameObject.name,gameObject);
     }
 }

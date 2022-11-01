@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2436648019928638876
+--- !u!1 &159489754512321735
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,39 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8105118218913341359}
-  - component: {fileID: 7541034872628254286}
+  - component: {fileID: 159489754512321732}
+  - component: {fileID: 4462972811179285415}
   m_Layer: 0
-  m_Name: Football
+  m_Name: SunRay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8105118218913341359
+--- !u!4 &159489754512321732
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2436648019928638876}
+  m_GameObject: {fileID: 159489754512321735}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.11690998, y: -4.194832, z: 0}
+  m_LocalPosition: {x: 9.735424, y: -5.9791174, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7541034872628254286
+--- !u!114 &4462972811179285415
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2436648019928638876}
+  m_GameObject: {fileID: 159489754512321735}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bcce2b529270974fa3e8ecc6fa02ccf, type: 3}
+  m_Script: {fileID: 11500000, guid: 3af8656ea499025478840c6de8e8b4f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
