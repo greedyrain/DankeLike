@@ -6,11 +6,11 @@ using UnityEngine;
 
 public class SkillObject_Thunder : BaseSkillObject 
 {
-    
     private void OnEnable()
     {
-        UniTask.WaitUntil(() => initCompleted).ContinueWith(() =>
+        UniTask.WaitUntil(() => initCompleted && target != null).ContinueWith(() =>
         {
+            transform.position = target.position;
             transform.localScale = Vector3.one * SkillData.radius * 2;
             UniTask.Delay((int) (SkillData.duration * 1000)).ContinueWith(() =>
             {

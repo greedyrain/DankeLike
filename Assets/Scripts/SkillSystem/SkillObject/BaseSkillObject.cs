@@ -12,11 +12,24 @@ public class BaseSkillObject : MonoBehaviour
         set => skillData = value;
     }
 
+    [HideInInspector] public Transform target;
+    [HideInInspector] public Transform owner;
+
     protected bool initCompleted = false;
 
     public void InitData(SkillData skillData)
     {
         this.skillData = skillData;
         initCompleted = true;
+    }
+
+    public void SetTarget(Transform target)
+    {
+        this.target = target;
+    }
+    
+    public void SetOwner(Transform owner)
+    {
+        this.owner = owner;
     }
 }

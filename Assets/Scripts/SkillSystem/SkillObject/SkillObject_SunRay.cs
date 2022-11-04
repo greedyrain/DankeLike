@@ -8,6 +8,7 @@ using UnityEngine.Events;
 public class SkillObject_SunRay : BaseSkillObject
 {
     private Collider2D coll;
+    private List<Collider2D> colls = new List<Collider2D>();
     private void OnEnable()
     {
         coll = GetComponent<Collider2D>();
@@ -15,7 +16,7 @@ public class SkillObject_SunRay : BaseSkillObject
         UniTask.WaitUntil(() => initCompleted).ContinueWith(() =>
         {
             transform.right = UIManager.Instance.GetPanel<JoyStickPanel>().direction;
-            SwitchTrigger();
+            Burn();
             UniTask.Delay((int) (SkillData.duration * 1000)).ContinueWith(() =>
             {
                 PoolManager.Instance.PushObj(gameObject.name,gameObject);
@@ -32,18 +33,28 @@ public class SkillObject_SunRay : BaseSkillObject
     {
         if (col.CompareTag("Enemy"))
         {
-            col.GetComponent<Enemy>()?.GetHurt(SkillData.damage);
+            colls.Add(col);
         }
     }
 
-    public async void SwitchTrigger()
+    private void OnTriggerExit2D(Collider2D other)
     {
+        if (colls.Contains(other))
+        {
+            colls.Remove(other);
+        }
+    }
+
+    public async void Burn()
+    {
+        Debug.Log("Radius is :"+SkillData.radius);
+        float time = SkillData.duration;
         while (true)
         {
-            coll.enabled = true;
-            await UniTask.DelayFrame(1);
-            coll.enabled = false;
+            for (int i = 0; i < colls.Count; i++)
+                colls[i].GetComponent<Enemy>().GetHurt(SkillData.damage);
+
             await UniTask.Delay((int) (SkillData.actionInterval * 1000));
-        } 
+        }
     }
 }

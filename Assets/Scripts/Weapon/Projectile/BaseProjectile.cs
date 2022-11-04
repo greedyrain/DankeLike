@@ -14,7 +14,7 @@ public class BaseProjectile : MonoBehaviour
         UniTask.Delay(6000).ContinueWith(() => PoolManager.Instance.PushObj(gameObject.name,gameObject));
     }
 
-    void Update()
+    public virtual void Update()
     {
         transform.Translate(Vector2.right * bulletSpeed * Time.deltaTime,Space.Self);
     }
@@ -26,7 +26,7 @@ public class BaseProjectile : MonoBehaviour
         bulletSpeed = weapon.weaponData.bulletSpeed;
     }
     
-    private void OnTriggerEnter2D(Collider2D collision)
+    public virtual void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy"))
         {

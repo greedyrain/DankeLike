@@ -12,7 +12,7 @@ public class DamagePopup : MonoBehaviour
 
     private void OnEnable()
     {
-        UniTask.Delay(1500).ContinueWith(() =>
+        UniTask.Delay(1000).ContinueWith(() =>
         {
             PoolManager.Instance.PushObj(gameObject.name, gameObject);
         });
