@@ -5,16 +5,13 @@ using UnityEngine;
 
 public class EnemyDeadState : BaseEnemyState
 {
-    public override void OnEnter()
+    public override async void OnEnter()
     {
+        enemy.isDead = true;
         enemy.rb.velocity = Vector2.zero;
         enemy.GetComponent<Collider2D>().enabled = false;
-        // UniTask.Delay(1500).ContinueWith(() =>
-        // {
-        //     enemy.transform.localPosition = Vector3.zero;
-        //     PoolManager.Instance.PushObj(enemy.transform.parent.name,enemy.transform.parent.gameObject);
-        // });
+        enemy.GetComponentInChildren<SpriteRenderer>().enabled = false;
         enemy.transform.localPosition = Vector3.zero;
-        PoolManager.Instance.PushObj(enemy.transform.parent.name,enemy.transform.parent.gameObject);
+        await UniTask.Delay(1000).ContinueWith(()=> PoolManager.Instance.PushObj(enemy.transform.name,enemy.transform.gameObject));
     }
 }

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1544342566150016022}
-  - component: {fileID: 1544342566150016023}
+  - component: {fileID: -8961142165089013889}
   m_Layer: 0
   m_Name: Laser
   m_TagString: Untagged
@@ -25,13 +25,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1544342566150016020}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.848989, y: -5.837826, z: 0}
+  m_LocalPosition: {x: 6.2550917, y: -5.4945164, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1544342566150016023
+--- !u!114 &-8961142165089013889
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,10 +41,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1544342566150016020}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 413cf2c517d5fb343b0babd584b0b295, type: 3}
+  m_Script: {fileID: 11500000, guid: 3af8656ea499025478840c6de8e8b4f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  targetLayer:
-    serializedVersion: 2
-    m_Bits: 128

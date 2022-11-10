@@ -36,7 +36,6 @@ public class SkillObject_Football : BaseSkillObject
         }
         if (col.transform.CompareTag("Enemy"))
         {
-            Debug.Log(col.transform.parent.name);
             col.transform.GetComponent<Enemy>().GetHurt(SkillData.damage);
         }
     }

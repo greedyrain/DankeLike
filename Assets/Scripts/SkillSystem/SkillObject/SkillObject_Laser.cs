@@ -1,30 +1,53 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class SkillObject_Laser : BaseSkillObject
 {
-    private LineRenderer line;
-    private void OnEnable()
+    Vector2 ownerPos;
+    Vector2 targetPos;
+    //设定target和owner，每一帧的位置都设定味owner的位置，朝向target的位置。
+    //如果target isdead，则把target设定为空,如果owner isdead，则把owner设定为空
+    private async void OnEnable()
     {
-        line = GetComponent<LineRenderer>();
-        line.enabled = false;
-        UniTask.WaitUntil(() => initCompleted && target != null).ContinueWith(() =>
+        await UniTask.WaitUntil(() => initCompleted).ContinueWith(async () =>
         {
-            line.enabled = true;
-            Active(owner,target);
-            UniTask.Delay(300).ContinueWith(()=>{PoolManager.Instance.PushObj(gameObject.name, gameObject);});
+            Active(owner, SkillData.count);
+            await UniTask.Delay(500).ContinueWith(() => PoolManager.Instance.PushObj(gameObject.name, gameObject));
         });
     }
 
-    public void Active(Transform owner, Transform target)
+    public async void Active(Transform owner, int count)
     {
-        transform.position = owner.position;
-        transform.right = target.position - transform.position;
-        float distance = (target.position - transform.position).magnitude;
-        transform.localScale = new Vector3(distance, 1, 1);
-        target.GetComponent<Enemy>().GetHurt(SkillData.damage);
+        //初始位置与owner重合，面向target，
+        Transform hitTarget = FindTarget(owner);
+        if (hitTarget != null)
+        {
+            PoolManager.Instance.GetObj("Prefabs/HitEffectObjects", "HitEffect_Laser", (obj) =>
+            {
+                obj.GetComponent<HitEffect_Laser>().Init(hitTarget, owner);
+            });
+            //hitTarget.GetComponent<Enemy>().GetHurt(SkillData.damage);
+            if (count > 0)
+            {
+                await UniTask.Delay(100).ContinueWith(() => Active(hitTarget, count - 1));
+            }
+        }
+    }
+    //把目标和所有者放在laser身上，实时计算目标和所有者之间的位置关系
+
+    public Transform FindTarget(Transform owner)
+    {
+        Collider2D[] colls = Physics2D.OverlapCircleAll(owner.position, SkillData.range, targetLayer);
+        if (colls.Length > 0)
+        {
+            int index = Random.Range(0, colls.Length);
+            return colls[index].transform;
+        }
+        return null;
     }
 }

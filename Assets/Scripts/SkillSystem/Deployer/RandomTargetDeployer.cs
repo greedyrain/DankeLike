@@ -7,12 +7,13 @@ using UnityEngine;
 public class RandomTargetDeployer : SkillDeployer
 {
     public LayerMask targetLayer;
-    public override  void Generate()
+    public override async void Generate()
     {
+        Debug.Log(player == null);
         transform.position = player.transform.position;
         //如果检测范围内有敌人
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, SkillData.range, targetLayer);
-        UniTask.WaitUntil(() => colliders.Length > 0).ContinueWith(async () =>
+        await UniTask.WaitUntil(() => colliders.Length > 0).ContinueWith(async () =>
         {
             int index = Random.Range(0, colliders.Length);
             // float x = colliders[index].transform.position.x;
@@ -29,7 +30,6 @@ public class RandomTargetDeployer : SkillDeployer
                 await UniTask.Delay((int) (SkillData.actionInterval * 1000));
             }
         });
-
 
         // else
         // {

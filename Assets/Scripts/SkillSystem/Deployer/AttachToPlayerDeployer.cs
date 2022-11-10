@@ -7,6 +7,7 @@ public class AttachToPlayerDeployer : SkillDeployer
 {
     public override async void Generate()
     {
+        player = FindObjectOfType<PlayerController>();
         transform.position = player.transform.position;
         PoolManager.Instance.GetObj("Prefabs/SkillObjects", SkillData.prefabName, (obj) =>
         {

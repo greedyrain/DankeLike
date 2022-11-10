@@ -14,18 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 1
   generators:
-  - enemyID: 1001
+  - enemyID: 1002
     generateTiming: 3
     count: 20
-    duration: 5
+    duration: 20
     isBoss: 0
-  - enemyID: 1002
-    generateTiming: 10
-    count: 10
-    duration: 3
-    isBoss: 0
-  - enemyID: 1002
-    generateTiming: 20
-    count: 1
-    duration: 1
-    isBoss: 1

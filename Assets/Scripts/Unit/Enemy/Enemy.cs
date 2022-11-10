@@ -29,14 +29,15 @@ public class Enemy : BaseUnit
     public LayerMask targetLayer;
 
     [HideInInspector] public Vector2 originPos;
-    public Transform patrolTarget;
+    public Vector2 patrolPos;
 
     [HideInInspector] public EnemyStateMachine stateMachine;
     [HideInInspector] public PlayerController target;
 
     public override void Awake()
     {
-        base.Awake();
+        rb = GetComponent<Rigidbody2D>();
+        sr = GetComponentInChildren<SpriteRenderer>();
         stateMachine = GetComponent<EnemyStateMachine>();
     }
 
@@ -45,6 +46,8 @@ public class Enemy : BaseUnit
         base.OnEnable();
         InitData();
         GetComponent<Collider2D>().enabled = true;
+        sr.enabled = true;
+        isDead = false;
     }
 
 

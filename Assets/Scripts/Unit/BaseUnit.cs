@@ -8,7 +8,7 @@ public class BaseUnit : MonoBehaviour
 {
     [HideInInspector] public Rigidbody2D rb;
     [HideInInspector] public Animator anim;
-    SpriteRenderer sr;
+    protected SpriteRenderer sr;
 
     public bool isDead;
     protected float moveSpeed;
@@ -16,7 +16,7 @@ public class BaseUnit : MonoBehaviour
     public virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        sr = GetComponent<SpriteRenderer>();
+        sr = GetComponentInChildren<SpriteRenderer>();
     }
 
     public virtual void Start()
