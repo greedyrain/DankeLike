@@ -29,9 +29,9 @@ public class SkillObject_Laser : BaseSkillObject
         {
             PoolManager.Instance.GetObj("Prefabs/HitEffectObjects", "HitEffect_Laser", (obj) =>
             {
-                obj.GetComponent<HitEffect_Laser>().Init(hitTarget, owner);
+                obj.GetComponent<HitEffect_Laser>().Init(hitTarget, owner,SkillData);
             });
-            //hitTarget.GetComponent<Enemy>().GetHurt(SkillData.damage);
+
             if (count > 0)
             {
                 await UniTask.Delay(100).ContinueWith(() => Active(hitTarget, count - 1));
@@ -46,7 +46,16 @@ public class SkillObject_Laser : BaseSkillObject
         if (colls.Length > 0)
         {
             int index = Random.Range(0, colls.Length);
-            return colls[index].transform;
+            Transform hitTarget = colls[index].transform;
+            if (hitTarget == owner && colls.Length > 1)
+            {
+                FindTarget(owner);
+            }
+            else if (hitTarget == owner && colls.Length <= 1)
+            {
+                return null;
+            }
+            return hitTarget;
         }
         return null;
     }
