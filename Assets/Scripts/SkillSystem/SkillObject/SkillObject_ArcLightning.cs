@@ -1,12 +1,9 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
-public class SkillObject_Laser : BaseSkillObject
+public class SkillObject_ArcLightning : BaseSkillObject
 {
     //设定target和owner，每一帧的位置都设定味owner的位置，朝向target的位置。
     //如果target isdead，则把target设定为空,如果owner isdead，则把owner设定为空
@@ -27,8 +24,8 @@ public class SkillObject_Laser : BaseSkillObject
         {
             PoolManager.Instance.GetObj("Prefabs/HitEffectObjects", SkillData.hitEffectName, (obj) =>
             {
-                obj.GetComponent<HitEffect_Laser>().InitData(SkillData);
-                obj.GetComponent<HitEffect_Laser>().Init(hitTarget, owner);
+                obj.GetComponent<HitEffect_ArcLightning>().InitData(SkillData);
+                obj.GetComponent<HitEffect_ArcLightning>().Init(hitTarget, owner);
             });
             hitTarget.GetComponent<Enemy>().GetHurt(SkillData.damage);
             if (count > 0)

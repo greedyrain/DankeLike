@@ -17,5 +17,10 @@ MonoBehaviour:
   - enemyID: 1002
     generateTiming: 3
     count: 20
-    duration: 20
+    duration: 10
+    isBoss: 0
+  - enemyID: 1001
+    generateTiming: 3
+    count: 20
+    duration: 10
     isBoss: 0

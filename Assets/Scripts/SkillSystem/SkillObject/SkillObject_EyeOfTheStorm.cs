@@ -14,7 +14,7 @@ public class SkillObject_EyeOfTheStorm : BaseSkillObject
     {
         UniTask.WaitUntil(() => initCompleted).ContinueWith(() =>
         {
-            SetTargetNum();
+            // SetTargetNum();
             SelectTarget();
             UniTask.Delay((int)(SkillData.duration*1000)).ContinueWith(()=>{PoolManager.Instance.PushObj(gameObject.name, gameObject);});
         });
@@ -22,23 +22,23 @@ public class SkillObject_EyeOfTheStorm : BaseSkillObject
 
     public async void Lightning(Transform target)
     {
-        PoolManager.Instance.GetObj("Prefabs/HitEffectObjects", "HitEffect_Lightning", (obj) =>
+        PoolManager.Instance.GetObj("Prefabs/HitEffectObjects", SkillData.hitEffectName, (obj) =>
         {
-            obj.GetComponent<BaseSkillObject>().InitData(SkillData);
-            obj.GetComponent<BaseSkillObject>().SetOwner(owner);
-            obj.GetComponent<BaseSkillObject>().SetTarget(target);
+            obj.GetComponent<HitEffect_Lightning>().InitData(SkillData);
+            obj.GetComponent<HitEffect_Lightning>().Init(target, owner);
         });
+        target.GetComponent<Enemy>().GetHurt(SkillData.damage);
     }
 
     public async void SelectTarget()
     {
         int index;
-        while (true)
+        while (gameObject.activeSelf)
         {
             colls = Physics2D.OverlapCircleAll(transform.position, SkillData.range, targetLayer);
             if (colls.Length > 0)
             {
-                for (int i = 0; i < targetCount; i++)
+                for (int i = 0; i < SkillData.count; i++)
                 {
                     index = Random.Range(0, colls.Length);
                     targetList.Add(colls[index].transform);
@@ -56,25 +56,25 @@ public class SkillObject_EyeOfTheStorm : BaseSkillObject
         }
     }
 
-    public void SetTargetNum()
-    {
-        switch (SkillData.level)
-        {
-            case 1:
-                targetCount = 1;
-                break;
-            case 2:
-                targetCount = 2;
-                break;
-            case 3:
-                targetCount = 3;
-                break;
-            case 4:
-                targetCount = 4;
-                break;
-            case 5:
-                targetCount = 5;
-                break;
-        }
-    }
+    // public void SetTargetNum()
+    // {
+    //     switch (SkillData.level)
+    //     {
+    //         case 1:
+    //             targetCount = 1;
+    //             break;
+    //         case 2:
+    //             targetCount = 2;
+    //             break;
+    //         case 3:
+    //             targetCount = 3;
+    //             break;
+    //         case 4:
+    //             targetCount = 4;
+    //             break;
+    //         case 5:
+    //             targetCount = 5;
+    //             break;
+    //     }
+    // }
 }

@@ -1,10 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-public class HitEffect_Laser : BaseSkillObject
+public class HitEffect_ArcLightning : BaseSkillObject 
 {
     Vector2 targetPos;
     Vector2 ownerPos;
@@ -36,7 +35,7 @@ public class HitEffect_Laser : BaseSkillObject
         UniTask.WaitUntil(() => isInitCompleted).ContinueWith(() =>
         {
             line.enabled = true;
-            UniTask.Delay((int)(SkillData.duration*1000)).ContinueWith(() =>
+            UniTask.Delay(500).ContinueWith(() =>
             {
                 target = null;
                 owner = null;

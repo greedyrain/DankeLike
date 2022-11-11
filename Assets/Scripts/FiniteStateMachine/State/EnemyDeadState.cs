@@ -11,7 +11,11 @@ public class EnemyDeadState : BaseEnemyState
         enemy.rb.velocity = Vector2.zero;
         enemy.GetComponent<Collider2D>().enabled = false;
         enemy.GetComponentInChildren<SpriteRenderer>().enabled = false;
-        enemy.transform.localPosition = Vector3.zero;
-        await UniTask.Delay(1000).ContinueWith(()=> PoolManager.Instance.PushObj(enemy.transform.name,enemy.transform.gameObject));
+        await UniTask.Delay(1000).ContinueWith(()=>
+        {
+            PoolManager.Instance.PushObj(enemy.transform.name, enemy.transform.gameObject);
+            enemy.transform.localPosition = Vector3.zero;
+        });
+        
     }
 }
