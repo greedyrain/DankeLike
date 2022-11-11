@@ -9,7 +9,6 @@ public class SkillChildObject_SerpentWard : BaseSkillObject
 
     private void OnEnable()
     {
-
         UniTask.WaitUntil(() => initCompleted).ContinueWith(() =>
         {
             Attack();
@@ -18,6 +17,7 @@ public class SkillChildObject_SerpentWard : BaseSkillObject
         });
     }
     
+    //蛇棒
     public async void Attack()
     {
         while (gameObject.activeSelf)

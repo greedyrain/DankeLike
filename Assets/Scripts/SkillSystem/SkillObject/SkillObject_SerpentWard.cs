@@ -17,11 +17,12 @@ public class SkillObject_SerpentWard : BaseSkillObject
 
     public void SetSerprentWard()
     {
+        Debug.Log(transform.position);
         for (int i = 0; i < 10; i++)
         {
             PoolManager.Instance.GetObj("Prefabs", "SerpentWard", (obj) =>
             {
-                obj.transform.position = Quaternion.AngleAxis(36 * i, transform.forward) * transform.up;
+                obj.transform.position = Quaternion.AngleAxis(36 * i, transform.forward) * transform.up + transform.position;
                 obj.GetComponent<BaseSkillObject>().InitData(SkillData);
             });
         }
