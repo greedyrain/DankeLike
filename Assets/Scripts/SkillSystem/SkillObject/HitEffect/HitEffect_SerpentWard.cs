@@ -10,7 +10,7 @@ public class HitEffect_SerpentWard : BaseSkillObject
 
     public  void Update()
     {
-        UniTask.WaitUntil(() => initCompleted != null).ContinueWith(() => { MoveToTarget(); });
+        UniTask.WaitUntil(() => initCompleted && target != null).ContinueWith(() => { MoveToTarget(); });
     }
 
     void MoveToTarget()

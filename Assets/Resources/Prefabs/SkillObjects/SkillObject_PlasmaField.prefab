@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3853419335021081922}
   - component: {fileID: 3853419335021081923}
   m_Layer: 0
-  m_Name: PlasmaFieldObject
+  m_Name: SkillObject_PlasmaField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

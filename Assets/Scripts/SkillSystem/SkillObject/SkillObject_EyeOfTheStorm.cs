@@ -20,7 +20,7 @@ public class SkillObject_EyeOfTheStorm : BaseSkillObject
         });
     }
 
-    public async void Lightning(Transform target)
+    public void Lightning(Transform target)
     {
         PoolManager.Instance.GetObj("Prefabs/HitEffectObjects", SkillData.hitEffectName, (obj) =>
         {
@@ -38,7 +38,7 @@ public class SkillObject_EyeOfTheStorm : BaseSkillObject
             colls = Physics2D.OverlapCircleAll(transform.position, SkillData.range, targetLayer);
             if (colls.Length > 0)
             {
-                for (int i = 0; i < SkillData.count; i++)
+                for (int i = 0; i < SkillData.targetCount; i++)
                 {
                     index = Random.Range(0, colls.Length);
                     targetList.Add(colls[index].transform);
@@ -55,26 +55,4 @@ public class SkillObject_EyeOfTheStorm : BaseSkillObject
             await UniTask.Delay((int) (SkillData.actionInterval * 1000));
         }
     }
-
-    // public void SetTargetNum()
-    // {
-    //     switch (SkillData.level)
-    //     {
-    //         case 1:
-    //             targetCount = 1;
-    //             break;
-    //         case 2:
-    //             targetCount = 2;
-    //             break;
-    //         case 3:
-    //             targetCount = 3;
-    //             break;
-    //         case 4:
-    //             targetCount = 4;
-    //             break;
-    //         case 5:
-    //             targetCount = 5;
-    //             break;
-    //     }
-    // }
 }

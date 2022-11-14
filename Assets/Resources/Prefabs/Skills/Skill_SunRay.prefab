@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 159489754512321732}
   - component: {fileID: 4462972811179285415}
   m_Layer: 0
-  m_Name: SunRay
+  m_Name: Skill_SunRay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 159489754512321735}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.4668124, y: 1.2878861, z: 0}
+  m_LocalPosition: {x: 1.0882844, y: -0.41013467, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

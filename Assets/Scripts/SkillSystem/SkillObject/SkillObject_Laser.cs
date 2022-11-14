@@ -14,7 +14,7 @@ public class SkillObject_Laser : BaseSkillObject
     {
         await UniTask.WaitUntil(() => initCompleted).ContinueWith(async () =>
         {
-            Active(owner, SkillData.count);
+            Active(owner, SkillData.targetCount);
             await UniTask.Delay(500).ContinueWith(() => PoolManager.Instance.PushObj(gameObject.name, gameObject));
         });
     }

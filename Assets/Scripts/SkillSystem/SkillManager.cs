@@ -79,7 +79,7 @@ public class SkillManager : MonoBehaviour
         {
             if (skill.ID == data.ID && skill.level == data.level)
             {
-                SkillDeployer obj = Resources.Load<SkillDeployer>($"Prefabs/Skills/{skill.skillName}");
+                SkillDeployer obj = Resources.Load<SkillDeployer>($"Prefabs/Skills/Skill_{skill.skillName}");
                 obj.SkillData = skill;
                 obj.player = player;
                 ownedSkill.Add(obj);

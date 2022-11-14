@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1803455444697258258}
   - component: {fileID: 7752118409722279605}
   m_Layer: 0
-  m_Name: ThunderObject
+  m_Name: SkillObject_Thunder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

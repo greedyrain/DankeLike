@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3116706816325416866}
   - component: {fileID: 1048637483027559320}
   m_Layer: 0
-  m_Name: SunRayObject
+  m_Name: SkillObject_SunRay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

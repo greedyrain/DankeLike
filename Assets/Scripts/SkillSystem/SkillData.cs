@@ -15,6 +15,8 @@ public class SkillData
     public List<string> impactTypes;
     //技能数量（如燃烧瓶个数）
     public int count;
+    //目标数量
+    public int targetCount;
     //技能伤害
     public int damage;
     //技能名称，用于读取技能预制体
