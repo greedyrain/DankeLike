@@ -36,8 +36,7 @@ public class Enemy : BaseUnit
 
     public override void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
-        sr = GetComponentInChildren<SpriteRenderer>();
+        rb = GetComponent<Rigidbody>();
         stateMachine = GetComponent<EnemyStateMachine>();
     }
 
@@ -46,7 +45,6 @@ public class Enemy : BaseUnit
         base.OnEnable();
         InitData();
         GetComponent<Collider2D>().enabled = true;
-        sr.enabled = true;
         isDead = false;
     }
 

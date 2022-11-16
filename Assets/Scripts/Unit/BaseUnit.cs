@@ -3,25 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-[RequireComponent(typeof(Rigidbody2D))]
 public class BaseUnit : MonoBehaviour
 {
-    [HideInInspector] public Rigidbody2D rb;
+    [HideInInspector] public Rigidbody rb;
     [HideInInspector] public Animator anim;
-    protected SpriteRenderer sr;
+    private float angle;
 
     public bool isDead;
     protected float moveSpeed;
+    protected float rotateSpeed;
 
     public virtual void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
-        sr = GetComponentInChildren<SpriteRenderer>();
+        rb = GetComponent<Rigidbody>();
     }
 
     public virtual void Start()
     {
-        rb.gravityScale = 0;
+        
     }
 
     protected virtual void OnEnable()
@@ -36,19 +35,15 @@ public class BaseUnit : MonoBehaviour
 
     public virtual void Move(Vector2 dir)
     {
-        rb.velocity = dir.normalized * moveSpeed;
-        if (dir.x > 0)
-        {
-            sr.flipX = true;
-        }
-        else if (dir.x < 0)
-        {
-            sr.flipX = false;
-        }
+        angle = Vector3.Angle(Vector3.up, dir);
+        angle = dir.x > 0 ? angle : -angle;
+        transform.rotation = Quaternion.Euler(0, angle, 0);
+        rb.velocity = transform.forward * moveSpeed;
     }
 
     public virtual void StopMove()
     {
-        rb.velocity = Vector2.zero;
+        
+        rb.velocity = Vector3.zero;
     }
 }

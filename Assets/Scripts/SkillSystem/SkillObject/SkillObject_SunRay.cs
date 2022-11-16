@@ -12,7 +12,7 @@ public class SkillObject_SunRay : BaseSkillObject
     private void OnEnable()
     {
         coll = GetComponent<Collider2D>();
-        UIManager.Instance.GetPanel<JoyStickPanel>().onDrag += SetSunRayDirection;
+        UIManager.Instance.GetPanel<JoyStickPanel>().OnDrag += SetSunRayDirection;
         UniTask.WaitUntil(() => initCompleted).ContinueWith(() =>
         {
             transform.right = UIManager.Instance.GetPanel<JoyStickPanel>().direction;

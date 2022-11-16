@@ -12,4 +12,5 @@ public class PlayerData
     public int atk;
     public int def;
     public int moveSpeed;
+    public int rotateSpeed;
 }

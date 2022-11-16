@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : BaseUnit
 {
-    public Vector2 direction;
+    public Vector3 direction;
     public GameObject weaponPos;
     
     public int ID;
@@ -33,27 +33,19 @@ public class PlayerController : BaseUnit
         healthBar.ShowHP(maxHP,HP);
         playerExperience = GetComponent<PlayerExperience>();
         playerExperience.Init();
-        playerSkillManager = GetComponent<SkillManager>(); 
+        playerSkillManager = GetComponent<SkillManager>();
+    }
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        UIManager.Instance.GetPanel<JoyStickPanel>().OnDrag += Move;
     }
 
     public override void Start()
     {
         base.Start();
         input.EnableGamePlayInput();
-    }
-
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-        input.onMove += Move;
-        input.onStopMove += StopMove;
-    }
-
-
-    protected override void OnDisable()
-    {
-        input.onMove -= Move;
-        input.onStopMove -= StopMove;
     }
 
     public override void Move(Vector2 dir)
@@ -86,6 +78,7 @@ public class PlayerController : BaseUnit
     {
         playerData = GameDataManager.Instance.PlayerData;
         moveSpeed = playerData.moveSpeed;
+        rotateSpeed = playerData.rotateSpeed;
         userName = playerData.userName;
         level = playerData.level;
         maxHP = playerData.maxHP;

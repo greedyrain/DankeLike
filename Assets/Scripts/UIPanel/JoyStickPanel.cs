@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks.Triggers;
@@ -14,7 +15,7 @@ public class JoyStickPanel : BasePanel
     public GameObject joyStickController;
     public PlayerController player;
     public Vector2 direction;
-    public event UnityAction<Vector2> onDrag;
+    public event UnityAction<Vector2> OnDrag;
     public override void Init()
     {
         Show();
@@ -37,16 +38,25 @@ public class JoyStickPanel : BasePanel
         touchAreaEventTrigger.triggers.Add(entryDrag);
     }
 
+    private void LateUpdate()
+    {
+        if (direction != Vector2.zero)
+        {
+            player.Move(direction);
+        }
+    }
+
     private void PointerDown(BaseEventData data)
     {
         joyStick.SetActive(true);
         joyStick.transform.position = Mouse.current.position.ReadValue();
+        joyStickController.transform.localPosition = Vector3.zero;
     }
     
     private void PointerUp(BaseEventData data)
     {
         joyStick.SetActive(false);
-        player.Move(Vector2.zero);
+        direction = Vector2.zero;
     }
     
     private void PointerDrag(BaseEventData data)
@@ -57,12 +67,11 @@ public class JoyStickPanel : BasePanel
             joyStickController.transform.localPosition =
                 (joyStickController.transform.position - joyStick.transform.position).normalized * 50;
         }
-
         direction = joyStickController.transform.position - joyStick.transform.position;
-        player.Move(joyStickController.transform.position - joyStick.transform.position);
         // player.weapon.SetWeaponDirection(joyStickController.transform.position - joyStick.transform.position);
-        player.direction = joyStickController.transform.position - joyStick.transform.position;
-        
-        onDrag?.Invoke(joyStickController.transform.position - joyStick.transform.position);
+        // player.direction = joyStickController.transform.position - joyStick.transform.position;
+        // onDrag?.Invoke(joyStickController.transform.position - joyStick.transform.position);
     }
+    
+    
 }

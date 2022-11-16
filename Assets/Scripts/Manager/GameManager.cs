@@ -11,6 +11,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         UIManager.Instance.ShowPanel<WeaponSelectPanel>();
-        mainCamera.transform.SetParent(player.transform);
+        // mainCamera.transform.SetParent(player.transform);
     }
 }
