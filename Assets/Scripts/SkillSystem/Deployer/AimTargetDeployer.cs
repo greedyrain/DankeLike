@@ -5,8 +5,15 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+public enum E_SelectTargetType
+{
+    Random,
+    Nearst
+}
+
 public class AimTargetDeployer : SkillDeployer
 {
+    public E_SelectTargetType selectTargetType;
     public LayerMask targetLayer;
 
     public override async void Generate()
@@ -22,17 +29,34 @@ public class AimTargetDeployer : SkillDeployer
                 PoolManager.Instance.GetObj("Prefabs/SkillObjects", SkillData.prefabName, (obj) =>
                 {
                     obj.GetComponent<BaseSkillObject>().InitData(SkillData);
+                    obj.GetComponent<BaseSkillObject>().SetOwner(player.transform);
                     obj.transform.position = transform.position;
                     obj.transform.right = colliders[0].transform.position - transform.position;
-                    float minDistance = Vector2.Distance(transform.position, colliders[0].transform.position);
-                    for (int i = 1; i < colliders.Length; i++)
+                    //根据需要的效果选择距离最近的或者范围内随机的敌人
+                    switch (selectTargetType)
                     {
-                        if (Vector2.Distance(transform.position, colliders[i].transform.position) < minDistance)
-                        {
-                            minDistance = Vector2.Distance(transform.position, colliders[i].transform.position);
-                            obj.transform.right = colliders[i].transform.position - transform.position;
+                        //选择距离最近的敌人
+                        case E_SelectTargetType.Nearst:
+                            float minDistance = Vector2.Distance(transform.position, colliders[0].transform.position);
+                            for (int j = 1; j < colliders.Length; j++)
+                            {
+                                if (Vector2.Distance(transform.position, colliders[j].transform.position) < minDistance)
+                                {
+                                    minDistance = Vector2.Distance(transform.position, colliders[j].transform.position);
+                                    obj.transform.right = colliders[j].transform.position - transform.position;
+                                    obj.transform.position = transform.position;
+                                    obj.GetComponent<BaseSkillObject>().SetTarget(colliders[j].transform);
+                                }
+                            }
+                            break;
+                        
+                        //范围内随机敌人
+                        case E_SelectTargetType.Random:
+                            int index = Random.Range(0, colliders.Length);
+                            obj.transform.right = colliders[index].transform.position - transform.position;
                             obj.transform.position = transform.position;
-                        }
+                            obj.GetComponent<BaseSkillObject>().SetTarget(colliders[index].transform);
+                            break;
                     }
                 });
                 await UniTask.Delay((int)(SkillData.actionInterval * 1000));

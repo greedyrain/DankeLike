@@ -1,1 +1,1 @@
-{"ID":10001,"userName":"GreedyRain","level":1,"maxHP":10,"HP":10,"atk":10,"def":0,"moveSpeed":5}
+{"ID":10001,"userName":"GreedyRain","level":1,"maxHP":100,"HP":100,"atk":10,"def":10,"moveSpeed":5,"rotateSpeed":20}

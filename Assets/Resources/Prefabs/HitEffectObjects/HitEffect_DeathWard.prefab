@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 180197460192474314}
   - component: {fileID: 180197460192474313}
-  - component: {fileID: 7797312138891501777}
   - component: {fileID: 7797312139696802938}
+  - component: {fileID: 2282878676681029239}
   m_Layer: 0
   m_Name: HitEffect_DeathWard
   m_TagString: Untagged
@@ -84,24 +84,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7797312138891501777
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 180197460192474312}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bf7c1c6514021949920de1fbdad974b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  target: {fileID: 0}
-  owner: {fileID: 0}
-  speed: 10
 --- !u!70 &7797312139696802938
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -118,3 +100,22 @@ CapsuleCollider2D:
   m_Offset: {x: 0.12381773, y: -0.012113617}
   m_Size: {x: 0.2802231, y: 0.09983261}
   m_Direction: 1
+--- !u!114 &2282878676681029239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180197460192474312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0a358429eda8284fbc699724b66c883, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  target: {fileID: 0}
+  owner: {fileID: 0}
+  speed: 10
+  isInitCompleted: 0

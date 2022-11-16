@@ -10,33 +10,50 @@ public class SkillObject_DeathWard : BaseSkillObject
     {
         UniTask.WaitUntil(() => initCompleted).ContinueWith(async () =>
         {
-            Debug.Log(SkillData == null);
-            Attack();
             UniTask.Delay((int) (SkillData.duration * 1000))
                 .ContinueWith(() => PoolManager.Instance.PushObj(gameObject.name, gameObject));
+            while (gameObject.activeSelf)
+            {
+                Attack(transform,SkillData.targetCount);
+                await UniTask.Delay((int) (SkillData.actionInterval * 1000));
+            }
         });
-
     }
 
     //蛇棒
-    public async void Attack()
+    public void Attack(Transform owner, int count)
     {
-        while (gameObject.activeSelf)
+        //初始位置与owner重合，面向target，
+        Transform hitTarget = FindTarget(owner);
+        if (hitTarget != null)
         {
-            Collider2D[] colls = Physics2D.OverlapCircleAll(transform.position, SkillData.radius, targetLayer);
-            if (colls.Length > 0)
+            PoolManager.Instance.GetObj("Prefabs/HitEffectObjects", SkillData.hitEffectName, (obj) =>
             {
-                target = colls[0].transform;
-                PoolManager.Instance.GetObj("Prefabs/HitEffectObjects", SkillData.hitEffectName, (obj) =>
-                {
-                    obj.GetComponent<HitEffect_SerpentWard>().InitData(SkillData);
-                    obj.GetComponent<HitEffect_SerpentWard>().SetTarget(target);
-                    obj.transform.position = transform.position;
-                });
-                // if (count > 0)
-                //     Attack(target,count - 1);
-            }
-            await UniTask.Delay((int) (SkillData.actionInterval * 1000));
+                obj.transform.position = owner.position;
+                obj.GetComponent<HitEffect_DeathWard>().count = count;
+                obj.GetComponent<HitEffect_DeathWard>().InitData(SkillData);
+                obj.GetComponent<HitEffect_DeathWard>().Init(hitTarget, owner);
+            });
         }
+    }
+    
+    public Transform FindTarget(Transform owner)
+    {
+        Collider2D[] colls = Physics2D.OverlapCircleAll(owner.position, SkillData.range, targetLayer);
+        if (colls.Length > 0)
+        {
+            int index = Random.Range(0, colls.Length);
+            Transform hitTarget = colls[index].transform;
+            if (hitTarget == owner && colls.Length > 1)
+            {
+                FindTarget(owner);
+            }
+            else if (hitTarget == owner && colls.Length <= 1)
+            {
+                return null;
+            }
+            return hitTarget;
+        }
+        return null;
     }
 }

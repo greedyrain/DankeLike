@@ -37,8 +37,8 @@ public class SkillObject_Laser : BaseSkillObject
             }
         }
     }
+    
     //把目标和所有者放在laser身上，实时计算目标和所有者之间的位置关系
-
     public Transform FindTarget(Transform owner)
     {
         Collider2D[] colls = Physics2D.OverlapCircleAll(owner.position, SkillData.range, targetLayer);
