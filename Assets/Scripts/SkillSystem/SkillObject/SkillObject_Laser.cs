@@ -10,6 +10,7 @@ public class SkillObject_Laser : BaseSkillObject
 {
     //设定target和owner，每一帧的位置都设定味owner的位置，朝向target的位置。
     //如果target isdead，则把target设定为空,如果owner isdead，则把owner设定为空
+    private Collider[] colls;
     private async void OnEnable()
     {
         await UniTask.WaitUntil(() => initCompleted).ContinueWith(async () =>
@@ -41,7 +42,7 @@ public class SkillObject_Laser : BaseSkillObject
     //把目标和所有者放在laser身上，实时计算目标和所有者之间的位置关系
     public Transform FindTarget(Transform owner)
     {
-        Collider2D[] colls = Physics2D.OverlapCircleAll(owner.position, SkillData.range, targetLayer);
+        colls = Physics.OverlapSphere(owner.position, SkillData.range, targetLayer);
         if (colls.Length > 0)
         {
             int index = Random.Range(0, colls.Length);

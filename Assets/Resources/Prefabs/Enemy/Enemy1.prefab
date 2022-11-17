@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 761146753608104151}
   - component: {fileID: 761146753608104150}
   - component: {fileID: 1250313503}
+  - component: {fileID: -9192538722444026603}
   m_Layer: 7
   m_Name: Enemy1
   m_TagString: Enemy
@@ -112,8 +113,8 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 64
-  originPos: {x: 0, y: 0}
-  patrolPos: {x: 0, y: 0}
+  originPos: {x: 0, y: 0, z: 0}
+  patrolPos: {x: 0, y: 0, z: 0}
   stateMachine: {fileID: 0}
   target: {fileID: 0}
 --- !u!114 &761146753608104150
@@ -142,6 +143,22 @@ CapsuleCollider:
   m_Height: 1.1695492
   m_Direction: 1
   m_Center: {x: 0, y: 0.34267735, z: -0.08477461}
+--- !u!54 &-9192538722444026603
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 761146753608104148}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!1 &761154456522872122
 GameObject:
   m_ObjectHideFlags: 0
@@ -278,7 +295,7 @@ GameObject:
   - component: {fileID: 758797699318284434}
   m_Layer: 7
   m_Name: Body
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -900,7 +917,7 @@ GameObject:
   - component: {fileID: 827637777700016076}
   m_Layer: 7
   m_Name: TurtleShell
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

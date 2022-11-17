@@ -7,7 +7,7 @@ using UnityEngine;
 public class SkillObject_EyeOfTheStorm : BaseSkillObject
 {
     public List<Transform> targetList = new List<Transform>();
-    private Collider2D[] colls;
+    private Collider[] colls;
     private int targetCount;
 
     private void OnEnable()
@@ -35,7 +35,7 @@ public class SkillObject_EyeOfTheStorm : BaseSkillObject
         int index;
         while (gameObject.activeSelf)
         {
-            colls = Physics2D.OverlapCircleAll(transform.position, SkillData.range, targetLayer);
+            colls = Physics.OverlapSphere(transform.position, SkillData.range, targetLayer);
             if (colls.Length > 0)
             {
                 for (int i = 0; i < SkillData.targetCount; i++)

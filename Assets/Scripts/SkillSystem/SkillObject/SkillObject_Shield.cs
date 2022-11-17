@@ -11,7 +11,7 @@ public class SkillObject_Shield : BaseSkillObject
     {
         UniTask.WaitUntil(() => initCompleted).ContinueWith(() =>
         {
-            transform.localScale = Vector3.one * SkillData.radius * 2;
+            transform.localScale = new Vector3(SkillData.radius * 2, 0.05f, SkillData.radius * 2); 
             Guarantee();
             UniTask.Delay((int) (SkillData.duration * 1000)).ContinueWith(() =>
             {
@@ -29,7 +29,7 @@ public class SkillObject_Shield : BaseSkillObject
             await UniTask.Delay((int) (SkillData.actionInterval * 1000)).ContinueWith(()=>
             {
                 time -= SkillData.actionInterval;
-                Collider2D[] colls = Physics2D.OverlapCircleAll(transform.position, SkillData.radius, targetLayer);
+                Collider[] colls = Physics.OverlapSphere(transform.position, SkillData.radius, targetLayer);
                 if (colls.Length > 0)
                 {
                     for (int i = 0; i < colls.Length; i++)

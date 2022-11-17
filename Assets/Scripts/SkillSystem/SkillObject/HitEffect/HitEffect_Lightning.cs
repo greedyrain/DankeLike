@@ -5,12 +5,11 @@ using UnityEngine;
 
 public class HitEffect_Lightning : BaseSkillObject
 {
-    Vector2 targetPos;
-    Vector2 ownerPos;
+    Vector3 targetPos;
+    Vector3 ownerPos;
 
     public bool isInitCompleted;
-    LineRenderer line;
-
+    // LineRenderer line;
     void Update()
     {
         UniTask.WaitUntil(() => isInitCompleted).ContinueWith(() =>
@@ -18,29 +17,29 @@ public class HitEffect_Lightning : BaseSkillObject
             if (target.gameObject.activeSelf && owner.gameObject.activeSelf)
             {
                 targetPos = target.position;
-                transform.right = targetPos - ownerPos;
+                transform.forward = targetPos - ownerPos;
                 ownerPos = owner.position;
                 transform.position = ownerPos;
                 float distance = (targetPos - ownerPos).magnitude;
-                transform.localScale = new Vector3(distance, 1, 1);
+                transform.localScale = new Vector3(1, 1, distance);
             }
         });
     }
 
     private void OnEnable()
     {
-        line = GetComponent<LineRenderer>();
-        line.enabled = false;
+        // line = GetComponent<LineRenderer>();
+        // line.enabled = false;
         isInitCompleted = false;
         UniTask.WaitUntil(() => isInitCompleted).ContinueWith(() =>
         {
-            line.enabled = true;
+            // line.enabled = true;
             UniTask.Delay(300).ContinueWith(() =>
             {
                 target = null;
                 owner = null;
                 isInitCompleted = false;
-                line.enabled = false;
+                // line.enabled = false;
                 PoolManager.Instance.PushObj(gameObject.name, gameObject);
             });
         });

@@ -9,8 +9,8 @@ public class EnemyDeadState : BaseEnemyState
     {
         enemy.isDead = true;
         enemy.rb.velocity = Vector2.zero;
-        enemy.GetComponent<Collider2D>().enabled = false;
-        enemy.GetComponentInChildren<SpriteRenderer>().enabled = false;
+        enemy.GetComponent<Collider>().enabled = false;
+        // enemy.GetComponentInChildren<MeshRenderer>().enabled = false;
         await UniTask.Delay(1000).ContinueWith(()=>
         {
             PoolManager.Instance.PushObj(enemy.transform.name, enemy.transform.gameObject);
