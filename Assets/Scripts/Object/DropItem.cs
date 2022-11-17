@@ -13,7 +13,7 @@ public class DropItem : MonoBehaviour
         experience = drop;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.transform.CompareTag("Player"))
         {

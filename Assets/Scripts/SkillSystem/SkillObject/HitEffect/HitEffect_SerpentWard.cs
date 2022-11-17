@@ -6,7 +6,7 @@ using UnityEngine;
 public class HitEffect_SerpentWard : BaseSkillObject
 {
     public float speed;
-    private Vector2 targetPos;
+    private Vector3 targetPos;
 
     public  void Update()
     {
@@ -19,7 +19,7 @@ public class HitEffect_SerpentWard : BaseSkillObject
         if (target.gameObject.activeSelf)
         {
             targetPos = target.position;
-            transform.right = targetPos - (Vector2)transform.position;
+            transform.forward = targetPos - transform.position;
             transform.position = Vector2.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
         }
 

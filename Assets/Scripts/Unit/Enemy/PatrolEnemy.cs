@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PatrolEnemy : Enemy
 {
+    private Collider[] targetList;
     public override void Awake()
     {
         base.Awake();
@@ -14,7 +17,7 @@ public class PatrolEnemy : Enemy
     {
         base.OnEnable();
         stateMachine.Init();
-        originPos = transform.position;
+        originPos = new Vector3(transform.position.x,0,transform.position.z);
         stateMachine.SwitchState(stateMachine.patrolState);
     }
 
@@ -25,9 +28,18 @@ public class PatrolEnemy : Enemy
 
     public void Alert()
     {
-        if (Physics2D.OverlapCircle(transform.position, enemyData.alertRadius, targetLayer))
+        if (Physics.OverlapSphere(transform.position, enemyData.alertRadius, targetLayer).Length > 0)
         {
-            target = Physics2D.OverlapCircle(transform.position, enemyData.alertRadius, targetLayer).GetComponent<PlayerController>();
+            targetList = Physics.OverlapSphere(transform.position, enemyData.alertRadius, targetLayer);
+            if (targetList.Length>0)
+            {
+                if (targetList.Length == 1)
+                    target = targetList[0].GetComponent<PlayerController>();
+                
+                else
+                    target = targetList[Random.Range(0,targetList.Length)].GetComponent<PlayerController>();
+            }
+            
             stateMachine.SwitchState(stateMachine.chaseState);
         }
         else if (target != null)

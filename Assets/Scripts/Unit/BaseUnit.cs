@@ -11,7 +11,6 @@ public class BaseUnit : MonoBehaviour
 
     public bool isDead;
     protected float moveSpeed;
-    protected float rotateSpeed;
 
     public virtual void Awake()
     {
@@ -31,14 +30,6 @@ public class BaseUnit : MonoBehaviour
     protected virtual void OnDisable()
     {
 
-    }
-
-    public virtual void Move(Vector2 dir)
-    {
-        angle = Vector3.Angle(Vector3.up, dir);
-        angle = dir.x > 0 ? angle : -angle;
-        transform.rotation = Quaternion.Euler(0, angle, 0);
-        rb.velocity = transform.forward * moveSpeed;
     }
 
     public virtual void StopMove()

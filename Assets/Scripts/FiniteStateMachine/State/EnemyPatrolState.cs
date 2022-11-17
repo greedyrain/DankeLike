@@ -18,7 +18,7 @@ public class EnemyPatrolState : BaseEnemyState
 
     public override void OnFixedUpdate()
     {
-        Vector2 dir = enemy.patrolPos - (Vector2)enemy.transform.position;
+        Vector3 dir = (enemy.patrolPos - enemy.transform.position).normalized;
         enemy.Move(dir);
     }
 
@@ -29,7 +29,7 @@ public class EnemyPatrolState : BaseEnemyState
 
     void CheckPatrolDistance()
     {
-        if (Vector2.Distance(enemy.transform.position, enemy.patrolPos) < 1)
+        if (Vector3.Distance(enemy.transform.position, enemy.patrolPos) < 0.1f)
         {
             SwitchPatrolTarget();
         }
@@ -38,8 +38,8 @@ public class EnemyPatrolState : BaseEnemyState
     public void SwitchPatrolTarget()
     {
         float x = Random.Range(enemy.originPos.x - enemy.enemyData.patrolRadius, enemy.originPos.x + enemy.enemyData.patrolRadius);
-        float y = Random.Range(enemy.originPos.y - enemy.enemyData.patrolRadius, enemy.originPos.y + enemy.enemyData.patrolRadius);
+        float z = Random.Range(enemy.originPos.z - enemy.enemyData.patrolRadius, enemy.originPos.z + enemy.enemyData.patrolRadius);
 
-        enemy.patrolPos = new Vector2(x, y);
+        enemy.patrolPos = new Vector3(x, 0,z);
     }
 }

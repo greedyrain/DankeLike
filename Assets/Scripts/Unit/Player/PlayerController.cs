@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,6 +9,7 @@ public class PlayerController : BaseUnit
 {
     public Vector3 direction;
     public GameObject weaponPos;
+    private float angle;
     
     public int ID;
     [HideInInspector] public string userName;
@@ -39,19 +41,16 @@ public class PlayerController : BaseUnit
     protected override void OnEnable()
     {
         base.OnEnable();
-        UIManager.Instance.GetPanel<JoyStickPanel>().OnDrag += Move;
+        UniTask.WaitUntil(() => UIManager.Instance.GetPanel<JoyStickPanel>()).ContinueWith(() =>
+        {
+            UIManager.Instance.GetPanel<JoyStickPanel>().OnDrag += Move;
+        });
     }
 
     public override void Start()
     {
         base.Start();
         input.EnableGamePlayInput();
-    }
-
-    public override void Move(Vector2 dir)
-    {
-        base.Move(dir);
-        direction = dir;
     }
 
     public void GetHurt(int damage)
@@ -69,6 +68,14 @@ public class PlayerController : BaseUnit
         }
     }
 
+    public virtual void Move(Vector2 dir)
+    {
+        angle = Vector3.Angle(Vector3.up, dir);
+        angle = dir.x > 0 ? angle : -angle;
+        transform.rotation = Quaternion.Euler(0, angle, 0);
+        transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
+    }
+    
     private void Dead()
     {
         Debug.Log("Dead");
@@ -78,7 +85,6 @@ public class PlayerController : BaseUnit
     {
         playerData = GameDataManager.Instance.PlayerData;
         moveSpeed = playerData.moveSpeed;
-        rotateSpeed = playerData.rotateSpeed;
         userName = playerData.userName;
         level = playerData.level;
         maxHP = playerData.maxHP;

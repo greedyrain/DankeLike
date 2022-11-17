@@ -47,7 +47,6 @@ public class SkillObject_SunRay : BaseSkillObject
 
     public async void Burn()
     {
-        Debug.Log("Radius is :"+SkillData.radius);
         float time = SkillData.duration;
         while (true)
         {

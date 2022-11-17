@@ -28,8 +28,8 @@ public class Enemy : BaseUnit
 
     public LayerMask targetLayer;
 
-    [HideInInspector] public Vector2 originPos;
-    public Vector2 patrolPos;
+    [HideInInspector] public Vector3 originPos;
+    public Vector3 patrolPos;
 
     [HideInInspector] public EnemyStateMachine stateMachine;
     [HideInInspector] public PlayerController target;
@@ -44,11 +44,15 @@ public class Enemy : BaseUnit
     {
         base.OnEnable();
         InitData();
-        GetComponent<Collider2D>().enabled = true;
+        GetComponent<Collider>().enabled = true;
         isDead = false;
     }
 
-
+    public void Move(Vector3 direction)
+    {
+        transform.Translate(direction * moveSpeed * Time.deltaTime);
+    }
+    
     public virtual void GetHurt(int damage)
     {
         if (isDead) return;
@@ -93,7 +97,14 @@ public class Enemy : BaseUnit
 
     public void InitData()
     {
-        enemyData = GameDataManager.Instance.EnemiesData[id - 1];
+        for (int i = 0; i < GameDataManager.Instance.EnemiesData.Count; i++)
+        {
+            if (GameDataManager.Instance.EnemiesData[i].ID == id)
+            {
+                enemyData  = GameDataManager.Instance.EnemiesData[i];
+                break;
+            }
+        }
         moveSpeed = enemyData.moveSpeed;
         objName = enemyData.name;
         description = enemyData.description;

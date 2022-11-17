@@ -16,7 +16,7 @@ public class EnemyChaseState : BaseEnemyState
 
     public override void OnFixedUpdate()
     {
-        Vector2 dir = enemy.target.transform.position - enemy.transform.position;
+        Vector3 dir = (enemy.target.transform.position - enemy.transform.position).normalized;
         enemy.Move(dir);
     }
 

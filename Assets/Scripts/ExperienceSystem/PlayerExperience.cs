@@ -21,7 +21,6 @@ public class PlayerExperience : MonoBehaviour
             if (level < maxLevel)
             {
                 level++;
-                Debug.Log("show level up panel...");
                 UIManager.Instance.ShowPanel<LevelUpPopupPanel>();
             }
             
