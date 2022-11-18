@@ -43,8 +43,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.118648805
-  m_Height: 0.8288665
+  m_Radius: 0.051021352
+  m_Height: 0.29819405
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: -0.0036947727}
 --- !u!114 &1003253547235801056
@@ -92,7 +92,7 @@ Transform:
   m_GameObject: {fileID: 1003253547835764601}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2448615, y: 0.41038656, z: 0.20274936}
+  m_LocalScale: {x: 0.1, y: 0.15, z: 0.1}
   m_Children:
   - {fileID: 3092998785270733245}
   m_Father: {fileID: 1003253547235801062}
@@ -172,7 +172,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6121779204594851568}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.867, z: -0}
+  m_LocalPosition: {x: 0, y: 0.53, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1003253547835764606}
@@ -228,7 +228,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.1324504
+        value: 0.10596034
         inSlope: 0
         outSlope: 0
         tangentMode: 0

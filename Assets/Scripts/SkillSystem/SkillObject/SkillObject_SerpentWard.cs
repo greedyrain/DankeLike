@@ -22,7 +22,7 @@ public class SkillObject_SerpentWard : BaseSkillObject
         {
             PoolManager.Instance.GetObj("Prefabs", "SerpentWard", (obj) =>
             {
-                obj.transform.position = Quaternion.AngleAxis(36 * i, transform.forward) * transform.up + transform.position;
+                obj.transform.position = Quaternion.AngleAxis(36 * i, transform.up) * transform.forward + transform.position;
                 obj.GetComponent<BaseSkillObject>().InitData(SkillData);
             });
         }

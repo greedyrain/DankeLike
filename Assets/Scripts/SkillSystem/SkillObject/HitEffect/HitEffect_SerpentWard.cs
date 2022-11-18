@@ -20,11 +20,11 @@ public class HitEffect_SerpentWard : BaseSkillObject
         {
             targetPos = target.position;
             transform.forward = targetPos - transform.position;
-            transform.position = Vector2.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
         }
 
         //如果子弹的目标已经死亡，则让子弹飞到目标位置后回收
-        if (!target.gameObject.activeSelf || Vector2.Distance(transform.position, targetPos) < 0.1f)
+        if (!target.gameObject.activeSelf || Vector3.Distance(transform.position, targetPos) < 0.1f)
         {
             PoolManager.Instance.PushObj(gameObject.name, gameObject);
             target = null;
@@ -32,7 +32,7 @@ public class HitEffect_SerpentWard : BaseSkillObject
     }
 
     //碰到敌人后造成伤害
-    public  void OnTriggerEnter2D(Collider2D collision)
+    public  void OnTriggerEnter(Collider collision)
     {
         if (collision.CompareTag("Enemy"))
         {

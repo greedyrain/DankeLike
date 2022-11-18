@@ -7,15 +7,16 @@ using UnityEngine.Events;
 
 public class SkillObject_SunRay : BaseSkillObject
 {
-    private Collider2D coll;
-    private List<Collider2D> colls = new List<Collider2D>();
+    private Collider coll;
+    private Vector3 dir;
+    private List<Collider> colls = new List<Collider>();
     private void OnEnable()
     {
-        coll = GetComponent<Collider2D>();
+        coll = GetComponent<Collider>();
         UIManager.Instance.GetPanel<JoyStickPanel>().OnDrag += SetSunRayDirection;
         UniTask.WaitUntil(() => initCompleted).ContinueWith(() =>
         {
-            transform.right = UIManager.Instance.GetPanel<JoyStickPanel>().direction;
+            transform.forward = UIManager.Instance.GetPanel<JoyStickPanel>().direction;
             Burn();
             UniTask.Delay((int) (SkillData.duration * 1000)).ContinueWith(() =>
             {
@@ -26,10 +27,11 @@ public class SkillObject_SunRay : BaseSkillObject
 
     public void SetSunRayDirection(Vector2 dir)
     {
-        transform.right = dir;
+        this.dir = new Vector3(dir.x, transform.position.y, dir.y);
+        transform.forward = this.dir;
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
+    private void OnTriggerEnter(Collider col)
     {
         if (col.CompareTag("Enemy"))
         {
@@ -37,7 +39,7 @@ public class SkillObject_SunRay : BaseSkillObject
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    private void OnTriggerExit(Collider other)
     {
         if (colls.Contains(other))
         {

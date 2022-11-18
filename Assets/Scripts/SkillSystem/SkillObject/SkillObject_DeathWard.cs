@@ -5,16 +5,18 @@ using UnityEngine;
 
 public class SkillObject_DeathWard : BaseSkillObject
 {
-    // private Collider2D[] colls;
+    public Transform deployPos;
+    private Collider[] colls;
     private void OnEnable()
     {
         UniTask.WaitUntil(() => initCompleted).ContinueWith(async () =>
         {
+            transform.position = new Vector3(transform.position.x, 1.334f, transform.position.z);
             UniTask.Delay((int) (SkillData.duration * 1000))
                 .ContinueWith(() => PoolManager.Instance.PushObj(gameObject.name, gameObject));
             while (gameObject.activeSelf)
             {
-                Attack(transform,SkillData.targetCount);
+                Attack(deployPos,SkillData.targetCount);
                 await UniTask.Delay((int) (SkillData.actionInterval * 1000));
             }
         });
@@ -39,7 +41,7 @@ public class SkillObject_DeathWard : BaseSkillObject
     
     public Transform FindTarget(Transform owner)
     {
-        Collider2D[] colls = Physics2D.OverlapCircleAll(owner.position, SkillData.range, targetLayer);
+        colls = Physics.OverlapSphere(owner.position, SkillData.range, targetLayer);
         if (colls.Length > 0)
         {
             int index = Random.Range(0, colls.Length);

@@ -5,12 +5,14 @@ using Random = UnityEngine.Random;
 
 public class SkillChildObject_SerpentWard : BaseSkillObject
 {
-    private Collider2D[] colls;
+    private Collider[] colls;
+    public Transform deployPos;
 
     private void OnEnable()
     {
         UniTask.WaitUntil(() => initCompleted).ContinueWith(() =>
         {
+            transform.position = new Vector3(transform.position.x, 0.35f, transform.position.z);
             Attack();
             UniTask.Delay((int) (SkillData.duration * 1000))
                 .ContinueWith(() => PoolManager.Instance.PushObj(gameObject.name, gameObject));
@@ -22,7 +24,7 @@ public class SkillChildObject_SerpentWard : BaseSkillObject
     {
         while (gameObject.activeSelf)
         {
-            colls = Physics2D.OverlapCircleAll(transform.position, SkillData.radius, targetLayer);
+            colls = Physics.OverlapSphere(transform.position, SkillData.radius, targetLayer);
             if (colls.Length > 0)
             {
                 target = colls[0].transform;
@@ -30,7 +32,7 @@ public class SkillChildObject_SerpentWard : BaseSkillObject
                 {
                     obj.GetComponent<HitEffect_SerpentWard>().InitData(SkillData);
                     obj.GetComponent<HitEffect_SerpentWard>().SetTarget(target);
-                    obj.transform.position = transform.position;
+                    obj.transform.position = deployPos.position;
                 }); 
             }
             await UniTask.Delay((int) (SkillData.actionInterval * 1000));

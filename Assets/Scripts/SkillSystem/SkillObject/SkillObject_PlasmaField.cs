@@ -1,12 +1,32 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public class SkillObject_PlasmaField : BaseSkillObject
 {
+    private ParticleSystem particle;
+    private SphereCollider coll;
+    private void OnEnable()
+    {
+        particle = GetComponentInChildren<ParticleSystem>();
+        coll = GetComponent<SphereCollider>();
+        UniTask.WaitUntil(() => initCompleted).ContinueWith(() =>
+        {
+            UniTask.Delay((int) (SkillData.duration * 1000)).ContinueWith(() =>
+            {
+                PoolManager.Instance.PushObj(gameObject.name,gameObject);
+            });
+        });
+    }
 
-    private void OnTriggerEnter2D(Collider2D col)
+    private void Update()
+    {
+        coll.radius = particle.shape.radius;
+    }
+
+    private void OnTriggerEnter(Collider col)
     {
         if (col.CompareTag("Enemy"))
         {
@@ -14,7 +34,7 @@ public class SkillObject_PlasmaField : BaseSkillObject
         }
     }
     
-    private void OnTriggerExit2D(Collider2D col)
+    private void OnTriggerExit(Collider col)
     {
         if (col.CompareTag("Enemy"))
         {

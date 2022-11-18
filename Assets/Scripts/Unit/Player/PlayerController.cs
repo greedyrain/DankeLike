@@ -32,7 +32,7 @@ public class PlayerController : BaseUnit
     {
         base.Awake();
         InitData();
-        healthBar.ShowHP(maxHP,HP);
+        // healthBar.ShowHP(maxHP,HP);
         playerExperience = GetComponent<PlayerExperience>();
         playerExperience.Init();
         playerSkillManager = GetComponent<SkillManager>();
