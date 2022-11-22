@@ -12,6 +12,7 @@ public class SkillObject_IllusoryOrb : BaseSkillObject
     {
         UniTask.WaitUntil(() => initCompleted).ContinueWith(() =>
         {
+            transform.position = new Vector3(transform.position.x, 1, transform.position.y);
             trail.enabled = true;
 
             UniTask.Delay((int) (SkillData.duration * 1000) - 1000).ContinueWith(() =>

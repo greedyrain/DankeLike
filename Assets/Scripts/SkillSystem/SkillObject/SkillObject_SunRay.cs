@@ -13,22 +13,17 @@ public class SkillObject_SunRay : BaseSkillObject
     private void OnEnable()
     {
         coll = GetComponent<Collider>();
-        UIManager.Instance.GetPanel<JoyStickPanel>().OnDrag += SetSunRayDirection;
         UniTask.WaitUntil(() => initCompleted).ContinueWith(() =>
         {
-            transform.forward = UIManager.Instance.GetPanel<JoyStickPanel>().direction;
+            transform.localScale = new Vector3(1, 1,SkillData.range);
+            transform.forward = owner.forward;
             Burn();
             UniTask.Delay((int) (SkillData.duration * 1000)).ContinueWith(() =>
             {
+                colls.Clear();
                 PoolManager.Instance.PushObj(gameObject.name,gameObject);
             });
         });
-    }
-
-    public void SetSunRayDirection(Vector2 dir)
-    {
-        this.dir = new Vector3(dir.x, transform.position.y, dir.y);
-        transform.forward = this.dir;
     }
 
     private void OnTriggerEnter(Collider col)
@@ -50,7 +45,7 @@ public class SkillObject_SunRay : BaseSkillObject
     public async void Burn()
     {
         float time = SkillData.duration;
-        while (true)
+        while (gameObject.activeSelf)
         {
             for (int i = 0; i < colls.Count; i++)
                 colls[i].GetComponent<Enemy>().GetHurt(SkillData.damage);
