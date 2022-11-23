@@ -43,8 +43,8 @@ public class EnemyGenerator
                     PoolManager.Instance.GetObj("Prefabs/Enemy", enemyPrefabName, (obj) =>
                     {
                         float x = Random.Range(-9f, 9f);
-                        float y = Random.Range(-9f, 9f);
-                        obj.transform.position = new Vector2(x, y);
+                        float z = Random.Range(-9f, 9f);
+                        obj.transform.position = new Vector3(x,0 ,z);
                     });
                     await UniTask.Delay((int) (duration * 1000 / count));
                 }

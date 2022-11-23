@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class SkillObject_ArcLightning : BaseSkillObject
 {
+    private Collider[] colls;
     //设定target和owner，每一帧的位置都设定味owner的位置，朝向target的位置。
     //如果target isdead，则把target设定为空,如果owner isdead，则把owner设定为空
     private async void OnEnable()
@@ -38,7 +39,7 @@ public class SkillObject_ArcLightning : BaseSkillObject
 
     public Transform FindTarget(Transform owner)
     {
-        Collider2D[] colls = Physics2D.OverlapCircleAll(owner.position, SkillData.range, targetLayer);
+       colls = Physics.OverlapSphere(owner.position, SkillData.range, targetLayer);
         if (colls.Length > 0)
         {
             int index = Random.Range(0, colls.Length);

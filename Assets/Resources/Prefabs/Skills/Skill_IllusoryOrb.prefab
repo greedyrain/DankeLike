@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8734025093204844140}
-  - component: {fileID: 8499914249010106786}
+  - component: {fileID: 4760422477282171406}
   m_Layer: 0
   m_Name: Skill_IllusoryOrb
   m_TagString: Untagged
@@ -24,14 +24,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5645444607477731757}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.4709473, y: -0.038576066, z: -2.5867262}
+  m_LocalRotation: {x: 0, y: 0.050196886, z: 0, w: 0.99873936}
+  m_LocalPosition: {x: -8.536696, y: -0.038576007, z: -4.2656946}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8499914249010106786
+--- !u!114 &4760422477282171406
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,7 +40,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5645444607477731757}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 578dc4854ce318b42b3fd5eacd28233f, type: 3}
+  m_Script: {fileID: 11500000, guid: c3084dcfb575a8441a7297c1a0be47c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}

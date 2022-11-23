@@ -114,7 +114,7 @@ MonoBehaviour:
     m_Bits: 128
   target: {fileID: 0}
   owner: {fileID: 0}
-  trail: {fileID: 2706145496826220852, guid: e45ff97a484d6224897b3b9cf810bec5, type: 3}
+  trail: {fileID: 8185505330440449051}
 --- !u!1 &8185505330440449049
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ public class SkillObject_IllusoryOrb : BaseSkillObject
     {
         UniTask.WaitUntil(() => initCompleted).ContinueWith(() =>
         {
-            transform.position = new Vector3(transform.position.x, 1, transform.position.y);
+            transform.position = new Vector3(transform.position.x, 1, transform.position.z);
             trail.enabled = true;
 
             UniTask.Delay((int) (SkillData.duration * 1000) - 1000).ContinueWith(() =>
@@ -26,10 +26,10 @@ public class SkillObject_IllusoryOrb : BaseSkillObject
 
     private void Update()
     {
-        transform.Translate(transform.right * SkillData.throwSpeed * Time.deltaTime);
+        transform.Translate(Vector3.forward * SkillData.throwSpeed * Time.deltaTime);
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
+    private void OnTriggerEnter(Collider col)
     {
         if (col.CompareTag("Enemy") && initCompleted)
         {

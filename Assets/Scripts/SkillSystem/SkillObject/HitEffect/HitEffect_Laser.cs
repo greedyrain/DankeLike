@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -19,7 +16,8 @@ public class HitEffect_Laser : BaseSkillObject
             if (target.gameObject.activeSelf && owner.gameObject.activeSelf)
             {
                 targetPos = target.position;
-                transform.forward = targetPos - ownerPos;
+                if (targetPos - ownerPos != Vector3.zero)
+                    transform.forward = targetPos - ownerPos;
                 ownerPos = owner.position;
                 transform.position = ownerPos;
                 float distance = (targetPos - ownerPos).magnitude;
@@ -30,18 +28,14 @@ public class HitEffect_Laser : BaseSkillObject
 
     private void OnEnable()
     {
-        // line = GetComponent<LineRenderer>();
-        // line.enabled = false;
         isInitCompleted = false;
         UniTask.WaitUntil(() => isInitCompleted).ContinueWith(() =>
         {
-            // line.enabled = true;
             UniTask.Delay((int)(SkillData.duration*1000)).ContinueWith(() =>
             {
                 target = null;
                 owner = null;
                 isInitCompleted = false;
-                // line.enabled = false;
                 PoolManager.Instance.PushObj(gameObject.name, gameObject);
             });
         });
