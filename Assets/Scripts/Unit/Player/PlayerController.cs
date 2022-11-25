@@ -25,8 +25,9 @@ public class PlayerController : BaseUnit
     public SkillManager playerSkillManager;
 
     public HealthBar healthBar;
-    
     public Weapon weapon;
+
+    private bool controllable = true;
 
     public override void Awake()
     {
@@ -70,10 +71,13 @@ public class PlayerController : BaseUnit
 
     public virtual void Move(Vector2 dir)
     {
-        angle = Vector3.Angle(Vector3.up, dir);
-        angle = dir.x > 0 ? angle : -angle;
-        transform.rotation = Quaternion.Euler(0, angle, 0);
-        transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
+        if (controllable)
+        {
+            angle = Vector3.Angle(Vector3.up, dir);
+            angle = dir.x > 0 ? angle : -angle;
+            transform.rotation = Quaternion.Euler(0, angle, 0);
+            transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime); 
+        }
     }
     
     private void Dead()
@@ -107,5 +111,10 @@ public class PlayerController : BaseUnit
         weapon.transform.SetParent(weaponPos.transform);
         weapon.transform.localPosition = Vector3.zero;
         weapon.ID = id;
+    }
+
+    public void SetControllableStatus(bool status)
+    {
+        controllable = status;
     }
 }
