@@ -8,14 +8,14 @@ using UnityEngine;
 public class SkillObject_SplitEarth : BaseSkillObject
 {
     private int count;
-    private Collider[] targetColls;
+    private List<Collider> targetColls = new List<Collider>();
     private void OnEnable()
     {
         UniTask.WaitUntil(() => initCompleted).ContinueWith(() =>
         {
             transform.rotation =Quaternion.identity; 
             transform.position = new Vector3(transform.position.x, 0, transform.position.z);
-            Active(transform.position,SkillData.count,SkillData.radius * 2);
+            Active(transform.position,SkillData.count,SkillData.radius);
             UniTask.Delay((int) (SkillData.duration * 100)).ContinueWith(() =>
             {
                 PoolManager.Instance.PushObj(gameObject.name, gameObject);
@@ -28,15 +28,22 @@ public class SkillObject_SplitEarth : BaseSkillObject
         PoolManager.Instance.GetObj("Prefabs/HitEffectObjects", SkillData.hitEffectName, (obj) =>
         {
             obj.transform.position = pos;
-            obj.transform.localScale = new Vector3(radius, transform.localScale.y, radius);
+            obj.transform.localScale = new Vector3(radius*2, transform.localScale.y, radius*2);
             obj.GetComponent<HitEffect_SplitEarth>().InitData(SkillData);
         });
-        targetColls = Physics.OverlapSphere(pos,radius, targetLayer);
-        for (int i = 0; i < targetColls.Length; i++)
+        Collider[] colls = Physics.OverlapSphere(pos,radius, targetLayer);
+        for (int i = 0; i < colls.Length; i++)
+        {
+            targetColls.Add(colls[i]);
+        }
+        colls = null;
+        
+        for (int i = 0; i < targetColls.Count; i++)
         {
             targetColls[i].GetComponent<Enemy>().GetHurt(SkillData.damage);
         }
-        targetColls = null;
+        targetColls.Clear();
+
         
         if (count > 0)
         {

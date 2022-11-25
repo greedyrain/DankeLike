@@ -17,6 +17,5 @@ public class HitEffect_SplitEarth : BaseSkillObject
                 PoolManager.Instance.PushObj(gameObject.name, gameObject);
             });
         });
-
     }
 }
