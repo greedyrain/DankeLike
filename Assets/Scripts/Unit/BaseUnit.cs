@@ -7,7 +7,6 @@ public class BaseUnit : MonoBehaviour
 {
     [HideInInspector] public Rigidbody rb;
     [HideInInspector] public Animator anim;
-    private float angle;
 
     public bool isDead;
     protected float moveSpeed;
