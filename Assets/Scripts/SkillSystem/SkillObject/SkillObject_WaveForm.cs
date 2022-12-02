@@ -12,7 +12,12 @@ public class SkillObject_WaveForm : BaseSkillObject
 
     private void OnEnable()
     {
-        UniTask.WaitUntil(() => initCompleted).ContinueWith(() => { originPos = transform.position; });
+        UniTask.WaitUntil(() => initCompleted).ContinueWith(() =>
+        {
+            owner.GetComponent<Rigidbody>().useGravity = false;
+            owner.GetComponent<Collider>().isTrigger = true;
+            originPos = transform.position;
+        });
     }
 
     private void Update()
@@ -23,6 +28,8 @@ public class SkillObject_WaveForm : BaseSkillObject
         {
             PoolManager.Instance.PushObj(gameObject.name, gameObject);
             owner.GetComponent<PlayerController>().SetControllableStatus(true);
+            owner.GetComponent<Collider>().isTrigger = false;
+            owner.GetComponent<Rigidbody>().useGravity = true;
         }
     }
 
