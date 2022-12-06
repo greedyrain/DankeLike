@@ -20,6 +20,7 @@ public class Enemy : BaseUnit
     [HideInInspector] public int def;
     [HideInInspector] public float patrolRadius;
     [HideInInspector] public float alertRadius;
+    private float originalMoveSpeed;
 
     private int minDrop;
     private int maxDrop;
@@ -106,6 +107,7 @@ public class Enemy : BaseUnit
             }
         }
         moveSpeed = enemyData.moveSpeed;
+        originalMoveSpeed = enemyData.moveSpeed;
         objName = enemyData.name;
         description = enemyData.description;
         maxHP = enemyData.maxHP;
@@ -116,5 +118,15 @@ public class Enemy : BaseUnit
         alertRadius = enemyData.alertRadius;
         minDrop = enemyData.minDrop;
         maxDrop = enemyData.maxDrop;
+    }
+
+    public void SetMoveSpeed(int facotr)
+    {
+        moveSpeed *= facotr;
+    }
+
+    public void ResetMoveSpeed()
+    {
+        moveSpeed = originalMoveSpeed;
     }
 }
