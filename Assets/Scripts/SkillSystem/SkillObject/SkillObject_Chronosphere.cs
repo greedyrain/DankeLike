@@ -52,12 +52,4 @@ public class SkillObject_Chronosphere : BaseSkillObject
             other.GetComponent<Enemy>().SetMoveSpeed(0);
         }
     }
-
-    // private void OnTriggerExit(Collider other)
-    // {
-    //     if (other.CompareTag("Enemy"))
-    //     {
-    //         other.GetComponent<Enemy>().ResetMoveSpeed();
-    //     }
-    // }
 }

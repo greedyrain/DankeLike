@@ -7,10 +7,11 @@ public class SkillObject_PulseNova : BaseSkillObject
 {
     private void OnEnable()
     {
-         UniTask.WaitUntil(() => initCompleted).ContinueWith( () =>
-         {
-             Attack();
-            UniTask.Delay((int)(SkillData.duration * 1000)).ContinueWith(()=>PoolManager.Instance.PushObj(gameObject.name,gameObject));
+        UniTask.WaitUntil(() => initCompleted).ContinueWith(() =>
+        {
+            Attack();
+            UniTask.Delay((int) (SkillData.duration * 1000))
+                .ContinueWith(() => PoolManager.Instance.PushObj(gameObject.name, gameObject));
         });
     }
 
@@ -25,7 +26,8 @@ public class SkillObject_PulseNova : BaseSkillObject
                 PoolManager.Instance.GetObj("Prefabs/HitEffectObjects", SkillData.hitEffectName, (obj) =>
                 {
                     obj.transform.position = enemy.transform.position;
-                    UniTask.Delay((int)(SkillData.duration * 1000)).ContinueWith(()=>PoolManager.Instance.PushObj(obj.name,obj));
+                    UniTask.Delay((int) (SkillData.duration * 1000))
+                        .ContinueWith(() => PoolManager.Instance.PushObj(obj.name, obj));
                 });
             }
         }
