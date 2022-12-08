@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b844555a8dad6934e9f0436e5d30e616, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: a2dabff861c9eff429b532374cc4caa0, type: 3}
   player: {fileID: 0}
   selectTargetType: 0
   targetLayer:

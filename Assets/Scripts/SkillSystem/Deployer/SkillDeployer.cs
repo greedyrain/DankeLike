@@ -11,7 +11,7 @@ using UnityEngine.InputSystem;
 /// </summary>
 public abstract class SkillDeployer : MonoBehaviour
 {
-
+    public Sprite icon;
     [HideInInspector] public PlayerController player;
     private SkillData skillData;
     public SkillData SkillData

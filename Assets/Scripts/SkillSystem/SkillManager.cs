@@ -64,7 +64,10 @@ public class SkillManager : MonoBehaviour
     {
         while (deployer.SkillData.remainCD > 0)
         {
-            await UniTask.DelayFrame(1).ContinueWith(()=>deployer.SkillData.remainCD -= Time.deltaTime);
+            await UniTask.DelayFrame(1).ContinueWith(()=>
+            {
+                deployer.SkillData.remainCD -= Time.deltaTime;
+            });
         }
     }
 
@@ -83,13 +86,8 @@ public class SkillManager : MonoBehaviour
                 obj.SkillData = skill;
                 obj.player = player;
                 ownedSkill.Add(obj);
+                UIManager.Instance.GetPanel<GamePanel>()?.InitSkillIcon(obj);
             }
         }
-    }
-
-    private T CreatObject<T>(string className) where T : class
-    {
-        Type type = Type.GetType(className);
-        return Activator.CreateInstance(type) as T;
     }
 }
