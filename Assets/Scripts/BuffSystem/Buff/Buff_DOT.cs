@@ -1,0 +1,47 @@
+using System.Collections;
+using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using UnityEngine;
+
+public class Buff_DOT : BaseBuff
+{
+    public int damage;
+    public float proportion;
+    public float interval;
+    public float remainInterval;
+
+
+    public void InitData(int skillID, int damage, float proportion, float duration, float interval,
+        FigureType figureType,BaseUnit owner)
+    {
+        this.owner = owner;
+        this.skillID = skillID;
+        this.damage = damage;
+        this.interval = interval;
+        this.proportion = proportion;
+        this.duration = duration;
+        actionType = BuffActionType.INTERMITTENT;
+        this.figureType = figureType;
+    }
+
+    public override async void Action()
+    {
+        remainInterval -= Time.deltaTime;
+        remainTime -= Time.deltaTime;
+        if (remainInterval <= 0 && remainTime > 0)
+        {
+            switch (figureType)
+            {
+                case FigureType.PROPORTION:
+                    owner.GetHurt((int) (owner.maxHP * proportion));
+                    remainInterval = interval;
+                    break;
+
+                case FigureType.CONSTANT:
+                    owner.GetHurt(damage);
+                    remainInterval = interval;
+                    break;
+            }
+        }
+    }
+}

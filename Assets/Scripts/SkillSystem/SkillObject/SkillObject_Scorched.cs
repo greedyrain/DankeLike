@@ -5,7 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-public class SkillObject_Shield : BaseSkillObject
+public class SkillObject_Scorched : BaseSkillObject
 {
     private  void OnEnable()
     {

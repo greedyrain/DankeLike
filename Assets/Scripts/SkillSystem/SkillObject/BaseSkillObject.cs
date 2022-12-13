@@ -17,7 +17,7 @@ public class BaseSkillObject : MonoBehaviour
 
     protected bool initCompleted = false;
 
-    public void InitData(SkillData skillData)
+    public virtual void InitData(SkillData skillData)
     {
         this.skillData = skillData;
         initCompleted = true;

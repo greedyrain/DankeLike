@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 847861379470929878}
   - component: {fileID: 761146753608104151}
   - component: {fileID: 761146753608104150}
+  - component: {fileID: -8738317317576000825}
   - component: {fileID: -9192538722444026603}
   - component: {fileID: 2190568888739030495}
   m_Layer: 7
@@ -98,16 +99,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 928f1ea8c422e4b10bbfca50192f7b88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHP: 0
+  HP: 0
+  baseAtk: 0
+  baseDef: 0
+  moveSpeed: 0
+  totalAtk: 0
+  totalDef: 0
+  totalMoveSpeed: 0
   rb: {fileID: 0}
   anim: {fileID: 0}
   isDead: 0
   id: 1001
   objName: 
   description: 
-  maxHP: 0
-  HP: 0
-  atk: 0
-  def: 0
   patrolRadius: 0
   alertRadius: 0
   targetLayer:
@@ -127,6 +132,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f651bd7c71bdd44d1b5322b34e2c0b58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-8738317317576000825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 761146753608104148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f94c5fe2f8556d94ca35d698e187bc98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!54 &-9192538722444026603

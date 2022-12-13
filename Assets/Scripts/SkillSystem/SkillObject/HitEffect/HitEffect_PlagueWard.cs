@@ -35,7 +35,13 @@ public class HitEffect_PlagueWard : BaseSkillObject
     {
         if (collision.transform == target)
         {
-            collision.transform.GetComponent<Enemy>().GetHurt(SkillData.damage);
+            Enemy enemy = collision.transform.GetComponent<Enemy>();
+            enemy.GetHurt(SkillData.damage);
+            Buff_DOT dot = new Buff_DOT();
+            dot.InitData(SkillData.ID,5,0,10,1,FigureType.CONSTANT,enemy);
+            enemy.GetComponent<BuffManager>().AddBuff(dot);
+            Debug.Log(enemy.GetComponent<BuffManager>().intermittentBuffList.Count);
+            
             PoolManager.Instance.PushObj(gameObject.name, gameObject);
         }
     }

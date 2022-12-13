@@ -65,6 +65,7 @@ public class AimTargetDeployer : SkillDeployer
 
         else
         {
+            Debug.Log("No target-----------------");
             float angle;
             for (int i = 0; i < SkillData.count; i++)
             {

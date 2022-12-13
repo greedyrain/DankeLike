@@ -14,10 +14,7 @@ public class Enemy : BaseUnit
     public int id;
     [HideInInspector] public string objName;
     [HideInInspector] public string description;
-    [HideInInspector] public int maxHP;
-    [HideInInspector] public int HP;
-    [HideInInspector] public int atk;
-    [HideInInspector] public int def;
+
     [HideInInspector] public float patrolRadius;
     [HideInInspector] public float alertRadius;
     private float originalMoveSpeed;
@@ -51,10 +48,10 @@ public class Enemy : BaseUnit
 
     public void Move(Vector3 direction)
     {
-        transform.Translate(direction * moveSpeed * Time.deltaTime);
+        transform.Translate(direction * totalMoveSpeed * Time.deltaTime);
     }
     
-    public virtual void GetHurt(int damage)
+    public override void GetHurt(int damage)
     {
         if (isDead) return;
         
@@ -107,20 +104,21 @@ public class Enemy : BaseUnit
             }
         }
         moveSpeed = enemyData.moveSpeed;
+        totalMoveSpeed = moveSpeed;
         originalMoveSpeed = enemyData.moveSpeed;
         objName = enemyData.name;
         description = enemyData.description;
         maxHP = enemyData.maxHP;
         HP = enemyData.HP;
-        atk = enemyData.atk;
-        def = enemyData.def;
+        baseAtk = enemyData.atk;
+        baseDef = enemyData.def;
         patrolRadius = enemyData.patrolRadius;
         alertRadius = enemyData.alertRadius;
         minDrop = enemyData.minDrop;
         maxDrop = enemyData.maxDrop;
     }
 
-    public void SetMoveSpeed(int facotr)
+    public void SetMoveSpeed(float facotr)
     {
         moveSpeed *= facotr;
     }

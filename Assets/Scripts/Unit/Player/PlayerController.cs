@@ -11,13 +11,8 @@ public class PlayerController : BaseUnit
     public GameObject weaponPos;
     private float angle;
     
-    public int ID;
     [HideInInspector] public string userName;
     [HideInInspector] public int level;
-    [HideInInspector] public int maxHP;
-    [HideInInspector] public int HP;
-    [HideInInspector] public int atk;
-    [HideInInspector] public int def;
 
     public PlayerData playerData;
     public PlayerInput input;
@@ -56,7 +51,7 @@ public class PlayerController : BaseUnit
 
     public void GetHurt(int damage)
     {
-        damage -= def;
+        damage -= totalDef;
         if (damage <= 0)
             damage = 0;
         HP -= damage;
@@ -76,7 +71,7 @@ public class PlayerController : BaseUnit
             angle = Vector3.Angle(Vector3.up, dir);
             angle = dir.x > 0 ? angle : -angle;
             transform.rotation = Quaternion.Euler(0, angle, 0);
-            transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime); 
+            transform.Translate(Vector3.forward * totalMoveSpeed * Time.deltaTime); 
         }
     }
     
@@ -89,12 +84,13 @@ public class PlayerController : BaseUnit
     {
         playerData = GameDataManager.Instance.PlayerData;
         moveSpeed = playerData.moveSpeed;
+        totalMoveSpeed = moveSpeed;
         userName = playerData.userName;
         level = playerData.level;
         maxHP = playerData.maxHP;
         HP = maxHP;
-        atk = playerData.atk;
-        def = playerData.def;
+        baseAtk = playerData.atk;
+        baseDef = playerData.def;
     }
 
     public void SetWeapon(int id)

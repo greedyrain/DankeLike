@@ -9,6 +9,18 @@ public enum E_EnemyState
     ATTACK
 }
 
+public enum BuffActionType
+{
+    PERSISTENT,
+    INTERMITTENT
+}
+
+public enum FigureType
+{
+    PROPORTION,
+    CONSTANT
+}
+
 public class CustomStruct
 {
 
