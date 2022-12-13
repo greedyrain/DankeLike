@@ -8,7 +8,6 @@ using UnityEngine.UI;
 
 public class BuffData
 {
-    public int id;
     public string buffName;
     public string iconName;
     public float duration;
@@ -16,10 +15,8 @@ public class BuffData
     public float interval;
     public int damage;
 
-    public event UnityAction onDispose;
-
-    public void Dispose()
+    public void InitData()
     {
-        onDispose?.Invoke();
+        
     }
 }
