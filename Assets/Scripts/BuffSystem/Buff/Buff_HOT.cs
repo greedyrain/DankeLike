@@ -17,13 +17,15 @@ public class Buff_HOT : BaseBuff
         this.owner = owner;
         this.skillID = skillID;
         this.heal = heal;
+        this.interval = interval;
         this.proportion = proportion;
         this.duration = duration;
+        remainTime = duration;
         actionType = BuffActionType.INTERMITTENT;
         this.figureType = figureType;
     }
 
-    public override async void Action()
+    public override void Action()
     {
         remainInterval -= Time.deltaTime;
         remainTime -= Time.deltaTime;

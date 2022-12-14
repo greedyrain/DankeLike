@@ -20,11 +20,12 @@ public class Buff_DOT : BaseBuff
         this.interval = interval;
         this.proportion = proportion;
         this.duration = duration;
+        remainTime = duration;
         actionType = BuffActionType.INTERMITTENT;
         this.figureType = figureType;
     }
 
-    public override async void Action()
+    public override void Action()
     {
         remainInterval -= Time.deltaTime;
         remainTime -= Time.deltaTime;
