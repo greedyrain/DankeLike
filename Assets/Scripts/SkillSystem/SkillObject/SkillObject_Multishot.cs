@@ -25,15 +25,13 @@ public class SkillObject_Multishot : BaseSkillObject
         {
             Enemy enemy = col.GetComponent<Enemy>();
             enemy.GetHurt(SkillData.damage);
-            //Slow
-            // col.GetComponent<Enemy>().SetMoveSpeed(0.5f);
-            // UniTask.Delay(5000).ContinueWith(() =>
-            // {
-            //     col.GetComponent<Enemy>().ResetMoveSpeed();
-            // });
-            Buff_Slow slow = new Buff_Slow();
-            slow.InitData(SkillData.ID,0.5f,5,enemy);
-            enemy.GetComponent<BuffManager>().AddBuff(slow);
+            // Buff_Slow slow = new Buff_Slow();
+            // slow.InitData(SkillData.ID,0.5f,5,enemy);
+            // enemy.GetComponent<BuffManager>().AddBuff(slow);
+            Buff_Stun stun = new Buff_Stun();
+            stun.InitData(SkillData.ID,5,enemy);
+            enemy.GetComponent<BuffManager>().AddBuff(stun);
+            
             PoolManager.Instance.PushObj(gameObject.name, gameObject);
             
         }

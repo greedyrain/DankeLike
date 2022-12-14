@@ -12,7 +12,7 @@ public class RandomTargetDeployer : SkillDeployer
         Debug.Log(player == null);
         transform.position = player.transform.position;
         //如果检测范围内有敌人
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, SkillData.range, targetLayer);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, SkillData.range, targetLayer);
         await UniTask.WaitUntil(() => colliders.Length > 0).ContinueWith(async () =>
         {
             int index = Random.Range(0, colliders.Length);

@@ -18,6 +18,7 @@ public class AimTargetDeployer : SkillDeployer
 
     public override async void Generate()
     {
+        Debug.Log(player == null);
         transform.position = player.transform.position;
         //如果检测范围内有敌人
         Collider[] colliders = Physics.OverlapSphere(transform.position, SkillData.range, targetLayer);
@@ -44,7 +45,7 @@ public class AimTargetDeployer : SkillDeployer
                                 {
                                     minDistance = Vector3.Distance(transform.position, colliders[j].transform.position);
                                     obj.transform.forward = colliders[j].transform.position - transform.position;
-                                    obj.transform.position = transform.position;
+                                    obj.transform.position = colliders[i].transform.position;
                                     obj.GetComponent<BaseSkillObject>().SetTarget(colliders[j].transform);
                                 }
                             }
@@ -54,7 +55,7 @@ public class AimTargetDeployer : SkillDeployer
                         case E_SelectTargetType.Random:
                             int index = Random.Range(0, colliders.Length);
                             obj.transform.forward = colliders[index].transform.position - transform.position;
-                            obj.transform.position = transform.position;
+                            obj.transform.position = colliders[index].transform.position;
                             obj.GetComponent<BaseSkillObject>().SetTarget(colliders[index].transform);
                             break;
                     }
@@ -65,7 +66,6 @@ public class AimTargetDeployer : SkillDeployer
 
         else
         {
-            Debug.Log("No target-----------------");
             float angle;
             for (int i = 0; i < SkillData.count; i++)
             {

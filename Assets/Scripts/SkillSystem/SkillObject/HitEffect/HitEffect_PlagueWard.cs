@@ -39,9 +39,11 @@ public class HitEffect_PlagueWard : BaseSkillObject
             enemy.GetHurt(SkillData.damage);
             Buff_DOT dot = new Buff_DOT();
             dot.InitData(SkillData.ID,5,0,10,1,FigureType.CONSTANT,enemy);
+            Buff_Slow slow = new Buff_Slow();
+            slow.InitData(SkillData.ID,0.3f,5,enemy);
             enemy.GetComponent<BuffManager>().AddBuff(dot);
-            Debug.Log(enemy.GetComponent<BuffManager>().intermittentBuffList.Count);
-            
+            enemy.GetComponent<BuffManager>().AddBuff(slow);
+
             PoolManager.Instance.PushObj(gameObject.name, gameObject);
         }
     }
