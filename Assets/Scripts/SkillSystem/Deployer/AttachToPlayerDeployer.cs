@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class AttachToPlayerDeployer : SkillDeployer
 {
+    public override bool CheckForGenerate()
+    {
+        return true;
+    }
+
     public override async void Generate()
     {
         player = FindObjectOfType<PlayerController>();

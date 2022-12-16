@@ -53,7 +53,7 @@ public class SkillManager : MonoBehaviour
     {
         if (deployer.SkillData.remainCD > 0)
             return false;
-        return true;
+        return deployer.CheckForGenerate();
     }
 
     /// <summary>
@@ -64,7 +64,7 @@ public class SkillManager : MonoBehaviour
     {
         while (deployer.SkillData.remainCD > 0)
         {
-            await UniTask.DelayFrame(1).ContinueWith(()=>
+            await UniTask.DelayFrame(1).ContinueWith(() =>
             {
                 deployer.SkillData.remainCD -= Time.deltaTime;
             });

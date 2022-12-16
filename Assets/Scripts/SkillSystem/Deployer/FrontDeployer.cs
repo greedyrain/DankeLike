@@ -5,6 +5,12 @@ public class FrontDeployer : SkillDeployer
 {
     private float angle;
     private float averageAngle;
+
+    public override bool CheckForGenerate()
+    {
+        return true;
+    }
+
     public override async void Generate()
     {
         transform.position = player.transform.position;

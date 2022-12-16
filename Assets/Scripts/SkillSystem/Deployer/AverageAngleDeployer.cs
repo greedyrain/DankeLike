@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class AverageAngleDeployer : SkillDeployer 
 {
+    public override bool CheckForGenerate()
+    {
+        return true;
+    }
+
     public  override async void Generate()
     {
         transform.position = player.transform.position;

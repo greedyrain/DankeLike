@@ -27,6 +27,7 @@ public abstract class SkillDeployer : MonoBehaviour
     private List<IImpactEffect> impactList;
 
     public abstract void Generate();
+    public abstract bool CheckForGenerate();
 
     private void InitDeployer()
     {

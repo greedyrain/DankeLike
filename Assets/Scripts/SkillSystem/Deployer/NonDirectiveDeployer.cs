@@ -6,6 +6,11 @@ using UnityEngine;
 
 public class NonDirectiveDeployer : SkillDeployer 
 {
+    public override bool CheckForGenerate()
+    {
+        throw new NotImplementedException();
+    }
+
     public override void Generate()
     {
         

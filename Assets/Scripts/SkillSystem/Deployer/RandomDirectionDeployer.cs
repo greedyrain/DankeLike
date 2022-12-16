@@ -6,6 +6,11 @@ using UnityEngine;
 
 public class RandomDirectionDeployer : SkillDeployer
 {
+    public override bool CheckForGenerate()
+    {
+        return true;
+    }
+
     public override async void Generate()
     {
         transform.position = player.transform.position;
