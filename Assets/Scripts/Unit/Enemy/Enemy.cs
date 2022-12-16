@@ -8,6 +8,7 @@ using Random = UnityEngine.Random;
 
 public class Enemy : BaseUnit
 {
+    public Transform center;
     protected const float atkCD = 0.2f;
     protected float remainAtkCD = 0f;
 
@@ -56,7 +57,7 @@ public class Enemy : BaseUnit
         if (isDead) return;
         
         HP -= damage;
-        DamagePopupManager.Instance.ShowDamage(damage, transform);
+        DamagePopupManager.Instance.ShowDamage(damage, center);
 
         if (HP <= 0)
         {

@@ -15,7 +15,7 @@ MonoBehaviour:
   ID: 1
   generators:
   - enemyID: 1002
-    generateTiming: 1
+    generateTiming: 10
     count: 1
     duration: 1
     isBoss: 0
