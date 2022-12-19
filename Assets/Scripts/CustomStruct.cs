@@ -21,6 +21,12 @@ public enum FigureType
     CONSTANT
 }
 
+public enum FrontDeployerType
+{
+    AVERAGEANGLE,
+    FRONT
+}
+
 public class CustomStruct
 {
 

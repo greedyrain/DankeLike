@@ -89,6 +89,11 @@ public class SkillManager : MonoBehaviour
                 obj.transform.SetParent(player.transform);
                 obj.SkillData = skill;
                 obj.player = player;
+                for (int i = 0; i < ownedSkill.Count; i++)
+                {
+                    if (ownedSkill[i].name == obj.name)
+                        ownedSkill[i] = obj;
+                }
                 ownedSkill.Add(obj);
                 UIManager.Instance.GetPanel<GamePanel>()?.InitSkillIcon(obj);
             }

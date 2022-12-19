@@ -46,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: bea4488d0e0b5b340b07340594d3e4b7, type: 3}
   player: {fileID: 0}
+  type: 0

@@ -29,6 +29,11 @@ public class SkillObject_Rupture : BaseSkillObject
             {
                 targetEnemy.GetHurt((int)((transform.position - lastFramesPos).magnitude * SkillData.damage));
                 lastFramesPos = transform.position;
+                if (targetEnemy.isDead)
+                {
+                    targetEnemy = null;
+                    PoolManager.Instance.PushObj(gameObject.name, gameObject);
+                }
             }
             await UniTask.Delay(200);
         }
