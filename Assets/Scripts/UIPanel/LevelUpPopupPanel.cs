@@ -42,28 +42,54 @@ public class LevelUpPopupPanel : BasePanel
             int index;
             int id;
             int level;
-            for (int i = 0; i < GameDataManager.Instance.SkillsData.Count; i++)
+
+            //if player have already got 6 skills, then will just pick the skill ids from which player already have.
+            if (playerSkillManager.ownedSkill.Count == 6)
             {
-                if (!ids.Contains(GameDataManager.Instance.SkillsData[i].ID))
-                    ids.Add(GameDataManager.Instance.SkillsData[i].ID);
+                for (int i = 0; i < playerSkillManager.ownedSkill.Count; i++)
+                {
+                    if (playerSkillManager.ownedSkill[i].SkillData.level < 5)
+                        ids.Add(playerSkillManager.ownedSkill[i].SkillData.ID);
+                }
             }
-            
+            //else, just pick skills ids from skillsData.
+            else
+            {
+                for (int i = 0; i < GameDataManager.Instance.SkillsData.Count; i++)
+                {
+                    Debug.Log(GameDataManager.Instance.SkillsData[i].ID);
+                    bool isThisMaxLevel = false;
+                    foreach (var skill in playerSkillManager.ownedSkill)
+                    {
+                        Debug.Log(skill.SkillData.level);
+                        if (GameDataManager.Instance.SkillsData[i].ID == skill.SkillData.ID &&
+                            skill.SkillData.level == 5)
+                            isThisMaxLevel = true;
+                    }
 
+                    //if the skill which its ID equals to the target ID, and it is max level, then skip this id;
+                    if (isThisMaxLevel)
+                        continue;
+                    
+                    if (!ids.Contains(GameDataManager.Instance.SkillsData[i].ID))
+                        ids.Add(GameDataManager.Instance.SkillsData[i].ID);
+                }
+            }
 
-            for (int i = 0; i < 4; i++)
+            int count = Mathf.Min(4, ids.Count);
+            for (int i = 0; i < count; i++)
             {
                 level = 1;
                 index = Random.Range(0, ids.Count);
                 id = ids[index];
-
+                
+                
                 for (int j = 0; j < playerSkillManager.ownedSkill.Count; j++)
                 {
                     if (playerSkillManager.ownedSkill[j].SkillData.ID == id)
                         level = playerSkillManager.ownedSkill[j].SkillData.level + 1;
-                    if (level > 5)
-                        level = 5;
                 }
-                
+
                 ids.RemoveAt(index);
                 PoolManager.Instance.GetObj("Prefabs", "SkillOptionObject", (obj) =>
                 {
