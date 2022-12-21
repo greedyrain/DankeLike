@@ -6,15 +6,15 @@ using Random = UnityEngine.Random;
 
 public class BaseUnit : MonoBehaviour
 {
-    [HideInInspector] public int maxHP;
+    [Header("---------Base Data----------")]
+    [HideInInspector] public int baseMaxHP;
     [HideInInspector] public int HP;
-    [HideInInspector] public int baseAtk;
-    [HideInInspector] public int baseDef;
-    [HideInInspector] public float moveSpeed;
+    [HideInInspector] public int baseArmor;
+    [HideInInspector] public float baseMoveSpeed;
 
     [Header("---------Total Data---------")] 
-    public int totalAtk;
-    public int totalDef;
+    public float totalMight;
+    public int totalArmor;
     public float totalMoveSpeed;
 
     [HideInInspector] public Rigidbody rb;

@@ -34,7 +34,7 @@ public class Buff_DOT : BaseBuff
             switch (figureType)
             {
                 case FigureType.PROPORTION:
-                    owner.GetHurt((int) (owner.maxHP * proportion));
+                    owner.GetHurt((int) (owner.baseMaxHP * proportion));
                     remainInterval = interval;
                     break;
 

@@ -23,6 +23,8 @@ public class LevelUpPopupPanel : BasePanel
             playerSkillManager.ObtainSkill(currentSelectedSkill.data);
             Time.timeScale = 1;
             UIManager.Instance.HidePanel<LevelUpPopupPanel>();
+            UIManager.Instance.ShowPanel<GamePanel>();
+            UIManager.Instance.ShowPanel<JoyStickPanel>();
         });
         isInitCompleted = true;
     }

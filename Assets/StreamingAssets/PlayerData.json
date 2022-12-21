@@ -1,1 +1,1 @@
-{"ID":10001,"userName":"GreedyRain","level":1,"maxHP":100,"HP":100,"atk":10,"def":10,"moveSpeed":5,"rotateSpeed":20}
+{"ID":10001,"userName":"GreedyRain","level":1,"maxHP":100,"HP":100,"recovery":1,"armor":0,"might":0.1,"speed":0,"duration":0,"area":0,"Cooddown":0,"Magnet":0,"moveSpeed":5}

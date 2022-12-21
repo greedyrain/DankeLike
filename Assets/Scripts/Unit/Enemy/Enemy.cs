@@ -8,6 +8,7 @@ using Random = UnityEngine.Random;
 
 public class Enemy : BaseUnit
 {
+    public PlayerController player;
     public Transform center;
     protected const float atkCD = 0.2f;
     protected float remainAtkCD = 0f;
@@ -23,7 +24,9 @@ public class Enemy : BaseUnit
     private int minDrop;
     private int maxDrop;
 
-    public EnemyData enemyData;
+    [Header("Enemy Status")] public EnemyData enemyData;
+
+    public int baseAtk;
 
     public LayerMask targetLayer;
 
@@ -51,11 +54,12 @@ public class Enemy : BaseUnit
     {
         transform.Translate(direction * totalMoveSpeed * Time.deltaTime);
     }
-    
+
     public override void GetHurt(int damage)
     {
         if (isDead) return;
-        
+        damage = (int) (damage + damage * player.totalMightEffect);
+
         HP -= damage;
         DamagePopupManager.Instance.ShowDamage(damage, center);
 
@@ -70,7 +74,7 @@ public class Enemy : BaseUnit
         Debug.Log($"Enemy takes {damage} damage. Remain HP is: {HP}.");
     }
 
-    
+
     public virtual void Drop()
     {
         int drop = Random.Range(minDrop, maxDrop);
@@ -96,23 +100,25 @@ public class Enemy : BaseUnit
 
     public void InitData()
     {
+        player = FindObjectOfType<PlayerController>();
         for (int i = 0; i < GameDataManager.Instance.EnemiesData.Count; i++)
         {
             if (GameDataManager.Instance.EnemiesData[i].ID == id)
             {
-                enemyData  = GameDataManager.Instance.EnemiesData[i];
+                enemyData = GameDataManager.Instance.EnemiesData[i];
                 break;
             }
         }
-        moveSpeed = enemyData.moveSpeed;
-        totalMoveSpeed = moveSpeed;
+
+        baseMoveSpeed = enemyData.moveSpeed;
+        totalMoveSpeed = baseMoveSpeed;
         originalMoveSpeed = enemyData.moveSpeed;
         objName = enemyData.name;
         description = enemyData.description;
-        maxHP = enemyData.maxHP;
+        baseMaxHP = enemyData.maxHP;
         HP = enemyData.HP;
         baseAtk = enemyData.atk;
-        baseDef = enemyData.def;
+        baseArmor = enemyData.def;
         patrolRadius = enemyData.patrolRadius;
         alertRadius = enemyData.alertRadius;
         minDrop = enemyData.minDrop;
@@ -121,11 +127,11 @@ public class Enemy : BaseUnit
 
     public void SetMoveSpeed(float facotr)
     {
-        moveSpeed *= facotr;
+        baseMoveSpeed *= facotr;
     }
 
     public void ResetMoveSpeed()
     {
-        moveSpeed = originalMoveSpeed;
+        baseMoveSpeed = originalMoveSpeed;
     }
 }

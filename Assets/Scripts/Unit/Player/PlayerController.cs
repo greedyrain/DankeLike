@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class PlayerController : BaseUnit
 {
@@ -13,8 +14,20 @@ public class PlayerController : BaseUnit
     
     [HideInInspector] public string userName;
     [HideInInspector] public int level;
+    [HideInInspector] public int baseRecovery;
 
+    [Header("Player Status")]
     public PlayerData playerData;
+    
+    public float totalMaxHPEffect;
+    public float totalArmorEffect;
+    public float totalSpeedEffect;
+    public float totalMightEffect;
+    public float totalDurationEffect;
+    public float totalRecoveryEffect;
+    public float totalCooldownEffect;
+    public float totalMagnetEffect;
+
     public PlayerInput input;
     private PlayerExperience playerExperience;
     public SkillManager playerSkillManager;
@@ -28,7 +41,6 @@ public class PlayerController : BaseUnit
     {
         base.Awake();
         InitData();
-        // healthBar.ShowHP(maxHP,HP);
         playerExperience = GetComponent<PlayerExperience>();
         playerExperience.Init();
         playerSkillManager = GetComponent<SkillManager>();
@@ -51,12 +63,12 @@ public class PlayerController : BaseUnit
 
     public void GetHurt(int damage)
     {
-        damage -= totalDef;
+        damage -= totalArmor;
         if (damage <= 0)
             damage = 0;
         HP -= damage;
         
-        healthBar.ShowHP(maxHP,HP);
+        healthBar.ShowHP(baseMaxHP,HP);
         if (HP <= 0)
         {
             isDead = true;
@@ -83,14 +95,17 @@ public class PlayerController : BaseUnit
     public void InitData()
     {
         playerData = GameDataManager.Instance.PlayerData;
-        moveSpeed = playerData.moveSpeed;
-        totalMoveSpeed = moveSpeed;
         userName = playerData.userName;
         level = playerData.level;
-        maxHP = playerData.maxHP;
-        HP = maxHP;
-        baseAtk = playerData.atk;
-        baseDef = playerData.def;
+        HP = baseMaxHP;
+
+        baseMoveSpeed = playerData.baseMoveSpeed;
+        baseMaxHP = playerData.baseMaxHP;
+        baseRecovery = playerData.baseRecovery;
+        baseArmor = playerData.baseArmor;
+
+        totalMoveSpeed = baseMoveSpeed;
+        totalMight = playerData.baseMight;
     }
 
     public void SetWeapon(int id)

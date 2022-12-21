@@ -53,7 +53,6 @@ public class SkillManager : MonoBehaviour
     {
         if (deployer.SkillData.remainCD > 0)
             return false;
-        Debug.Log(deployer.CheckForGenerate());
         return deployer.CheckForGenerate();
     }
 
@@ -95,7 +94,7 @@ public class SkillManager : MonoBehaviour
                         ownedSkill[i] = obj;
                 }
                 ownedSkill.Add(obj);
-                UIManager.Instance.GetPanel<GamePanel>()?.InitSkillIcon(obj);
+                UIManager.Instance.GetPanel<GamePanel>().InitSkillIcon(obj);
             }
         }
     }
