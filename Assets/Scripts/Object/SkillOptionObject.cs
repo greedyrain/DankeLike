@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class SkillOptionObject : MonoBehaviour
 {
+    public Sprite icon;
     public Button button;
     public SkillData data;
     public Text skillName;
@@ -14,9 +15,9 @@ public class SkillOptionObject : MonoBehaviour
     {
         button.onClick.AddListener(() =>
         {
-            UIManager.Instance.GetPanel<LevelUpPopupPanel>().UpdatePanelData(data);
+            UIManager.Instance.GetPanel<LevelUpPopupPanel>().UpdatePanelData(data.description);
             UIManager.Instance.GetPanel<LevelUpPopupPanel>().currentSelectedSkill = this;
-            Debug.Log(UIManager.Instance.GetPanel<LevelUpPopupPanel>().currentSelectedSkill.data.skillName);
+            UIManager.Instance.GetPanel<LevelUpPopupPanel>().currentSelectedItem = null;
         });
     }
 

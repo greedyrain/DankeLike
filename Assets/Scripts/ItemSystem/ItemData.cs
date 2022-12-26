@@ -6,11 +6,12 @@ public class ItemData
 {
     public int ID;
     public int level;
+    public string iconName;
     public string name;
     public string description;
     public int maxHPEffectRate;
-    public int armorEffectRate;
-    public int speedEffectRate;
+    public float armorEffectRate;
+    public float speedEffectRate;
     public float mightEffectRate;
     public float durationEffectRate;
     public float recoveryEffectRate;

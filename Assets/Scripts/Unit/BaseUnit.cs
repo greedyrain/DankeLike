@@ -17,6 +17,15 @@ public class BaseUnit : MonoBehaviour
     public int totalArmor;
     public float totalMoveSpeed;
 
+    public float totalMaxHPEffect;
+    public float totalArmorEffect;
+    public float totalSpeedEffect;
+    public float totalMightEffect;
+    public float totalDurationEffect;
+    public float totalRecoveryEffect;
+    public float totalCooldownEffect;
+    public float totalMagnetEffect;
+
     [HideInInspector] public Rigidbody rb;
     [HideInInspector] public Animator anim;
 

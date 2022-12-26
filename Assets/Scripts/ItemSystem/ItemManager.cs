@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class ItemManager : MonoBehaviour
 {
-    public List<BaseItem> itemList;
+    BaseUnit owner;
+    public List<BaseItem> ownedItemList = new List<BaseItem>();
     
     public float totalMaxHPEffect;
     public float totalArmorEffect;
@@ -15,29 +16,35 @@ public class ItemManager : MonoBehaviour
     public float totalCooldownEffect;
     public float totalMagnetEffect;
 
+    private void Awake()
+    {
+        owner = GetComponent<BaseUnit>();
+    }
+
     public void AddItem(BaseItem item)
     {
-        for (int i = 0; i < itemList.Count; i++)
+        for (int i = 0; i < ownedItemList.Count; i++)
         {
-            if (itemList[i].itemData.ID == item.itemData.ID)
+            if (ownedItemList[i].itemData.ID == item.itemData.ID)
             {
-                totalMaxHPEffect -= itemList[i].itemData.maxHPEffectRate;
-                totalArmorEffect -= itemList[i].itemData.armorEffectRate;
-                totalSpeedEffect -= itemList[i].itemData.speedEffectRate;
-                totalMightEffect -= itemList[i].itemData.mightEffectRate;
-                totalDurationEffect -= itemList[i].itemData.durationEffectRate;
-                totalRecoveryEffect -= itemList[i].itemData.recoveryEffectRate;
-                totalCooldownEffect -= itemList[i].itemData.cooldownEffectRate;
-                totalMagnetEffect -= itemList[i].itemData.magnetEffectRate;
+                totalMaxHPEffect -= ownedItemList[i].itemData.maxHPEffectRate;
+                totalArmorEffect -= ownedItemList[i].itemData.armorEffectRate;
+                totalSpeedEffect -= ownedItemList[i].itemData.speedEffectRate;
+                totalMightEffect -= ownedItemList[i].itemData.mightEffectRate;
+                totalDurationEffect -= ownedItemList[i].itemData.durationEffectRate;
+                totalRecoveryEffect -= ownedItemList[i].itemData.recoveryEffectRate;
+                totalCooldownEffect -= ownedItemList[i].itemData.cooldownEffectRate;
+                totalMagnetEffect -= ownedItemList[i].itemData.magnetEffectRate;
             }
             
             else
             {
-                itemList.Add(item);
+                ownedItemList.Add(item);
             }
         }
 
         ActEffect(item);
+        Activate();
     }
 
     public void ActEffect(BaseItem item)
@@ -50,5 +57,17 @@ public class ItemManager : MonoBehaviour
         totalRecoveryEffect += item.itemData.recoveryEffectRate;
         totalCooldownEffect += item.itemData.cooldownEffectRate;
         totalMagnetEffect += item.itemData.magnetEffectRate;
+    }
+
+    public void Activate()
+    {
+        owner.totalMaxHPEffect = totalMaxHPEffect;
+        owner.totalArmorEffect = totalArmorEffect;
+        owner.totalSpeedEffect = totalSpeedEffect;
+        owner.totalMightEffect = totalMightEffect;
+        owner.totalDurationEffect = totalDurationEffect;
+        owner.totalRecoveryEffect = totalRecoveryEffect;
+        owner.totalCooldownEffect = totalCooldownEffect;
+        owner.totalMagnetEffect = totalMagnetEffect;
     }
 }

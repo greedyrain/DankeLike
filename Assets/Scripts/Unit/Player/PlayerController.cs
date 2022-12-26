@@ -18,19 +18,11 @@ public class PlayerController : BaseUnit
 
     [Header("Player Status")]
     public PlayerData playerData;
-    
-    public float totalMaxHPEffect;
-    public float totalArmorEffect;
-    public float totalSpeedEffect;
-    public float totalMightEffect;
-    public float totalDurationEffect;
-    public float totalRecoveryEffect;
-    public float totalCooldownEffect;
-    public float totalMagnetEffect;
 
     public PlayerInput input;
     private PlayerExperience playerExperience;
     public SkillManager playerSkillManager;
+    public ItemManager playerItemManager;
 
     public HealthBar healthBar;
     public Weapon weapon;
@@ -44,6 +36,7 @@ public class PlayerController : BaseUnit
         playerExperience = GetComponent<PlayerExperience>();
         playerExperience.Init();
         playerSkillManager = GetComponent<SkillManager>();
+        playerItemManager = GetComponent<ItemManager>();
     }
 
     protected override void OnEnable()
