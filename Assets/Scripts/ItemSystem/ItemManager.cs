@@ -23,6 +23,7 @@ public class ItemManager : MonoBehaviour
 
     public void AddItem(BaseItem item)
     {
+        bool hasRepetition = false;
         for (int i = 0; i < ownedItemList.Count; i++)
         {
             if (ownedItemList[i].itemData.ID == item.itemData.ID)
@@ -35,12 +36,17 @@ public class ItemManager : MonoBehaviour
                 totalRecoveryEffect -= ownedItemList[i].itemData.recoveryEffectRate;
                 totalCooldownEffect -= ownedItemList[i].itemData.cooldownEffectRate;
                 totalMagnetEffect -= ownedItemList[i].itemData.magnetEffectRate;
+                ownedItemList[i] = item;
+                hasRepetition = true;
+                break;
             }
-            
-            else
-            {
-                ownedItemList.Add(item);
-            }
+        }
+
+        if (!hasRepetition)
+        {
+            Debug.Log("Added item....");
+            ownedItemList.Add(item);
+            UIManager.Instance.GetPanel<GamePanel>().InitItemIcon(item);
         }
 
         ActEffect(item);

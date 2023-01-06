@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class SkillOptionObject : MonoBehaviour
 {
-    public Sprite icon;
+    public Image icon;
     public Button button;
     public SkillData data;
     public Text skillName;
@@ -30,5 +30,7 @@ public class SkillOptionObject : MonoBehaviour
         }
 
         skillName.text = data.skillName;
+        icon = GetComponent<Image>();
+        icon.sprite = Resources.Load<Sprite>($"Sprites/SkillIcons/{data.skillName}");
     }
 }

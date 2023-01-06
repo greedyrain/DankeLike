@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BaseItem : MonoBehaviour
 {
+    public int ID;
     public int level;
     public ItemData itemData;
     public Sprite icon;
@@ -20,7 +21,8 @@ public class BaseItem : MonoBehaviour
                 break;
             }
         }
-        icon = Resources.Load<Sprite>($"Sprites/ItemIcon/{itemData.iconName}");
+        icon = Resources.Load<Sprite>($"Sprites/ItemIcons/{itemData.name}");
+        ID = itemData.ID;
         itemName = itemData.name;
         description = itemData.description;
     }

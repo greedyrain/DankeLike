@@ -57,7 +57,6 @@ public class LevelUpPopupPanel : BasePanel
             int itemID = 0;
             int itemLevel = 0;
 
-
             //if player have already got 6 skills, then will just pick the skill ids from which player already have.
             if (playerSkillManager.ownedSkill.Count == 6)
             {
@@ -72,11 +71,9 @@ public class LevelUpPopupPanel : BasePanel
             {
                 for (int i = 0; i < GameDataManager.Instance.SkillsData.Count; i++)
                 {
-                    Debug.Log(GameDataManager.Instance.SkillsData[i].ID);
                     bool isThisMaxLevel = false;
                     foreach (var skill in playerSkillManager.ownedSkill)
                     {
-                        Debug.Log(skill.SkillData.level);
                         if (GameDataManager.Instance.SkillsData[i].ID == skill.SkillData.ID &&
                             skill.SkillData.level == 5)
                             isThisMaxLevel = true;

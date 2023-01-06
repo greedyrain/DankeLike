@@ -5,10 +5,9 @@ using UnityEngine.UI;
 
 public class ItemOptionObject : MonoBehaviour
 {
-    public Sprite icon;
+    public Image icon;
     public Button button;
     public BaseItem item;
-    public ItemData data;
     public Text skillName;
 
     private void OnEnable()
@@ -26,11 +25,15 @@ public class ItemOptionObject : MonoBehaviour
         foreach (var item in GameDataManager.Instance.Items)
         {
             if (id == item.ID && level == item.level)
-                this.data = item;
+            {
+                this.item = new BaseItem();
+                this.item.InitData(id, level);
+            }
         }
-        item = new BaseItem();
-        item.InitData(id, level);
 
-        skillName.text = data.name;
+        icon = GetComponent<Image>();
+        // icon.sprite = Resources.Load<Sprite>($"Sprites/ItemIcons/{item.itemData.name}");
+        icon.sprite = item.icon;
+        skillName.text = this.item.itemData.name;
     }
 }

@@ -58,8 +58,7 @@ public class Enemy : BaseUnit
     public override void GetHurt(int damage)
     {
         if (isDead) return;
-        damage = (int) (damage + damage * player.totalMightEffect);
-
+        // damage = (int) (damage + damage * player.totalMightEffect);
         HP -= damage;
         DamagePopupManager.Instance.ShowDamage(damage, center);
 

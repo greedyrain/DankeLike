@@ -40,7 +40,7 @@ public class SkillObject_WaveForm : BaseSkillObject
             owner.GetComponent<PlayerController>().SetControllableStatus(false);
             if (initCompleted && other.CompareTag("Enemy"))
             {
-                other.GetComponent<Enemy>().GetHurt(SkillData.damage);
+                other.GetComponent<Enemy>().GetHurt(owner.GetComponent<BaseUnit>().CalculateDamage(SkillData.damage));
             }
         });
     }

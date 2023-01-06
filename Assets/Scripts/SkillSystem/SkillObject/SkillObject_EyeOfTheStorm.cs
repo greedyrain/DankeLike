@@ -30,7 +30,7 @@ public class SkillObject_EyeOfTheStorm : BaseSkillObject
             obj.GetComponent<HitEffect_Lightning>().InitData(SkillData);
             obj.GetComponent<HitEffect_Lightning>().Init(target, deployCenter);
         });
-        target.GetComponent<Enemy>().GetHurt(SkillData.damage);
+        target.GetComponent<Enemy>().GetHurt(owner.GetComponent<BaseUnit>().CalculateDamage(SkillData.damage));
     }
 
     public async void SelectTarget()

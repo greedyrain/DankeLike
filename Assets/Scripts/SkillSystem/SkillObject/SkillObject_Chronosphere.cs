@@ -38,7 +38,7 @@ public class SkillObject_Chronosphere : BaseSkillObject
             {
                 foreach (var target in colls)
                 {
-                    target.GetComponent<Enemy>().GetHurt(SkillData.damage);
+                    target.GetComponent<Enemy>().GetHurt(owner.GetComponent<BaseUnit>().CalculateDamage(SkillData.damage));
                 }
             }
             await UniTask.Delay((int) (SkillData.actionInterval * 1000));

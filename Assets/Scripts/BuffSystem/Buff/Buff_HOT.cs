@@ -14,7 +14,7 @@ public class Buff_HOT : BaseBuff
     public void InitData(int skillID, int heal, float proportion, float duration, float interval,
         FigureType figureType,BaseUnit owner)
     {
-        this.owner = owner;
+        this.recipient = owner;
         this.skillID = skillID;
         this.heal = heal;
         this.interval = interval;
@@ -35,12 +35,12 @@ public class Buff_HOT : BaseBuff
             switch (figureType)
             {
                 case FigureType.PROPORTION:
-                    owner.HP += (int) (owner.baseMaxHP * proportion);
+                    recipient.HP += (int) (recipient.baseMaxHP * proportion);
                     remainInterval = interval;
                     break;
 
                 case FigureType.CONSTANT:
-                    owner.HP += heal;
+                    recipient.HP += heal;
                     remainInterval = interval;
                     break;
             }

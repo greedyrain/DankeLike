@@ -28,6 +28,7 @@ public class FrontDeployer : SkillDeployer
                         obj.transform.position = transform.position;
                         obj.transform.forward = player.transform.forward;
                         obj.GetComponent<BaseSkillObject>().InitData(SkillData);
+                        obj.GetComponent<BaseSkillObject>().SetOwner(player.transform);
                     });
                     await UniTask.Delay((int)(SkillData.disposeInterval * 1000));
                 }

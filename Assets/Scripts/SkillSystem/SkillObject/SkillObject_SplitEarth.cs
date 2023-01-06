@@ -40,7 +40,7 @@ public class SkillObject_SplitEarth : BaseSkillObject
         
         for (int i = 0; i < targetColls.Count; i++)
         {
-            targetColls[i].GetComponent<Enemy>().GetHurt(SkillData.damage);
+            targetColls[i].GetComponent<Enemy>().GetHurt(owner.GetComponent<BaseUnit>().CalculateDamage(SkillData.damage));
         }
         targetColls.Clear();
 

@@ -22,7 +22,7 @@ public class SkillObject_PulseNova : BaseSkillObject
         {
             foreach (var enemy in colls)
             {
-                enemy.GetComponent<Enemy>().GetHurt(SkillData.damage);
+                enemy.GetComponent<Enemy>().GetHurt(owner.GetComponent<BaseUnit>().CalculateDamage(SkillData.damage));
                 PoolManager.Instance.GetObj("Prefabs/HitEffectObjects", SkillData.hitEffectName, (obj) =>
                 {
                     obj.transform.position = enemy.transform.position;

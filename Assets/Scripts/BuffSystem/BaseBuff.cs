@@ -9,7 +9,8 @@ using UnityEngine.UI;
 public abstract class BaseBuff
 {
     public int skillID;
-    public BaseUnit owner;
+    public BaseUnit recipient;
+    public BaseUnit releaser;
     
     public string iconName;
     public float duration;
@@ -30,7 +31,7 @@ public abstract class BaseBuff
         remainTime -= Time.deltaTime;
         if (remainTime <= 0)
         {
-            owner.GetComponent<BuffManager>().RemoveBuff(this);
+            recipient.GetComponent<BuffManager>().RemoveBuff(this);
         }
     }
 }

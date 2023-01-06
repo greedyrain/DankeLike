@@ -13,7 +13,9 @@ public class GamePanel : BasePanel
     public Image expBar;
 
     public List<SkillCoolDownItem> skillList;
+    public List<ItemsIconObject> itemList;
     private int skillCount;
+    private int itemCount;
     public override void Init()
     {
         Show();
@@ -55,5 +57,19 @@ public class GamePanel : BasePanel
         }
         skillList[skillCount].Init(deployer);
         skillCount++;
+    }
+
+    public void InitItemIcon(BaseItem baseItem)
+    {
+        foreach (var item in itemList)
+        {
+            if (item.ID == baseItem.itemData.ID)
+            {
+                return;
+            }
+        }
+        
+        itemList[itemCount].Initialize(baseItem);
+        itemCount++;
     }
 }

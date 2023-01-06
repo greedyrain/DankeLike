@@ -134,12 +134,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f41a0301764025f4da7612f388b4687e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  icon: {fileID: 0}
   button: {fileID: 6669794447655428966}
   data:
     ID: 0
     level: 0
     impactTypes: []
     count: 0
+    targetCount: 0
     damage: 0
     skillName: 
     description: 
@@ -148,6 +150,7 @@ MonoBehaviour:
     duration: 0
     skillCD: 0
     remainCD: 0
+    throwSpeed: 0
     disposeInterval: 0
     actionInterval: 0
     prefabName: 
@@ -187,8 +190,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -125.24858}
+  m_SizeDelta: {x: 0, y: -82.9774}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6669794448011945104
 CanvasRenderer:
@@ -211,7 +214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -225,7 +228,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 40
-    m_Alignment: 4
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0

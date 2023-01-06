@@ -27,7 +27,8 @@ public class AttachToTargetDeployer : SkillDeployer
         PoolManager.Instance.GetObj("Prefabs/SkillObjects", SkillData.prefabName, (obj) =>
         {
             obj.GetComponent<BaseSkillObject>().InitData(SkillData);
-            obj.GetComponent<BaseSkillObject>().SetOwner(targets[index].transform);
+            obj.GetComponent<BaseSkillObject>().SetTarget(targets[index].transform);
+            obj.GetComponent<BaseSkillObject>().SetOwner(player.transform);
             obj.transform.position = targets[index].transform.position;
             obj.transform.rotation = targets[index].transform.rotation;
             obj.transform.SetParent(targets[index].transform);

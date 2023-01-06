@@ -25,7 +25,6 @@ public class SkillObject_WildAxes : BaseSkillObject
             {
                 PoolManager.Instance.GetObj("Prefabs/HitEffectObjects", SkillData.hitEffectName, (obj) =>
                 {
-                    Debug.Log("--------------------------------------");
                     obj.GetComponent<HitEffect_WildAxes>().SetOwner(owner); 
                     obj.GetComponent<HitEffect_WildAxes>().SetLeftOrRight(i == 0);
                     obj.GetComponent<HitEffect_WildAxes>().InitData(SkillData);

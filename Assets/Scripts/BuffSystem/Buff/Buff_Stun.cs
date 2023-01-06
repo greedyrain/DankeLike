@@ -9,7 +9,7 @@ public class Buff_Stun : BaseBuff
 
     public void InitData(int skillID, float duration, BaseUnit owner)
     {
-        this.owner = owner;
+        this.recipient = owner;
         this.skillID = skillID;
         this.duration = duration;
         remainTime = duration;
@@ -18,16 +18,16 @@ public class Buff_Stun : BaseBuff
 
     public override void Action()
     {
-        if (owner.CompareTag("Enemy"))
+        if (recipient.CompareTag("Enemy"))
         {
             IState previousState = new BaseEnemyState();
-            Enemy enemy = owner.GetComponent<Enemy>();
+            Enemy enemy = recipient.GetComponent<Enemy>();
             previousState = enemy.stateMachine.currentState;
             enemy.stateMachine.SwitchState(enemy.stateMachine.stunState);
             UniTask.WaitUntil(() => remainTime <= 0).ContinueWith(() => enemy.stateMachine.SwitchState(previousState));
         }
 
-        if (owner.CompareTag("Player"))
+        if (recipient.CompareTag("Player"))
         {
             //
         }

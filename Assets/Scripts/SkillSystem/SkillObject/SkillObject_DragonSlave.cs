@@ -38,7 +38,7 @@ public class SkillObject_DragonSlave : BaseSkillObject
     {
         if (other.CompareTag("Enemy"))
         {
-            other.GetComponent<Enemy>().GetHurt(SkillData.damage);
+            other.GetComponent<Enemy>().GetHurt(owner.GetComponent<BaseUnit>().CalculateDamage(SkillData.damage));
         }
     }
 }

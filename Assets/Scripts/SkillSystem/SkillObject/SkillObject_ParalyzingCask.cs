@@ -51,19 +51,17 @@ public class SkillObject_ParalyzingCask : BaseSkillObject
         if (other.CompareTag("Enemy"))
         {
             Debug.Log(count);
-            other.transform.GetComponent<Enemy>().GetHurt(SkillData.damage);
+            other.transform.GetComponent<Enemy>().GetHurt(owner.GetComponent<BaseUnit>().CalculateDamage(SkillData.damage));
             if (count <= 0)
             {
                 PoolManager.Instance.PushObj(gameObject.name, gameObject);
             }
             else
             {
-                Debug.Log("--------------------------------");
                 count--;
                 selfTarget = Physics.OverlapSphere(transform.position, SkillData.radius, targetLayer);
                 if (selfTarget.Length > 0)
                 {
-                    Debug.Log("=================================");
                     SetTarget(selfTarget[Random.Range(0, selfTarget.Length)].transform);
                 }
             }

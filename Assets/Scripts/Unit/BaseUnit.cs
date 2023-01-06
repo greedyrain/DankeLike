@@ -58,4 +58,12 @@ public class BaseUnit : MonoBehaviour
     {
         
     }
+    
+    public virtual int CalculateDamage(int damage)
+    {
+        int totalDamage = damage + (int)(damage*totalMightEffect);
+        Debug.Log(damage);
+        Debug.Log(totalMightEffect);
+        return totalDamage;
+    }
 }

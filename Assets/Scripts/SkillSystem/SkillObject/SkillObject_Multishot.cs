@@ -24,13 +24,13 @@ public class SkillObject_Multishot : BaseSkillObject
         if (col.CompareTag("Enemy") && initCompleted)
         {
             Enemy enemy = col.GetComponent<Enemy>();
-            enemy.GetHurt(SkillData.damage);
-            // Buff_Slow slow = new Buff_Slow();
-            // slow.InitData(SkillData.ID,0.5f,5,enemy);
-            // enemy.GetComponent<BuffManager>().AddBuff(slow);
-            Buff_Stun stun = new Buff_Stun();
-            stun.InitData(SkillData.ID,5,enemy);
-            enemy.GetComponent<BuffManager>().AddBuff(stun);
+            enemy.GetHurt(owner.GetComponent<BaseUnit>().CalculateDamage(SkillData.damage));
+            Buff_Slow slow = new Buff_Slow();
+            slow.InitData(SkillData.ID,0.5f,5,enemy);
+            enemy.GetComponent<BuffManager>().AddBuff(slow);
+            // Buff_Stun stun = new Buff_Stun();
+            // stun.InitData(SkillData.ID,5,enemy);
+            // enemy.GetComponent<BuffManager>().AddBuff(stun);
             
             PoolManager.Instance.PushObj(gameObject.name, gameObject);
             

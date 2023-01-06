@@ -27,7 +27,7 @@ public class SkillObject_Rupture : BaseSkillObject
         {
             if (transform.position != lastFramesPos)
             {
-                targetEnemy.GetHurt((int)((transform.position - lastFramesPos).magnitude * SkillData.damage));
+                targetEnemy.GetHurt(owner.GetComponent<BaseUnit>().CalculateDamage((int)((transform.position - lastFramesPos).magnitude * SkillData.damage)));
                 lastFramesPos = transform.position;
                 if (targetEnemy.isDead)
                 {

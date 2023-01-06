@@ -14,7 +14,7 @@ public class Buff_DOT : BaseBuff
     public void InitData(int skillID, int damage, float proportion, float duration, float interval,
         FigureType figureType,BaseUnit owner)
     {
-        this.owner = owner;
+        this.recipient = owner;
         this.skillID = skillID;
         this.damage = damage;
         this.interval = interval;
@@ -34,12 +34,12 @@ public class Buff_DOT : BaseBuff
             switch (figureType)
             {
                 case FigureType.PROPORTION:
-                    owner.GetHurt((int) (owner.baseMaxHP * proportion));
+                    recipient.GetHurt((int) (recipient.baseMaxHP * proportion));
                     remainInterval = interval;
                     break;
 
                 case FigureType.CONSTANT:
-                    owner.GetHurt(damage);
+                    recipient.GetHurt(releaser.CalculateDamage(damage));
                     remainInterval = interval;
                     break;
             }

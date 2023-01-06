@@ -88,12 +88,21 @@ public class SkillManager : MonoBehaviour
                 obj.transform.SetParent(player.transform);
                 obj.SkillData = skill;
                 obj.player = player;
+                bool hasRepetition = false;
                 for (int i = 0; i < ownedSkill.Count; i++)
                 {
                     if (ownedSkill[i].name == obj.name)
+                    {
                         ownedSkill[i] = obj;
+                        hasRepetition = true;
+                        break;
+                    }
                 }
-                ownedSkill.Add(obj);
+
+                if (!hasRepetition)
+                {
+                    ownedSkill.Add(obj); 
+                }
                 UIManager.Instance.GetPanel<GamePanel>().InitSkillIcon(obj);
             }
         }

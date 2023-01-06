@@ -36,7 +36,7 @@ public class HitEffect_SerpentWard : BaseSkillObject
     {
         if (collision.CompareTag("Enemy"))
         {
-            collision.transform.GetComponent<Enemy>().GetHurt(SkillData.damage);
+            collision.transform.GetComponent<Enemy>().GetHurt(owner.GetComponent<BaseUnit>().CalculateDamage(SkillData.damage));
             PoolManager.Instance.PushObj(gameObject.name, gameObject);
         }
     }

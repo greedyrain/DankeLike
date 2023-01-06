@@ -36,7 +36,7 @@ public class HitEffect_PlagueWard : BaseSkillObject
         if (collision.transform == target)
         {
             Enemy enemy = collision.transform.GetComponent<Enemy>();
-            enemy.GetHurt(SkillData.damage);
+            enemy.GetHurt(owner.GetComponent<BaseUnit>().CalculateDamage(SkillData.damage));
             Buff_DOT dot = new Buff_DOT();
             dot.InitData(SkillData.ID,5,0,10,1,FigureType.CONSTANT,enemy);
             Buff_Slow slow = new Buff_Slow();

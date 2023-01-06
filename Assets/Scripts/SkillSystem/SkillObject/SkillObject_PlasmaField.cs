@@ -30,7 +30,7 @@ public class SkillObject_PlasmaField : BaseSkillObject
     {
         if (col.CompareTag("Enemy"))
         {
-            col.GetComponent<Enemy>().GetHurt(SkillData.damage);
+            col.GetComponent<Enemy>().GetHurt(owner.GetComponent<BaseUnit>().CalculateDamage(SkillData.damage));
         }
     }
     
@@ -38,7 +38,7 @@ public class SkillObject_PlasmaField : BaseSkillObject
     {
         if (col.CompareTag("Enemy"))
         {
-            col.GetComponent<Enemy>().GetHurt(SkillData.damage);
+            col.GetComponent<Enemy>().GetHurt(owner.GetComponent<BaseUnit>().CalculateDamage(SkillData.damage));
         }
     }
 

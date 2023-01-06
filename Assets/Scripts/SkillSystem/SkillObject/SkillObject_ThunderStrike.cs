@@ -36,7 +36,7 @@ public class SkillObject_ThunderStrike : BaseSkillObject
             {
                 for (int i = 0; i < targets.Length; i++)
                 {
-                    targets[i].GetComponent<Enemy>().GetHurt(SkillData.damage);
+                    targets[i].GetComponent<Enemy>().GetHurt(owner.GetComponent<BaseUnit>().CalculateDamage(SkillData.damage));
                 }
             }
             if (targetEnemy.isDead)

@@ -26,7 +26,7 @@ public class SkillObject_Thunder : BaseSkillObject
         if (colls.Length > 0)
         {
             for (int i = 0; i < colls.Length; i++)
-                colls[i].GetComponent<Enemy>()?.GetHurt(SkillData.damage);
+                colls[i].GetComponent<Enemy>()?.GetHurt(owner.GetComponent<BaseUnit>().CalculateDamage(SkillData.damage));
         }
     }
     

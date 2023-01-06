@@ -31,7 +31,7 @@ public class SkillObject_Avalanche : BaseSkillObject
                 foreach (var target in colls)
                 {
                     Enemy enemy = target.GetComponent<Enemy>();
-                    enemy.GetHurt(SkillData.damage);
+                    enemy.GetHurt(owner.GetComponent<BaseUnit>().CalculateDamage(SkillData.damage));
                     Buff_Stun stun = new Buff_Stun();
                     stun.InitData(SkillData.ID,0.18f,enemy);
                     enemy.GetComponent<BuffManager>().AddBuff(stun);

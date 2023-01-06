@@ -48,7 +48,7 @@ public class SkillObject_SunRay : BaseSkillObject
         while (gameObject.activeSelf)
         {
             for (int i = 0; i < colls.Count; i++)
-                colls[i].GetComponent<Enemy>().GetHurt(SkillData.damage);
+                colls[i].GetComponent<Enemy>().GetHurt(owner.GetComponent<BaseUnit>().CalculateDamage(SkillData.damage));
 
             await UniTask.Delay((int) (SkillData.actionInterval * 1000));
         }

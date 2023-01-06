@@ -9,7 +9,7 @@ public class Buff_Slow : BaseBuff
 
     public void InitData(int skillID, float proportion, float duration, BaseUnit owner)
     {
-        this.owner = owner;
+        this.recipient = owner;
         this.skillID = skillID;
         this.proportion = proportion;
         this.duration = duration;
@@ -20,9 +20,9 @@ public class Buff_Slow : BaseBuff
 
     public override void Action()
     {
-        float effect = owner.baseMoveSpeed * proportion;
-        owner.totalMoveSpeed -= effect;
-        UniTask.WaitUntil(() => remainTime <= 0).ContinueWith(() => owner.totalMoveSpeed += effect);
+        float effect = recipient.baseMoveSpeed * proportion;
+        recipient.totalMoveSpeed -= effect;
+        UniTask.WaitUntil(() => remainTime <= 0).ContinueWith(() => recipient.totalMoveSpeed += effect);
     }
 
 }
