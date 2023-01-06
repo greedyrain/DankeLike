@@ -8,8 +8,8 @@ using Random = UnityEngine.Random;
 
 public class Enemy : BaseUnit
 {
-    public PlayerController player;
     public Transform center;
+    public Transform damageDisplayPos;
     protected const float atkCD = 0.2f;
     protected float remainAtkCD = 0f;
 
@@ -58,9 +58,10 @@ public class Enemy : BaseUnit
     public override void GetHurt(int damage)
     {
         if (isDead) return;
-        // damage = (int) (damage + damage * player.totalMightEffect);
         HP -= damage;
-        DamagePopupManager.Instance.ShowDamage(damage, center);
+        
+        //Show the damage popup;
+        DamagePopupManager.Instance.ShowDamage(damage, damageDisplayPos);
 
         if (HP <= 0)
         {
@@ -80,7 +81,7 @@ public class Enemy : BaseUnit
         PoolManager.Instance.GetObj("Prefabs", "DropItem", (obj) =>
         {
             obj.GetComponent<DropItem>().Init(drop);
-            obj.transform.position = transform.position;
+            obj.transform.position = transform.position + Vector3.up * 0.25f;
             obj.transform.rotation = transform.rotation;
         });
     }
@@ -99,7 +100,6 @@ public class Enemy : BaseUnit
 
     public void InitData()
     {
-        player = FindObjectOfType<PlayerController>();
         for (int i = 0; i < GameDataManager.Instance.EnemiesData.Count; i++)
         {
             if (GameDataManager.Instance.EnemiesData[i].ID == id)

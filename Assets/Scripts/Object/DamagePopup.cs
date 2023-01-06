@@ -31,6 +31,7 @@ public class DamagePopup : MonoBehaviour
     public void Setup(int damage,Transform pos)
     {
         transform.position = pos.position;
+        transform.forward = Camera.main.transform.forward;
         text.text = damage.ToString();
     }
 }

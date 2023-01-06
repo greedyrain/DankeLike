@@ -10,6 +10,7 @@ public class PlayerController : BaseUnit
 {
     public Vector3 direction;
     public GameObject weaponPos;
+    [SerializeField] private SphereCollider magneticArea;
     private float angle;
     
     [HideInInspector] public string userName;
@@ -25,7 +26,6 @@ public class PlayerController : BaseUnit
     public ItemManager playerItemManager;
 
     public HealthBar healthBar;
-    public Weapon weapon;
 
     private bool controllable = true;
 
@@ -37,6 +37,8 @@ public class PlayerController : BaseUnit
         playerExperience.Init();
         playerSkillManager = GetComponent<SkillManager>();
         playerItemManager = GetComponent<ItemManager>();
+        playerItemManager.onItemObtain += SetMagneticArea;
+        playerItemManager.onItemObtain += SetPlayerSpeed;
     }
 
     protected override void OnEnable()
@@ -101,24 +103,18 @@ public class PlayerController : BaseUnit
         totalMight = playerData.baseMight;
     }
 
-    public void SetWeapon(int id)
-    {
-        string weaponName = "";
-        for (int i = 0; i < GameDataManager.Instance.Weapons.Count; i++)
-        {
-            if (GameDataManager.Instance.Weapons[i].ID == id)
-            {
-                weaponName = GameDataManager.Instance.Weapons[i].name;
-            }
-        }
-        weapon = Instantiate(Resources.Load<Weapon>($"Prefabs/Weapon/{weaponName}"));
-        weapon.transform.SetParent(weaponPos.transform);
-        weapon.transform.localPosition = Vector3.zero;
-        weapon.ID = id;
-    }
-
     public void SetControllableStatus(bool status)
     {
         controllable = status;
+    }
+
+    public void SetMagneticArea()
+    {
+        magneticArea.radius = 1.5f + 1.5f * totalMagnetEffect;
+    }
+
+    public void SetPlayerSpeed()
+    {
+        totalMoveSpeed = baseMoveSpeed + baseMoveSpeed * totalSpeedEffect;
     }
 }

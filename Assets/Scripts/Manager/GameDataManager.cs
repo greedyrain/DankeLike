@@ -22,12 +22,6 @@ public class GameDataManager
         get { return enemiesData; }
     }
 
-    private List<WeaponData> weapons;
-    public List<WeaponData> Weapons
-    {
-        get { return weapons; }
-    }
-
     private List<ItemData> items;
     public List<ItemData> Items
     {
@@ -49,7 +43,6 @@ public class GameDataManager
 
     private GameDataManager()
     {
-        weapons = JsonManager.Instance.LoadData<List<WeaponData>>("WeaponData");
         enemiesData = JsonManager.Instance.LoadData<List<EnemyData>>("EnemyData");
         playerData = JsonManager.Instance.LoadData<PlayerData>("PlayerData");
         experienceDatas = JsonManager.Instance.LoadData<List<ExperienceData>>("ExperienceData");

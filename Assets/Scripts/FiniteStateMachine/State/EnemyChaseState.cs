@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,8 +17,11 @@ public class EnemyChaseState : BaseEnemyState
 
     public override void OnFixedUpdate()
     {
-        Vector3 dir = (enemy.target.transform.position - enemy.transform.position).normalized;
-        enemy.Move(dir);
+        if (enemy.target!=null)
+        {
+            Vector3 dir = (enemy.target.transform.position - enemy.transform.position).normalized;
+            enemy.Move(dir); 
+        }
     }
 
     public override void OnUpdate()

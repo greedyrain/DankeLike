@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
@@ -184,9 +182,6 @@ public class LevelUpPopupPanel : BasePanel
                         }
                         break;
                 }
-
-
-
             }
         });
     }

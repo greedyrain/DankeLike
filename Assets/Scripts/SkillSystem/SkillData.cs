@@ -9,13 +9,11 @@ public class SkillData
 {
     //技能系列的ID
     public int ID;
-    //
+    //技能等级
     public int level;
-    //
-    public List<string> impactTypes;
     //技能数量（如燃烧瓶个数）
     public int count;
-    //目标数量
+    //目标数量 (用于有攻击目标限制的技能，没有限制则为0)
     public int targetCount;
     //技能伤害
     public int damage;

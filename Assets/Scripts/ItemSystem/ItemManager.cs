@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,8 @@ public class ItemManager : MonoBehaviour
     public float totalRecoveryEffect;
     public float totalCooldownEffect;
     public float totalMagnetEffect;
+
+    public event Action onItemObtain;
 
     private void Awake()
     {
@@ -44,13 +47,13 @@ public class ItemManager : MonoBehaviour
 
         if (!hasRepetition)
         {
-            Debug.Log("Added item....");
             ownedItemList.Add(item);
             UIManager.Instance.GetPanel<GamePanel>().InitItemIcon(item);
         }
 
         ActEffect(item);
         Activate();
+        onItemObtain?.Invoke();
     }
 
     public void ActEffect(BaseItem item)
