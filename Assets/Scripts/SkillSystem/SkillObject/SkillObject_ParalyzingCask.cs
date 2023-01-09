@@ -51,7 +51,7 @@ public class SkillObject_ParalyzingCask : BaseSkillObject
         if (other.CompareTag("Enemy"))
         {
             Debug.Log(count);
-            other.transform.GetComponent<Enemy>().GetHurt(owner.GetComponent<BaseUnit>().CalculateDamage(SkillData.damage));
+            other.transform.GetComponent<Enemy>().GetHurt(owner.GetComponent<PlayerController>().CalculateDamage(SkillData.damage));
             if (count <= 0)
             {
                 PoolManager.Instance.PushObj(gameObject.name, gameObject);

@@ -11,20 +11,24 @@ public class BaseUnit : MonoBehaviour
     [HideInInspector] public int HP;
     [HideInInspector] public int baseArmor;
     [HideInInspector] public float baseMoveSpeed;
+    [HideInInspector] public int baseRecovery;
 
-    [Header("---------Total Data---------")] 
-    public float totalMight;
+    [Header("---------Total Data---------")]
     public int totalArmor;
     public float totalMoveSpeed;
+    public int totalRecovery;
+    
 
-    public float totalMaxHPEffect;
-    public float totalArmorEffect;
-    public float totalSpeedEffect;
-    public float totalMightEffect;
-    public float totalDurationEffect;
-    public float totalRecoveryEffect;
-    public float totalCooldownEffect;
-    public float totalMagnetEffect;
+    [Header("---------Effect Data---------")]
+    public float experienceEffect;
+    public int recoveryEffect;
+    public int maxHPEffect;
+    public int armorEffect;
+    public float speedEffect;
+    public float mightEffect;
+    public float durationEffect;
+    public float cooldownEffect;
+    public float magnetEffect;
 
     [HideInInspector] public Rigidbody rb;
     [HideInInspector] public Animator anim;
@@ -56,14 +60,5 @@ public class BaseUnit : MonoBehaviour
 
     public virtual void GetHurt(int damage)
     {
-        
-    }
-    
-    public virtual int CalculateDamage(int damage)
-    {
-        int totalDamage = damage + (int)(damage*totalMightEffect);
-        Debug.Log(damage);
-        Debug.Log(totalMightEffect);
-        return totalDamage;
     }
 }

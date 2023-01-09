@@ -14,7 +14,8 @@ public class SkillObject_PlasmaField : BaseSkillObject
         coll = GetComponent<SphereCollider>();
         UniTask.WaitUntil(() => initCompleted).ContinueWith(() =>
         {
-            UniTask.Delay((int) (SkillData.duration * 1000)).ContinueWith(() =>
+            float duration = owner.GetComponent<PlayerController>().CalculateDuration(SkillData.duration);
+            UniTask.Delay((int) (duration * 1000)).ContinueWith(() =>
             {
                 PoolManager.Instance.PushObj(gameObject.name,gameObject);
             });
@@ -30,7 +31,7 @@ public class SkillObject_PlasmaField : BaseSkillObject
     {
         if (col.CompareTag("Enemy"))
         {
-            col.GetComponent<Enemy>().GetHurt(owner.GetComponent<BaseUnit>().CalculateDamage(SkillData.damage));
+            col.GetComponent<Enemy>().GetHurt(owner.GetComponent<PlayerController>().CalculateDamage(SkillData.damage));
         }
     }
     
@@ -38,7 +39,7 @@ public class SkillObject_PlasmaField : BaseSkillObject
     {
         if (col.CompareTag("Enemy"))
         {
-            col.GetComponent<Enemy>().GetHurt(owner.GetComponent<BaseUnit>().CalculateDamage(SkillData.damage));
+            col.GetComponent<Enemy>().GetHurt(owner.GetComponent<PlayerController>().CalculateDamage(SkillData.damage));
         }
     }
 

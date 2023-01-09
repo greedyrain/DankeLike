@@ -25,7 +25,8 @@ public class HitEffect_LightningStorm : BaseSkillObject
         isInitCompleted = false;
         UniTask.WaitUntil(() => isInitCompleted).ContinueWith(() =>
         {
-            UniTask.Delay((int)(SkillData.duration*1000)).ContinueWith(() =>
+            float duration = owner.GetComponent<PlayerController>().CalculateDuration(SkillData.duration);
+            UniTask.Delay((int)(duration*1000)).ContinueWith(() =>
             {
                 target = null;
                 owner = null;

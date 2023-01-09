@@ -13,7 +13,8 @@ public class SkillObject_Scorched : BaseSkillObject
         {
             transform.localScale = new Vector3(SkillData.radius * 2, 0.05f, SkillData.radius * 2); 
             Guarantee();
-            UniTask.Delay((int) (SkillData.duration * 1000)).ContinueWith(() =>
+            float duration = owner.GetComponent<PlayerController>().CalculateDuration(SkillData.duration);
+            UniTask.Delay((int) (duration * 1000)).ContinueWith(() =>
             {
                 PoolManager.Instance.PushObj(gameObject.name, gameObject);
             });
@@ -23,7 +24,7 @@ public class SkillObject_Scorched : BaseSkillObject
     public async void Guarantee()
     {
         Debug.Log("Radius is :"+SkillData.radius);
-        float time = SkillData.duration;
+        float time =  owner.GetComponent<PlayerController>().CalculateDuration(SkillData.duration);;
         while (time > 0)
         {
             await UniTask.Delay((int) (SkillData.actionInterval * 1000)).ContinueWith(()=>
@@ -33,7 +34,7 @@ public class SkillObject_Scorched : BaseSkillObject
                 if (colls.Length > 0)
                 {
                     for (int i = 0; i < colls.Length; i++)
-                        colls[i].GetComponent<Enemy>()?.GetHurt(owner.GetComponent<BaseUnit>().CalculateDamage(SkillData.damage));
+                        colls[i].GetComponent<Enemy>()?.GetHurt(owner.GetComponent<PlayerController>().CalculateDamage(SkillData.damage));
                 }
             });
         }

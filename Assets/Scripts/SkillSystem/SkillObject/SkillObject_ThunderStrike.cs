@@ -36,7 +36,7 @@ public class SkillObject_ThunderStrike : BaseSkillObject
             {
                 for (int i = 0; i < targets.Length; i++)
                 {
-                    targets[i].GetComponent<Enemy>().GetHurt(owner.GetComponent<BaseUnit>().CalculateDamage(SkillData.damage));
+                    targets[i].GetComponent<Enemy>().GetHurt(owner.GetComponent<PlayerController>().CalculateDamage(SkillData.damage));
                 }
             }
             if (targetEnemy.isDead)
@@ -47,6 +47,7 @@ public class SkillObject_ThunderStrike : BaseSkillObject
             UniTask.Delay(200).ContinueWith(() => area.SetActive(false));
             if (count <= 0)
             {
+                await UniTask.Delay(100);
                 PoolManager.Instance.PushObj(gameObject.name, gameObject);
             }
             await UniTask.Delay((int)(SkillData.actionInterval * 1000));

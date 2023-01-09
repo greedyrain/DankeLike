@@ -15,6 +15,7 @@ public class PlayerExperience : MonoBehaviour
 
     public void ObtainDropItem(int exp)
     {
+        exp += (int)(exp * player.experienceEffect);
         currentExp += exp;
         if (currentExp >= maxExp)
         {

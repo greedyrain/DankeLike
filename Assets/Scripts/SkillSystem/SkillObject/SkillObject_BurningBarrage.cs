@@ -35,7 +35,7 @@ public class SkillObject_BurningBarrage : BaseSkillObject
     {
         if (other.CompareTag("Enemy"))
         {
-            other.GetComponent<Enemy>().GetHurt(owner.GetComponent<BaseUnit>().CalculateDamage(SkillData.damage));
+            other.GetComponent<Enemy>().GetHurt(owner.GetComponent<PlayerController>().CalculateDamage(SkillData.damage));
         }
     }
 }

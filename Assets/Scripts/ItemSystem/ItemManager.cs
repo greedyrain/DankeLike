@@ -8,14 +8,15 @@ public class ItemManager : MonoBehaviour
     BaseUnit owner;
     public List<BaseItem> ownedItemList = new List<BaseItem>();
     
-    public float totalMaxHPEffect;
-    public float totalArmorEffect;
+    public int totalMaxHPEffect;
+    public int totalArmorEffect;
     public float totalSpeedEffect;
     public float totalMightEffect;
     public float totalDurationEffect;
-    public float totalRecoveryEffect;
+    public int totalRecoveryEffect;
     public float totalCooldownEffect;
     public float totalMagnetEffect;
+    public float totalExperienceEffect;
 
     public event Action onItemObtain;
 
@@ -31,14 +32,15 @@ public class ItemManager : MonoBehaviour
         {
             if (ownedItemList[i].itemData.ID == item.itemData.ID)
             {
-                totalMaxHPEffect -= ownedItemList[i].itemData.maxHPEffectRate;
-                totalArmorEffect -= ownedItemList[i].itemData.armorEffectRate;
-                totalSpeedEffect -= ownedItemList[i].itemData.speedEffectRate;
-                totalMightEffect -= ownedItemList[i].itemData.mightEffectRate;
-                totalDurationEffect -= ownedItemList[i].itemData.durationEffectRate;
-                totalRecoveryEffect -= ownedItemList[i].itemData.recoveryEffectRate;
-                totalCooldownEffect -= ownedItemList[i].itemData.cooldownEffectRate;
-                totalMagnetEffect -= ownedItemList[i].itemData.magnetEffectRate;
+                totalMaxHPEffect -= ownedItemList[i].itemData.maxHPEffect;
+                totalArmorEffect -= ownedItemList[i].itemData.armorEffect;
+                totalSpeedEffect -= ownedItemList[i].itemData.speedEffect;
+                totalMightEffect -= ownedItemList[i].itemData.mightEffect;
+                totalDurationEffect -= ownedItemList[i].itemData.durationEffect;
+                totalRecoveryEffect -= ownedItemList[i].itemData.recoveryEffect;
+                totalCooldownEffect -= ownedItemList[i].itemData.cooldownEffect;
+                totalMagnetEffect -= ownedItemList[i].itemData.magnetEffect;
+                totalExperienceEffect -= ownedItemList[i].itemData.experienceEffect;
                 ownedItemList[i] = item;
                 hasRepetition = true;
                 break;
@@ -58,25 +60,27 @@ public class ItemManager : MonoBehaviour
 
     public void ActEffect(BaseItem item)
     {
-        totalMaxHPEffect += item.itemData.maxHPEffectRate;
-        totalArmorEffect += item.itemData.armorEffectRate;
-        totalSpeedEffect += item.itemData.speedEffectRate;
-        totalMightEffect += item.itemData.mightEffectRate;
-        totalDurationEffect += item.itemData.durationEffectRate;
-        totalRecoveryEffect += item.itemData.recoveryEffectRate;
-        totalCooldownEffect += item.itemData.cooldownEffectRate;
-        totalMagnetEffect += item.itemData.magnetEffectRate;
+        totalMaxHPEffect += item.itemData.maxHPEffect;
+        totalArmorEffect += item.itemData.armorEffect;
+        totalSpeedEffect += item.itemData.speedEffect;
+        totalMightEffect += item.itemData.mightEffect;
+        totalDurationEffect += item.itemData.durationEffect;
+        totalRecoveryEffect += item.itemData.recoveryEffect;
+        totalCooldownEffect += item.itemData.cooldownEffect;
+        totalMagnetEffect += item.itemData.magnetEffect;
+        totalExperienceEffect += item.itemData.experienceEffect;
     }
 
     public void Activate()
     {
-        owner.totalMaxHPEffect = totalMaxHPEffect;
-        owner.totalArmorEffect = totalArmorEffect;
-        owner.totalSpeedEffect = totalSpeedEffect;
-        owner.totalMightEffect = totalMightEffect;
-        owner.totalDurationEffect = totalDurationEffect;
-        owner.totalRecoveryEffect = totalRecoveryEffect;
-        owner.totalCooldownEffect = totalCooldownEffect;
-        owner.totalMagnetEffect = totalMagnetEffect;
+        owner.maxHPEffect = totalMaxHPEffect;
+        owner.armorEffect = totalArmorEffect;
+        owner.speedEffect = totalSpeedEffect;
+        owner.mightEffect = totalMightEffect;
+        owner.durationEffect = totalDurationEffect;
+        owner.recoveryEffect = totalRecoveryEffect;
+        owner.cooldownEffect = totalCooldownEffect;
+        owner.magnetEffect = totalMagnetEffect;
+        owner.experienceEffect = totalExperienceEffect;
     }
 }

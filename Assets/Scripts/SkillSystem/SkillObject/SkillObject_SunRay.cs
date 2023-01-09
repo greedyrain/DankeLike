@@ -18,7 +18,8 @@ public class SkillObject_SunRay : BaseSkillObject
             transform.localScale = new Vector3(1, 1,SkillData.range);
             transform.forward = owner.forward;
             Burn();
-            UniTask.Delay((int) (SkillData.duration * 1000)).ContinueWith(() =>
+            float duration = owner.GetComponent<PlayerController>().CalculateDuration(SkillData.duration);
+            UniTask.Delay((int) (duration * 1000)).ContinueWith(() =>
             {
                 colls.Clear();
                 PoolManager.Instance.PushObj(gameObject.name,gameObject);
@@ -48,7 +49,7 @@ public class SkillObject_SunRay : BaseSkillObject
         while (gameObject.activeSelf)
         {
             for (int i = 0; i < colls.Count; i++)
-                colls[i].GetComponent<Enemy>().GetHurt(owner.GetComponent<BaseUnit>().CalculateDamage(SkillData.damage));
+                colls[i].GetComponent<Enemy>().GetHurt(owner.GetComponent<PlayerController>().CalculateDamage(SkillData.damage));
 
             await UniTask.Delay((int) (SkillData.actionInterval * 1000));
         }

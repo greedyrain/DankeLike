@@ -8,17 +8,13 @@ using UnityEngine.Serialization;
 
 public class PlayerController : BaseUnit
 {
-    public Vector3 direction;
-    public GameObject weaponPos;
     [SerializeField] private SphereCollider magneticArea;
     private float angle;
-    
+
     [HideInInspector] public string userName;
     [HideInInspector] public int level;
-    [HideInInspector] public int baseRecovery;
 
-    [Header("Player Status")]
-    public PlayerData playerData;
+    [Header("Player Status")] public PlayerData playerData;
 
     public PlayerInput input;
     private PlayerExperience playerExperience;
@@ -37,16 +33,21 @@ public class PlayerController : BaseUnit
         playerExperience.Init();
         playerSkillManager = GetComponent<SkillManager>();
         playerItemManager = GetComponent<ItemManager>();
+        
         playerItemManager.onItemObtain += SetMagneticArea;
         playerItemManager.onItemObtain += SetPlayerSpeed;
+        playerItemManager.onItemObtain += SetPlayerRecovery;
+        playerItemManager.onItemObtain += SetPlayerArmor;
     }
 
     protected override void OnEnable()
     {
         base.OnEnable();
+        Recover();
         UniTask.WaitUntil(() => UIManager.Instance.GetPanel<JoyStickPanel>()).ContinueWith(() =>
         {
             UIManager.Instance.GetPanel<JoyStickPanel>().OnDrag += Move;
+            input.onGetHurt += ()=>{GetHurt(10);};
         });
     }
 
@@ -63,12 +64,16 @@ public class PlayerController : BaseUnit
             damage = 0;
         HP -= damage;
         
-        healthBar.ShowHP(baseMaxHP,HP);
+        Debug.Log($"Damage is : {damage}, current HP is {HP}.");
+
+        
         if (HP <= 0)
         {
             isDead = true;
             Dead();
         }
+
+        // healthBar.ShowHP(baseMaxHP, HP);
     }
 
     public virtual void Move(Vector2 dir)
@@ -78,10 +83,10 @@ public class PlayerController : BaseUnit
             angle = Vector3.Angle(Vector3.up, dir);
             angle = dir.x > 0 ? angle : -angle;
             transform.rotation = Quaternion.Euler(0, angle, 0);
-            transform.Translate(Vector3.forward * totalMoveSpeed * Time.deltaTime); 
+            transform.Translate(Vector3.forward * totalMoveSpeed * Time.deltaTime);
         }
     }
-    
+
     private void Dead()
     {
         Debug.Log("Dead");
@@ -90,17 +95,37 @@ public class PlayerController : BaseUnit
     public void InitData()
     {
         playerData = GameDataManager.Instance.PlayerData;
+        
         userName = playerData.userName;
         level = playerData.level;
+        
+        baseMaxHP = playerData.baseMaxHP;
         HP = baseMaxHP;
 
         baseMoveSpeed = playerData.baseMoveSpeed;
-        baseMaxHP = playerData.baseMaxHP;
         baseRecovery = playerData.baseRecovery;
         baseArmor = playerData.baseArmor;
 
+        experienceEffect = playerData.baseExperienceEffect;
+
         totalMoveSpeed = baseMoveSpeed;
-        totalMight = playerData.baseMight;
+        totalArmor = baseArmor;
+        totalRecovery = baseRecovery;
+    }
+
+    private async void Recover()
+    {
+        while (!isDead)
+        {
+            await UniTask.Delay(1000).ContinueWith(() =>
+            {
+                HP += totalRecovery;
+                if (HP >= (int) (baseMaxHP + baseMaxHP * maxHPEffect))
+                {
+                    HP = (int) (baseMaxHP + baseMaxHP * maxHPEffect);
+                }
+            });
+        }
     }
 
     public void SetControllableStatus(bool status)
@@ -108,13 +133,43 @@ public class PlayerController : BaseUnit
         controllable = status;
     }
 
-    public void SetMagneticArea()
+    void SetMagneticArea()
     {
-        magneticArea.radius = 1.5f + 1.5f * totalMagnetEffect;
+        magneticArea.radius = 1.5f + 1.5f * magnetEffect;
     }
 
-    public void SetPlayerSpeed()
+    void SetPlayerSpeed()
     {
-        totalMoveSpeed = baseMoveSpeed + baseMoveSpeed * totalSpeedEffect;
+        totalMoveSpeed = baseMoveSpeed + baseMoveSpeed * speedEffect;
+    }
+
+    void SetPlayerRecovery()
+    {
+        totalRecovery = baseRecovery + recoveryEffect;
+    }
+
+    void SetPlayerArmor()
+    {
+        totalArmor = baseArmor + armorEffect;
+    }
+    
+    public int CalculateDamage(int damage)
+    {
+        int totalDamage = damage + (int)(damage*mightEffect);
+        return totalDamage;
+    }
+    
+    public float CalculateDuration(float duration)
+    {
+        float totalDuration = duration + duration*durationEffect;
+        return totalDuration;
+    }
+    
+    public int CalculateThrowSpeed(int damage)
+    {
+        int totalDamage = damage + (int)(damage*mightEffect);
+        Debug.Log(damage);
+        Debug.Log(mightEffect);
+        return totalDamage;
     }
 }

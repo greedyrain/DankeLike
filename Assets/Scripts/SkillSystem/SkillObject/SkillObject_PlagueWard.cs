@@ -12,7 +12,8 @@ public class SkillObject_PlagueWard : BaseSkillObject
         UniTask.WaitUntil(() => initCompleted).ContinueWith( () =>
         {
             Attack();
-            UniTask.Delay((int) (SkillData.duration * 1000))
+            float duration = owner.GetComponent<PlayerController>().CalculateDuration(SkillData.duration);
+            UniTask.Delay((int) (duration * 1000))
                 .ContinueWith(() => PoolManager.Instance.PushObj(gameObject.name, gameObject));
         });
     }

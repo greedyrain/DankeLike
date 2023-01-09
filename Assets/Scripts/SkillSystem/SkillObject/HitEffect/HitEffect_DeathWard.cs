@@ -40,7 +40,7 @@ public class HitEffect_DeathWard : BaseSkillObject
     {
         if (collision.CompareTag("Enemy"))
         {
-            collision.transform.GetComponent<Enemy>().GetHurt(owner.GetComponent<BaseUnit>().CalculateDamage(SkillData.damage));
+            collision.transform.GetComponent<Enemy>().GetHurt(owner.GetComponent<PlayerController>().CalculateDamage(SkillData.damage));
             if (count <=0)
             {
                 PoolManager.Instance.PushObj(gameObject.name, gameObject);

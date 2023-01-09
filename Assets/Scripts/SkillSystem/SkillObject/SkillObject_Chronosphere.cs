@@ -13,7 +13,8 @@ public class SkillObject_Chronosphere : BaseSkillObject
         {
             transform.localScale = Vector3.one * SkillData.radius * 2;
             Attack();
-            UniTask.Delay((int) (SkillData.duration * 1000))
+            float duration = owner.GetComponent<PlayerController>().CalculateDuration(SkillData.duration);
+            UniTask.Delay((int) (duration * 1000))
                 .ContinueWith(() =>
                 {
                     Collider[] enemys = Physics.OverlapSphere(transform.position, SkillData.radius, targetLayer);
@@ -38,7 +39,7 @@ public class SkillObject_Chronosphere : BaseSkillObject
             {
                 foreach (var target in colls)
                 {
-                    target.GetComponent<Enemy>().GetHurt(owner.GetComponent<BaseUnit>().CalculateDamage(SkillData.damage));
+                    target.GetComponent<Enemy>().GetHurt(owner.GetComponent<PlayerController>().CalculateDamage(SkillData.damage));
                 }
             }
             await UniTask.Delay((int) (SkillData.actionInterval * 1000));

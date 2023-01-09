@@ -22,7 +22,8 @@ public class SkillObject_Bedlam : BaseSkillObject
             Debug.Log(owner.position);
             transform.SetParent(parent.transform);
             CheckTarget();
-            UniTask.Delay((int) (SkillData.duration * 1000))
+            float duration = owner.GetComponent<PlayerController>().CalculateDuration(SkillData.duration);
+            UniTask.Delay((int) (duration * 1000))
                 .ContinueWith(() => PoolManager.Instance.PushObj(gameObject.name, gameObject));
         });
     }

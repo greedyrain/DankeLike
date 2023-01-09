@@ -44,6 +44,15 @@ public partial class @DankeLikeInputAction : IInputActionCollection2, IDisposabl
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""GetHurt"",
+                    ""type"": ""Button"",
+                    ""id"": ""db0b48a3-0ad0-417f-b8b2-0f012b0f790d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -167,6 +176,17 @@ public partial class @DankeLikeInputAction : IInputActionCollection2, IDisposabl
                     ""action"": ""Skill"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fff7d51e-cb35-44e6-aeaf-334fab7360be"",
+                    ""path"": ""<Keyboard>/j"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GetHurt"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -177,6 +197,7 @@ public partial class @DankeLikeInputAction : IInputActionCollection2, IDisposabl
         m_GamePlay = asset.FindActionMap("GamePlay", throwIfNotFound: true);
         m_GamePlay_Move = m_GamePlay.FindAction("Move", throwIfNotFound: true);
         m_GamePlay_Skill = m_GamePlay.FindAction("Skill", throwIfNotFound: true);
+        m_GamePlay_GetHurt = m_GamePlay.FindAction("GetHurt", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -238,12 +259,14 @@ public partial class @DankeLikeInputAction : IInputActionCollection2, IDisposabl
     private IGamePlayActions m_GamePlayActionsCallbackInterface;
     private readonly InputAction m_GamePlay_Move;
     private readonly InputAction m_GamePlay_Skill;
+    private readonly InputAction m_GamePlay_GetHurt;
     public struct GamePlayActions
     {
         private @DankeLikeInputAction m_Wrapper;
         public GamePlayActions(@DankeLikeInputAction wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_GamePlay_Move;
         public InputAction @Skill => m_Wrapper.m_GamePlay_Skill;
+        public InputAction @GetHurt => m_Wrapper.m_GamePlay_GetHurt;
         public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -259,6 +282,9 @@ public partial class @DankeLikeInputAction : IInputActionCollection2, IDisposabl
                 @Skill.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnSkill;
                 @Skill.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnSkill;
                 @Skill.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnSkill;
+                @GetHurt.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnGetHurt;
+                @GetHurt.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnGetHurt;
+                @GetHurt.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnGetHurt;
             }
             m_Wrapper.m_GamePlayActionsCallbackInterface = instance;
             if (instance != null)
@@ -269,6 +295,9 @@ public partial class @DankeLikeInputAction : IInputActionCollection2, IDisposabl
                 @Skill.started += instance.OnSkill;
                 @Skill.performed += instance.OnSkill;
                 @Skill.canceled += instance.OnSkill;
+                @GetHurt.started += instance.OnGetHurt;
+                @GetHurt.performed += instance.OnGetHurt;
+                @GetHurt.canceled += instance.OnGetHurt;
             }
         }
     }
@@ -277,5 +306,6 @@ public partial class @DankeLikeInputAction : IInputActionCollection2, IDisposabl
     {
         void OnMove(InputAction.CallbackContext context);
         void OnSkill(InputAction.CallbackContext context);
+        void OnGetHurt(InputAction.CallbackContext context);
     }
 }

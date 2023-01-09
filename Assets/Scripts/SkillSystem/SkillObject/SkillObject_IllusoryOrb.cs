@@ -14,12 +14,14 @@ public class SkillObject_IllusoryOrb : BaseSkillObject
         {
             transform.position = new Vector3(transform.position.x, 1, transform.position.z);
             trail.enabled = true;
+            
+            float duration = owner.GetComponent<PlayerController>().CalculateDuration(SkillData.duration);
 
-            UniTask.Delay((int) (SkillData.duration * 1000) - 1000).ContinueWith(() =>
+            UniTask.Delay((int) (duration * 1000) - 1000).ContinueWith(() =>
             {
                 trail.enabled = false;
             });
-            UniTask.Delay((int) (SkillData.duration * 1000))
+            UniTask.Delay((int) (duration * 1000))
                 .ContinueWith(() => { PoolManager.Instance.PushObj(gameObject.name, gameObject); });
         });
     }
@@ -33,7 +35,7 @@ public class SkillObject_IllusoryOrb : BaseSkillObject
     {
         if (col.CompareTag("Enemy") && initCompleted)
         {
-            col.GetComponent<Enemy>().GetHurt(owner.GetComponent<BaseUnit>().CalculateDamage(SkillData.damage));
+            col.GetComponent<Enemy>().GetHurt(owner.GetComponent<PlayerController>().CalculateDamage(SkillData.damage));
         }
     }
 }

@@ -9,12 +9,15 @@ public class ItemData
     public string iconName;
     public string name;
     public string description;
-    public int maxHPEffectRate;
-    public float armorEffectRate;
-    public float speedEffectRate;
-    public float mightEffectRate;
-    public float durationEffectRate;
-    public float recoveryEffectRate;
-    public float cooldownEffectRate;
-    public float magnetEffectRate;
+    public int maxHPEffect;
+    public int recoveryEffect;
+    public int armorEffect;
+    public float mightEffect;
+    public float throwSpeedEffect;
+    public float durationEffect;
+    public float areaEffect;
+    public float cooldownEffect;
+    public float magnetEffect;
+    public float experienceEffect;
+    public float speedEffect;
 }

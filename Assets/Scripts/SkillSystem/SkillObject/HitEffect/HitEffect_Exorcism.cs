@@ -111,7 +111,7 @@ public class HitEffect_Exorcism : BaseSkillObject
         {
             if (attackTarget != null)
             {
-                attackTarget.GetComponent<Enemy>().GetHurt(owner.GetComponent<BaseUnit>().CalculateDamage(SkillData.damage));
+                attackTarget.GetComponent<Enemy>().GetHurt(owner.GetComponent<PlayerController>().CalculateDamage(SkillData.damage));
                 attackTarget = null; 
             }
             isBackToPlayer = true;

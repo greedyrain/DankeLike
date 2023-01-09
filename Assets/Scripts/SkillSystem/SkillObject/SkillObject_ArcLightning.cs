@@ -28,7 +28,7 @@ public class SkillObject_ArcLightning : BaseSkillObject
                 obj.GetComponent<HitEffect_ArcLightning>().InitData(SkillData);
                 obj.GetComponent<HitEffect_ArcLightning>().Init(hitTarget, owner);
             });
-            hitTarget.GetComponent<Enemy>().GetHurt(owner.GetComponent<BaseUnit>().CalculateDamage(SkillData.damage));
+            hitTarget.GetComponent<Enemy>().GetHurt(owner.GetComponent<PlayerController>().CalculateDamage(SkillData.damage));
             if (count > 0)
             {
                 await UniTask.Delay(300).ContinueWith(() => Active(hitTarget, count - 1));

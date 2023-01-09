@@ -10,7 +10,8 @@ public class SkillObject_Multishot : BaseSkillObject
         UniTask.WaitUntil(() => initCompleted).ContinueWith(() =>
         {
             transform.position = new Vector3(transform.position.x, 0.5f, transform.position.z);
-            UniTask.Delay((int)(SkillData.duration * 1000)).ContinueWith(()=>PoolManager.Instance.PushObj(gameObject.name, gameObject));
+            float duration = owner.GetComponent<PlayerController>().CalculateDuration(SkillData.duration);
+            UniTask.Delay((int)(duration * 1000)).ContinueWith(()=>PoolManager.Instance.PushObj(gameObject.name, gameObject));
         }); 
     }
     
@@ -24,7 +25,7 @@ public class SkillObject_Multishot : BaseSkillObject
         if (col.CompareTag("Enemy") && initCompleted)
         {
             Enemy enemy = col.GetComponent<Enemy>();
-            enemy.GetHurt(owner.GetComponent<BaseUnit>().CalculateDamage(SkillData.damage));
+            enemy.GetHurt(owner.GetComponent<PlayerController>().CalculateDamage(SkillData.damage));
             Buff_Slow slow = new Buff_Slow();
             slow.InitData(SkillData.ID,0.5f,5,enemy);
             enemy.GetComponent<BuffManager>().AddBuff(slow);

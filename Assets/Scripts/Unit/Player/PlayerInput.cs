@@ -9,6 +9,7 @@ public class PlayerInput : ScriptableObject, DankeLikeInputAction.IGamePlayActio
     public event UnityAction onStopMove;
     public event UnityAction onSkill;
     public event UnityAction onSkillCancel;
+    public event UnityAction onGetHurt;
 
     public DankeLikeInputAction inputAction;
 
@@ -25,6 +26,12 @@ public class PlayerInput : ScriptableObject, DankeLikeInputAction.IGamePlayActio
     {
         if (context.phase == InputActionPhase.Performed && Keyboard.current.jKey.wasPressedThisFrame)
             onSkill?.Invoke();
+    }
+
+    public void OnGetHurt(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+            onGetHurt?.Invoke();
     }
 
     private void OnEnable()
@@ -49,4 +56,6 @@ public class PlayerInput : ScriptableObject, DankeLikeInputAction.IGamePlayActio
     {
         inputAction.GamePlay.Disable();
     }
+    
+    
 }

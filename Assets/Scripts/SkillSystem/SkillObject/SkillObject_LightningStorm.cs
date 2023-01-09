@@ -28,7 +28,7 @@ public class SkillObject_LightningStorm : BaseSkillObject
                 obj.GetComponent<HitEffect_LightningStorm>().InitData(SkillData);
                 obj.GetComponent<HitEffect_LightningStorm>().Init(hitTarget, owner);
             });
-            hitTarget.GetComponent<Enemy>().GetHurt(owner.GetComponent<BaseUnit>().CalculateDamage(SkillData.damage));
+            hitTarget.GetComponent<Enemy>().GetHurt(owner.GetComponent<PlayerController>().CalculateDamage(SkillData.damage));
             if (count > 0)
             {
                 await UniTask.Delay(300).ContinueWith(() => Active(hitTarget, count - 1));

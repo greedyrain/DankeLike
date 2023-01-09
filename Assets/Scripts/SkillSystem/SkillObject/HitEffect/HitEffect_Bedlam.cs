@@ -33,7 +33,7 @@ public class HitEffect_Bedlam : BaseSkillObject
     {
         if (collision.transform == target)
         {
-            collision.transform.GetComponent<Enemy>().GetHurt(owner.GetComponent<BaseUnit>().CalculateDamage(SkillData.damage));
+            collision.transform.GetComponent<Enemy>().GetHurt(owner.GetComponent<PlayerController>().CalculateDamage(SkillData.damage));
             PoolManager.Instance.PushObj(gameObject.name, gameObject);
         }
     }
