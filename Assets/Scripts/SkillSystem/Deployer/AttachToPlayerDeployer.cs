@@ -5,8 +5,22 @@ using UnityEngine;
 
 public class AttachToPlayerDeployer : SkillDeployer
 {
+    Collider[] targets;
+    public LayerMask targetLayer;
+
     public override bool CheckForGenerate()
     {
+        if (SkillData.range != 0)
+        {
+            targets = Physics.OverlapSphere(transform.position, SkillData.range, targetLayer);
+            if (targets.Length > 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         return true;
     }
 
@@ -16,7 +30,7 @@ public class AttachToPlayerDeployer : SkillDeployer
         transform.position = player.transform.position;
         PoolManager.Instance.GetObj("Prefabs/SkillObjects", SkillData.prefabName, (obj) =>
         {
-            obj.GetComponent<BaseSkillObject>().InitData(SkillData,player);
+            obj.GetComponent<BaseSkillObject>().InitData(SkillData, player);
             obj.GetComponent<BaseSkillObject>().SetOwner(player.transform);
             obj.transform.position = transform.position;
             obj.transform.rotation = transform.rotation;
