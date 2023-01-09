@@ -39,7 +39,7 @@ public class SkillManager : MonoBehaviour
         if (PrepareSkill(deployer))
         {
             deployer.Generate();
-            deployer.SkillData.remainCD = deployer.SkillData.skillCD;
+            deployer.SkillData.remainCD = player.CalculateCoolDown(deployer.SkillData.skillCD);
             CoolDownSkill(deployer);
         }
     }

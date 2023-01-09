@@ -9,6 +9,7 @@ using UnityEngine.Serialization;
 public class PlayerController : BaseUnit
 {
     private float moveAngle;
+    private float baseMagneticRadius;
 
     [HideInInspector] public string userName;
     [HideInInspector] public int level;
@@ -35,6 +36,7 @@ public class PlayerController : BaseUnit
         playerExperience.Init();
         playerSkillManager = GetComponent<SkillManager>();
         playerItemManager = GetComponent<ItemManager>();
+        baseMagneticRadius = magneticArea.radius;
         
         playerItemManager.onItemObtain += SetMagneticArea;
         playerItemManager.onItemObtain += SetPlayerSpeed;
@@ -134,20 +136,6 @@ public class PlayerController : BaseUnit
         controllable = status;
     }
 
-    void SetMagneticArea()
-    {
-        magneticArea.radius = 1.5f + 1.5f * magnetEffect;
-    }
-
-    void SetPlayerSpeed()
-    {
-        totalMoveSpeed = baseMoveSpeed + baseMoveSpeed * speedEffect;
-    }
-
-    void SetPlayerRecovery()
-    {
-        totalRecovery = baseRecovery + recoveryEffect;
-    }
 
     void SetPlayerArmor()
     {
@@ -174,4 +162,31 @@ public class PlayerController : BaseUnit
         float totalThrowSpeed = throwSpeed + (int)(throwSpeed*speedEffect);
         return totalThrowSpeed;
     }
+    
+    public float CalculateCoolDown(float coolDown)
+    {
+        float totalCoolDown = coolDown - coolDown*cooldownEffect;
+        return totalCoolDown;
+    }
+    
+    #region Functions of event
+
+    void SetMagneticArea()
+    {
+        magneticArea.radius = baseMagneticRadius + baseMagneticRadius * magnetEffect;
+    }
+
+    void SetPlayerSpeed()
+    {
+        totalMoveSpeed = baseMoveSpeed + baseMoveSpeed * speedEffect;
+    }
+
+    void SetPlayerRecovery()
+    {
+        totalRecovery = baseRecovery + recoveryEffect;
+    } 
+
+    #endregion
+
+
 }
