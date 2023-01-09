@@ -34,7 +34,7 @@ public class ItemManager : MonoBehaviour
             {
                 totalMaxHPEffect -= ownedItemList[i].itemData.maxHPEffect;
                 totalArmorEffect -= ownedItemList[i].itemData.armorEffect;
-                totalSpeedEffect -= ownedItemList[i].itemData.speedEffect;
+                totalSpeedEffect -= ownedItemList[i].itemData.moveSpeedEffect;
                 totalMightEffect -= ownedItemList[i].itemData.mightEffect;
                 totalDurationEffect -= ownedItemList[i].itemData.durationEffect;
                 totalRecoveryEffect -= ownedItemList[i].itemData.recoveryEffect;
@@ -62,7 +62,7 @@ public class ItemManager : MonoBehaviour
     {
         totalMaxHPEffect += item.itemData.maxHPEffect;
         totalArmorEffect += item.itemData.armorEffect;
-        totalSpeedEffect += item.itemData.speedEffect;
+        totalSpeedEffect += item.itemData.moveSpeedEffect;
         totalMightEffect += item.itemData.mightEffect;
         totalDurationEffect += item.itemData.durationEffect;
         totalRecoveryEffect += item.itemData.recoveryEffect;

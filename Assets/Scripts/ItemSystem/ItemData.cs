@@ -19,5 +19,5 @@ public class ItemData
     public float cooldownEffect;
     public float magnetEffect;
     public float experienceEffect;
-    public float speedEffect;
+    public float moveSpeedEffect;
 }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4237806280560627028}
   m_Layer: 6
   m_Name: MagneticArea
-  m_TagString: Untagged
+  m_TagString: MagneticArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42,7 +42,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.5
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5875270692787185640
 GameObject:
@@ -2464,30 +2464,29 @@ MonoBehaviour:
   HP: 0
   baseArmor: 0
   baseMoveSpeed: 0
-  totalMight: 0
+  baseRecovery: 0
   totalArmor: 0
   totalMoveSpeed: 0
-  totalMaxHPEffect: 0
-  totalArmorEffect: 0
-  totalSpeedEffect: 0
-  totalMightEffect: 0
-  totalDurationEffect: 0
-  totalRecoveryEffect: 0
-  totalCooldownEffect: 0
-  totalMagnetEffect: 0
+  totalRecovery: 0
+  experienceEffect: 0
+  recoveryEffect: 0
+  maxHPEffect: 0
+  armorEffect: 0
+  speedEffect: 0
+  mightEffect: 0
+  durationEffect: 0
+  cooldownEffect: 0
+  magnetEffect: 0
   rb: {fileID: 0}
   anim: {fileID: 0}
   isDead: 0
-  direction: {x: 0, y: 0, z: 0}
-  weaponPos: {fileID: 0}
-  magneticArea: {fileID: 4237806280560627028}
   userName: 
   level: 0
-  baseRecovery: 0
   input: {fileID: 11400000, guid: c68eb0c94360047888e4ea2c4467bb80, type: 2}
   playerSkillManager: {fileID: 0}
   playerItemManager: {fileID: 0}
   healthBar: {fileID: 0}
+  magneticArea: {fileID: 4237806280560627028}
 --- !u!114 &1382808353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2509,6 +2508,7 @@ MonoBehaviour:
   totalRecoveryEffect: 0
   totalCooldownEffect: 0
   totalMagnetEffect: 0
+  totalExperienceEffect: 0
 --- !u!1 &7869946003227586798
 GameObject:
   m_ObjectHideFlags: 0
