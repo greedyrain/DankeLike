@@ -44,7 +44,7 @@ public class HitEffect_WildAxes : BaseSkillObject
             targetPos = new Vector3(target.position.x - 0.001f, targetPos.y, target.position.z - 0.001f);
         else
             targetPos = new Vector3(target.position.x + 0.001f, targetPos.y, target.position.z + 0.001f);
-        transform.position = Vector3.Slerp(transform.position, targetPos, SkillData.throwSpeed * Time.deltaTime);
+        transform.position = Vector3.Slerp(transform.position, targetPos, throwSpeed * Time.deltaTime);
     }
 
     public void SetLeftOrRight(bool isRight)

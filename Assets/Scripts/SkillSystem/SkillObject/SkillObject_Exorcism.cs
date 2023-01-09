@@ -21,7 +21,7 @@ public class SkillObject_Exorcism : BaseSkillObject
             PoolManager.Instance.GetObj("Prefabs/HitEffectObjects", SkillData.hitEffectName, (obj) =>
             {
                 obj.transform.position = transform.position;
-                obj.GetComponent<HitEffect_Exorcism>().InitData(SkillData);
+                obj.GetComponent<HitEffect_Exorcism>().InitData(SkillData,player);
                 obj.GetComponent<HitEffect_Exorcism>().SetOwner(owner);
             });
             await UniTask.Delay((int) (SkillData.disposeInterval * 1000));

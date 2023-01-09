@@ -22,7 +22,6 @@ public class SkillObject_Bedlam : BaseSkillObject
             Debug.Log(owner.position);
             transform.SetParent(parent.transform);
             CheckTarget();
-            float duration = owner.GetComponent<PlayerController>().CalculateDuration(SkillData.duration);
             UniTask.Delay((int) (duration * 1000))
                 .ContinueWith(() => PoolManager.Instance.PushObj(gameObject.name, gameObject));
         });
@@ -54,7 +53,7 @@ public class SkillObject_Bedlam : BaseSkillObject
                 {
                     PoolManager.Instance.GetObj("Prefabs/HitEffectObjects", SkillData.hitEffectName, (obj) =>
                     {
-                        obj.GetComponent<HitEffect_Bedlam>().InitData(SkillData);
+                        obj.GetComponent<HitEffect_Bedlam>().InitData(SkillData,player);
                         obj.GetComponent<HitEffect_Bedlam>().SetTarget(colls[index].transform);
                         obj.transform.position = transform.position;
                     });

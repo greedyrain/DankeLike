@@ -39,7 +39,7 @@ public class Buff_DOT : BaseBuff
                     break;
 
                 case FigureType.CONSTANT:
-                    recipient.GetHurt(releaser.GetComponent<PlayerController>().CalculateDamage(damage));
+                    recipient.GetHurt(damage);
                     remainInterval = interval;
                     break;
             }

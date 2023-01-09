@@ -24,7 +24,7 @@ public class SkillObject_Bottle : BaseSkillObject
         {
             if (Vector2.Distance(transform.position,destination) > .5f)
             {
-                transform.Translate(Vector2.right * Time.deltaTime * SkillData.throwSpeed, Space.Self);
+                transform.Translate(Vector2.right * Time.deltaTime * throwSpeed, Space.Self);
             }
             else
             {
@@ -32,7 +32,7 @@ public class SkillObject_Bottle : BaseSkillObject
                 PoolManager.Instance.PushObj(SkillData.prefabName,gameObject);
                 PoolManager.Instance.GetObj("Prefabs/HitEffectObjects", SkillData.hitEffectName, (obj) =>
                 {
-                    obj.GetComponent<BaseSkillObject>().InitData(SkillData);
+                    obj.GetComponent<BaseSkillObject>().InitData(SkillData,player);
                     obj.transform.position = transform.position;
                     obj.transform.rotation = transform.rotation;
                 });

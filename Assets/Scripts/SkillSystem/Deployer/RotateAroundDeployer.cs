@@ -32,7 +32,7 @@ public class RotateAroundDeployer : SkillDeployer
                 {
                     obj.GetComponent<BaseSkillObject>().SetTarget(targets[index].transform);
                     obj.GetComponent<BaseSkillObject>().SetOwner(player.transform);
-                    obj.GetComponent<BaseSkillObject>().InitData(SkillData);
+                    obj.GetComponent<BaseSkillObject>().InitData(SkillData,player);
                     // obj.transform.position = new Vector2(x, y);
                 });
                 await UniTask.Delay((int) (SkillData.actionInterval * 1000));

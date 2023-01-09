@@ -12,7 +12,6 @@ public class SkillObject_Thunder : BaseSkillObject
         {
             transform.position = target.position;
             transform.localScale = Vector3.one * SkillData.radius * 2;
-            float duration = owner.GetComponent<PlayerController>().CalculateDuration(SkillData.duration);
             UniTask.Delay((int) (duration * 1000)).ContinueWith(() =>
             {
                 PoolManager.Instance.PushObj(gameObject.name, gameObject);
@@ -27,7 +26,7 @@ public class SkillObject_Thunder : BaseSkillObject
         if (colls.Length > 0)
         {
             for (int i = 0; i < colls.Length; i++)
-                colls[i].GetComponent<Enemy>()?.GetHurt(owner.GetComponent<PlayerController>().CalculateDamage(SkillData.damage));
+                colls[i].GetComponent<Enemy>()?.GetHurt(damage);
         }
     }
     

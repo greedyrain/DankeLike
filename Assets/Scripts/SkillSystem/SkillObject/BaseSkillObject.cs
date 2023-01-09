@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class BaseSkillObject : MonoBehaviour
 {
+    protected PlayerController player;
+    protected float duration;
+    protected float throwSpeed;
+    protected int damage;
+    
     public LayerMask targetLayer;
     private SkillData skillData;
     public SkillData SkillData
@@ -17,9 +22,15 @@ public class BaseSkillObject : MonoBehaviour
 
     protected bool initCompleted = false;
 
-    public virtual void InitData(SkillData skillData)
+    public virtual void InitData(SkillData skillData, PlayerController player)
     {
         this.skillData = skillData;
+        this.player = player;
+
+        duration = player.CalculateDuration(SkillData.duration);
+        throwSpeed = player.CalculateThrowSpeed(SkillData.throwSpeed);
+        damage = player.CalculateDamage(SkillData.damage);
+
         initCompleted = true;
     }
 

@@ -83,7 +83,7 @@ public class HitEffect_Exorcism : BaseSkillObject
 
     void BackToPlayer()
     {
-        transform.position = Vector3.MoveTowards(transform.position, owner.position, SkillData.throwSpeed * 2 * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, owner.position, throwSpeed * 2 * Time.deltaTime);
         if (Vector3.Distance(transform.position, owner.position) < 0.5f)
         {
             isPatroling = false;
@@ -94,7 +94,7 @@ public class HitEffect_Exorcism : BaseSkillObject
 
     void Patrol()
     {
-        transform.position = Vector3.Slerp(transform.position, patrolTarget, SkillData.throwSpeed * Time.deltaTime);
+        transform.position = Vector3.Slerp(transform.position, patrolTarget, throwSpeed * Time.deltaTime);
         if (attackTarget == null && Vector3.Distance(transform.position, patrolTarget) < 0.2f)
         {
             SetPatrolTarget();
@@ -106,12 +106,12 @@ public class HitEffect_Exorcism : BaseSkillObject
         if (attackTarget != null)
             attackTargetPos = attackTarget.position;
         transform.position = Vector3.MoveTowards(transform.position, attackTargetPos,
-            SkillData.throwSpeed * Time.deltaTime);
+            throwSpeed * Time.deltaTime);
         if (Vector3.Distance(transform.position, attackTargetPos) < 0.2f)
         {
             if (attackTarget != null)
             {
-                attackTarget.GetComponent<Enemy>().GetHurt(owner.GetComponent<PlayerController>().CalculateDamage(SkillData.damage));
+                attackTarget.GetComponent<Enemy>().GetHurt(damage);
                 attackTarget = null; 
             }
             isBackToPlayer = true;

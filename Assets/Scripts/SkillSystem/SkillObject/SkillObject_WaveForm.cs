@@ -23,7 +23,7 @@ public class SkillObject_WaveForm : BaseSkillObject
     private void Update()
     {
         if (initCompleted && !CheckDistance())
-            owner.transform.Translate(Vector3.forward * SkillData.throwSpeed * Time.deltaTime);
+            owner.transform.Translate(Vector3.forward * throwSpeed * Time.deltaTime);
         if (CheckDistance())
         {
             PoolManager.Instance.PushObj(gameObject.name, gameObject);
@@ -40,7 +40,7 @@ public class SkillObject_WaveForm : BaseSkillObject
             owner.GetComponent<PlayerController>().SetControllableStatus(false);
             if (initCompleted && other.CompareTag("Enemy"))
             {
-                other.GetComponent<Enemy>().GetHurt(owner.GetComponent<PlayerController>().CalculateDamage(SkillData.damage));
+                other.GetComponent<Enemy>().GetHurt(damage);
             }
         });
     }

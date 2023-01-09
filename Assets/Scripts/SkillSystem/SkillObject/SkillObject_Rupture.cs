@@ -16,7 +16,6 @@ public class SkillObject_Rupture : BaseSkillObject
             transform.SetParent(targetEnemy.center);
             lastFramesPos = transform.position;
             Action();
-            float duration = owner.GetComponent<PlayerController>().CalculateDuration(SkillData.duration);
             await UniTask.Delay((int)(duration * 1000)).ContinueWith(() => PoolManager.Instance.PushObj(gameObject.name, gameObject));
         });
 
@@ -28,7 +27,7 @@ public class SkillObject_Rupture : BaseSkillObject
         {
             if (transform.position != lastFramesPos)
             {
-                targetEnemy.GetHurt(owner.GetComponent<PlayerController>().CalculateDamage((int)((transform.position - lastFramesPos).magnitude * SkillData.damage)));
+                targetEnemy.GetHurt((int)((transform.position - lastFramesPos).magnitude * damage));
                 lastFramesPos = transform.position;
                 if (targetEnemy.isDead)
                 {

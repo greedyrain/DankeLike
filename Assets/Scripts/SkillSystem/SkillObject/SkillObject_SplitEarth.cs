@@ -16,7 +16,6 @@ public class SkillObject_SplitEarth : BaseSkillObject
             transform.rotation =Quaternion.identity; 
             transform.position = new Vector3(transform.position.x, 0, transform.position.z);
             Active(transform.position,SkillData.count,SkillData.radius);
-            float duration = owner.GetComponent<PlayerController>().CalculateDuration(SkillData.duration);
             UniTask.Delay((int) (duration * 100)).ContinueWith(() =>
             {
                 PoolManager.Instance.PushObj(gameObject.name, gameObject);
@@ -30,7 +29,7 @@ public class SkillObject_SplitEarth : BaseSkillObject
         {
             obj.transform.position = pos;
             obj.transform.localScale = new Vector3(radius*2, transform.localScale.y, radius*2);
-            obj.GetComponent<HitEffect_SplitEarth>().InitData(SkillData);
+            obj.GetComponent<HitEffect_SplitEarth>().InitData(SkillData,player);
         });
         Collider[] colls = Physics.OverlapSphere(pos,radius, targetLayer);
         for (int i = 0; i < colls.Length; i++)
@@ -41,7 +40,7 @@ public class SkillObject_SplitEarth : BaseSkillObject
         
         for (int i = 0; i < targetColls.Count; i++)
         {
-            targetColls[i].GetComponent<Enemy>().GetHurt(owner.GetComponent<PlayerController>().CalculateDamage(SkillData.damage));
+            targetColls[i].GetComponent<Enemy>().GetHurt(damage);
         }
         targetColls.Clear();
 

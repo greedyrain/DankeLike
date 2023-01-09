@@ -19,7 +19,6 @@ public class SkillObject_EyeOfTheStorm : BaseSkillObject
             transform.localPosition = new Vector3(transform.localPosition.x, 3, transform.localPosition.z);
             // SetTargetNum();
             SelectTarget();
-            float duration = owner.GetComponent<PlayerController>().CalculateDuration(SkillData.duration);
             UniTask.Delay((int)(duration*1000)).ContinueWith(()=>{PoolManager.Instance.PushObj(gameObject.name, gameObject);});
         });
     }
@@ -28,10 +27,10 @@ public class SkillObject_EyeOfTheStorm : BaseSkillObject
     {
         PoolManager.Instance.GetObj("Prefabs/HitEffectObjects", SkillData.hitEffectName, (obj) =>
         {
-            obj.GetComponent<HitEffect_Lightning>().InitData(SkillData);
+            obj.GetComponent<HitEffect_Lightning>().InitData(SkillData,player);
             obj.GetComponent<HitEffect_Lightning>().Init(target, deployCenter);
         });
-        target.GetComponent<Enemy>().GetHurt(owner.GetComponent<PlayerController>().CalculateDamage(SkillData.damage));
+        target.GetComponent<Enemy>().GetHurt(damage);
     }
 
     public async void SelectTarget()

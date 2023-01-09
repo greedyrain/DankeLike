@@ -26,10 +26,10 @@ public class SkillObject_Laser : BaseSkillObject
         {
             PoolManager.Instance.GetObj("Prefabs/HitEffectObjects", SkillData.hitEffectName, (obj) =>
             {
-                obj.GetComponent<HitEffect_Laser>().InitData(SkillData);
+                obj.GetComponent<HitEffect_Laser>().InitData(SkillData,player);
                 obj.GetComponent<HitEffect_Laser>().Init(hitTarget, owner);
             });
-            hitTarget.GetComponent<Enemy>().GetHurt(owner.GetComponent<PlayerController>().CalculateDamage(SkillData.damage));
+            hitTarget.GetComponent<Enemy>().GetHurt(damage);
             if (count > 0)
             {
                 await UniTask.Delay(300).ContinueWith(() => Active(hitTarget, count - 1));

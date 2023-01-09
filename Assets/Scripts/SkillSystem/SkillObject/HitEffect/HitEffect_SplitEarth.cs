@@ -12,7 +12,6 @@ public class HitEffect_SplitEarth : BaseSkillObject
             transform.rotation = Quaternion.identity;
             transform.position = new Vector3(transform.position.x, 0, transform.position.z);
 
-            float duration = owner.GetComponent<PlayerController>().CalculateDuration(SkillData.duration);
             UniTask.Delay((int) (duration * 1000)).ContinueWith(() =>
             {
                 PoolManager.Instance.PushObj(gameObject.name, gameObject);

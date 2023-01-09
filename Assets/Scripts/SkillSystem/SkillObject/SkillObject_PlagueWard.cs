@@ -12,7 +12,6 @@ public class SkillObject_PlagueWard : BaseSkillObject
         UniTask.WaitUntil(() => initCompleted).ContinueWith( () =>
         {
             Attack();
-            float duration = owner.GetComponent<PlayerController>().CalculateDuration(SkillData.duration);
             UniTask.Delay((int) (duration * 1000))
                 .ContinueWith(() => PoolManager.Instance.PushObj(gameObject.name, gameObject));
         });
@@ -28,7 +27,7 @@ public class SkillObject_PlagueWard : BaseSkillObject
                 target = colls[0].transform;
                 PoolManager.Instance.GetObj("Prefabs/HitEffectObjects", SkillData.hitEffectName, (obj) =>
                 {
-                    obj.GetComponent<HitEffect_PlagueWard>().InitData(SkillData);
+                    obj.GetComponent<HitEffect_PlagueWard>().InitData(SkillData,player);
                     obj.GetComponent<HitEffect_PlagueWard>().SetTarget(target);
                     obj.transform.position = deployPos.position;
                 }); 

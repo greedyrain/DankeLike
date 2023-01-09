@@ -31,7 +31,6 @@ public class HitEffect_Laser : BaseSkillObject
         isInitCompleted = false;
         UniTask.WaitUntil(() => isInitCompleted).ContinueWith(() =>
         {
-            float duration = owner.GetComponent<PlayerController>().CalculateDuration(SkillData.duration);
             UniTask.Delay((int)(duration*1000)).ContinueWith(() =>
             {
                 target = null;

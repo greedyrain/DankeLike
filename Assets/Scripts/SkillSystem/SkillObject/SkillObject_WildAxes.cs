@@ -27,7 +27,7 @@ public class SkillObject_WildAxes : BaseSkillObject
                 {
                     obj.GetComponent<HitEffect_WildAxes>().SetOwner(owner); 
                     obj.GetComponent<HitEffect_WildAxes>().SetLeftOrRight(i == 0);
-                    obj.GetComponent<HitEffect_WildAxes>().InitData(SkillData);
+                    obj.GetComponent<HitEffect_WildAxes>().InitData(SkillData,player);
                     obj.GetComponent<HitEffect_WildAxes>().SetTarget(target);
                 });
             }

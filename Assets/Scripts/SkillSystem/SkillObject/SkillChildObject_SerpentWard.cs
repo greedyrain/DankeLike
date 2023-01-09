@@ -30,7 +30,7 @@ public class SkillChildObject_SerpentWard : BaseSkillObject
                 target = colls[0].transform;
                 PoolManager.Instance.GetObj("Prefabs/HitEffectObjects", SkillData.hitEffectName, (obj) =>
                 {
-                    obj.GetComponent<HitEffect_SerpentWard>().InitData(SkillData);
+                    obj.GetComponent<HitEffect_SerpentWard>().InitData(SkillData,player);
                     obj.GetComponent<HitEffect_SerpentWard>().SetTarget(target);
                     obj.transform.position = deployPos.position;
                 }); 

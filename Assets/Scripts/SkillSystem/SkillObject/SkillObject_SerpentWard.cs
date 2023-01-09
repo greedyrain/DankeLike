@@ -10,7 +10,6 @@ public class SkillObject_SerpentWard : BaseSkillObject
         UniTask.WaitUntil(() => initCompleted).ContinueWith(() =>
         {
             SetSerprentWard();
-            float duration = owner.GetComponent<PlayerController>().CalculateDuration(SkillData.duration);
             UniTask.Delay((int) (duration * 1000))
                 .ContinueWith(() => PoolManager.Instance.PushObj(gameObject.name, gameObject));
         });
@@ -24,7 +23,7 @@ public class SkillObject_SerpentWard : BaseSkillObject
             PoolManager.Instance.GetObj("Prefabs", "SerpentWard", (obj) =>
             {
                 obj.transform.position = Quaternion.AngleAxis(36 * i, transform.up) * transform.forward + transform.position;
-                obj.GetComponent<BaseSkillObject>().InitData(SkillData);
+                obj.GetComponent<BaseSkillObject>().InitData(SkillData,player);
             });
         }
     }

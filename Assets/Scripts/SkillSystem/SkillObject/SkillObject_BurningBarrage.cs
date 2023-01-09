@@ -24,7 +24,7 @@ public class SkillObject_BurningBarrage : BaseSkillObject
 
     public void Fly()
     {
-        transform.Translate(Vector3.forward * SkillData.throwSpeed * Time.deltaTime);
+        transform.Translate(Vector3.forward * throwSpeed * Time.deltaTime);
         if ((transform.position - originPos).magnitude >= SkillData.range)
         {
             PoolManager.Instance.PushObj(gameObject.name, gameObject);
@@ -35,7 +35,7 @@ public class SkillObject_BurningBarrage : BaseSkillObject
     {
         if (other.CompareTag("Enemy"))
         {
-            other.GetComponent<Enemy>().GetHurt(owner.GetComponent<PlayerController>().CalculateDamage(SkillData.damage));
+            other.GetComponent<Enemy>().GetHurt(damage);
         }
     }
 }

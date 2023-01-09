@@ -14,7 +14,6 @@ public class SkillObject_Avalanche : BaseSkillObject
             transform.rotation =Quaternion.identity; 
             transform.localScale = new Vector3(SkillData.radius * 2, 0.05f, SkillData.radius * 2);
             Action();
-            float duration = owner.GetComponent<PlayerController>().CalculateDuration(SkillData.duration);
             UniTask.Delay((int) (duration * 1000)).ContinueWith(() =>
             {
                 PoolManager.Instance.PushObj(gameObject.name, gameObject);
@@ -32,7 +31,7 @@ public class SkillObject_Avalanche : BaseSkillObject
                 foreach (var target in colls)
                 {
                     Enemy enemy = target.GetComponent<Enemy>();
-                    enemy.GetHurt(owner.GetComponent<PlayerController>().CalculateDamage(SkillData.damage));
+                    enemy.GetHurt(damage);
                     Buff_Stun stun = new Buff_Stun();
                     stun.InitData(SkillData.ID,0.18f,enemy);
                     enemy.GetComponent<BuffManager>().AddBuff(stun);

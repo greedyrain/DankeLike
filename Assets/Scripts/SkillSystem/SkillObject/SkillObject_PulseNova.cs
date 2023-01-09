@@ -10,7 +10,6 @@ public class SkillObject_PulseNova : BaseSkillObject
         UniTask.WaitUntil(() => initCompleted).ContinueWith(() =>
         {
             Attack();
-            float duration = owner.GetComponent<PlayerController>().CalculateDuration(SkillData.duration);
             UniTask.Delay((int) (duration * 1000))
                 .ContinueWith(() => PoolManager.Instance.PushObj(gameObject.name, gameObject));
         });
@@ -23,11 +22,10 @@ public class SkillObject_PulseNova : BaseSkillObject
         {
             foreach (var enemy in colls)
             {
-                enemy.GetComponent<Enemy>().GetHurt(owner.GetComponent<PlayerController>().CalculateDamage(SkillData.damage));
+                enemy.GetComponent<Enemy>().GetHurt(damage);
                 PoolManager.Instance.GetObj("Prefabs/HitEffectObjects", SkillData.hitEffectName, (obj) =>
                 {
                     obj.transform.position = enemy.transform.position;
-                    float duration = owner.GetComponent<PlayerController>().CalculateDuration(SkillData.duration);
                     UniTask.Delay((int) (duration * 1000))
                         .ContinueWith(() => PoolManager.Instance.PushObj(obj.name, obj));
                 });

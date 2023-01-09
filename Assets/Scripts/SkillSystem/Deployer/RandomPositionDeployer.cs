@@ -19,7 +19,7 @@ public class RandomPositionDeployer : SkillDeployer
         {
             PoolManager.Instance.GetObj("Prefabs/SkillObjects", SkillData.prefabName, (obj) =>
             {
-                obj.GetComponent<BaseSkillObject>().InitData(SkillData);
+                obj.GetComponent<BaseSkillObject>().InitData(SkillData,player);
                 obj.GetComponent<BaseSkillObject>().SetOwner(player.transform);
                 obj.transform.position = new Vector3(x,0, z);
             });

@@ -19,7 +19,7 @@ public class RandomDirectionDeployer : SkillDeployer
         {
             PoolManager.Instance.GetObj("Prefabs/SkillObjects", SkillData.prefabName, (obj) =>
             {
-                obj.GetComponent<BaseSkillObject>().InitData(SkillData);
+                obj.GetComponent<BaseSkillObject>().InitData(SkillData,player);
                 obj.GetComponent<BaseSkillObject>().SetOwner(player.transform);
                 obj.transform.position = transform.position;
                 angle = Random.Range(0, 360);

@@ -27,7 +27,7 @@ public class FrontDeployer : SkillDeployer
                     {
                         obj.transform.position = transform.position;
                         obj.transform.forward = player.transform.forward;
-                        obj.GetComponent<BaseSkillObject>().InitData(SkillData);
+                        obj.GetComponent<BaseSkillObject>().InitData(SkillData,player);
                         obj.GetComponent<BaseSkillObject>().SetOwner(player.transform);
                     });
                     await UniTask.Delay((int)(SkillData.disposeInterval * 1000));
@@ -43,7 +43,7 @@ public class FrontDeployer : SkillDeployer
                     {
                         obj.transform.position = transform.position;
                         obj.transform.forward = Quaternion.AngleAxis((-angle / 2) + (i * averageAngle), Vector3.up) * transform.forward;
-                        obj.GetComponent<BaseSkillObject>().InitData(SkillData);
+                        obj.GetComponent<BaseSkillObject>().InitData(SkillData,player);
                     });
                     await UniTask.Delay((int)(SkillData.disposeInterval * 1000));
                 }

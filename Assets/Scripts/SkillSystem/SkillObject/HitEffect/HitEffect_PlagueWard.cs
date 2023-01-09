@@ -19,7 +19,7 @@ public class HitEffect_PlagueWard : BaseSkillObject
         {
             targetPos = target.position;
             transform.forward = targetPos - transform.position;
-            transform.position = Vector3.MoveTowards(transform.position, targetPos, SkillData.throwSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, throwSpeed * Time.deltaTime);
         }
 
         //如果子弹的目标已经死亡，则让子弹飞到目标位置后回收
@@ -36,7 +36,7 @@ public class HitEffect_PlagueWard : BaseSkillObject
         if (collision.transform == target)
         {
             Enemy enemy = collision.transform.GetComponent<Enemy>();
-            enemy.GetHurt(owner.GetComponent<PlayerController>().CalculateDamage(SkillData.damage));
+            enemy.GetHurt(damage);
             Buff_DOT dot = new Buff_DOT();
             dot.InitData(SkillData.ID,5,0,10,1,FigureType.CONSTANT,enemy);
             Buff_Slow slow = new Buff_Slow();

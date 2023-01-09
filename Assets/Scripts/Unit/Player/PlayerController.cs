@@ -8,22 +8,24 @@ using UnityEngine.Serialization;
 
 public class PlayerController : BaseUnit
 {
-    [SerializeField] private SphereCollider magneticArea;
-    private float angle;
+    private float moveAngle;
 
     [HideInInspector] public string userName;
     [HideInInspector] public int level;
 
-    [Header("Player Status")] public PlayerData playerData;
+    [Header("------------Player Status------------")] 
+    public PlayerData playerData;
+    private bool controllable = true;
 
+
+    [Header("------------player Component------------")]
     public PlayerInput input;
     private PlayerExperience playerExperience;
     public SkillManager playerSkillManager;
     public ItemManager playerItemManager;
-
     public HealthBar healthBar;
+    [SerializeField] private SphereCollider magneticArea;
 
-    private bool controllable = true;
 
     public override void Awake()
     {
@@ -65,7 +67,6 @@ public class PlayerController : BaseUnit
         HP -= damage;
         
         Debug.Log($"Damage is : {damage}, current HP is {HP}.");
-
         
         if (HP <= 0)
         {
@@ -80,9 +81,9 @@ public class PlayerController : BaseUnit
     {
         if (controllable)
         {
-            angle = Vector3.Angle(Vector3.up, dir);
-            angle = dir.x > 0 ? angle : -angle;
-            transform.rotation = Quaternion.Euler(0, angle, 0);
+            moveAngle = Vector3.Angle(Vector3.up, dir);
+            moveAngle = dir.x > 0 ? moveAngle : -moveAngle;
+            transform.rotation = Quaternion.Euler(0, moveAngle, 0);
             transform.Translate(Vector3.forward * totalMoveSpeed * Time.deltaTime);
         }
     }
@@ -153,23 +154,24 @@ public class PlayerController : BaseUnit
         totalArmor = baseArmor + armorEffect;
     }
     
+    //Set the damage of Skill Object
     public int CalculateDamage(int damage)
     {
         int totalDamage = damage + (int)(damage*mightEffect);
         return totalDamage;
     }
     
+    //Set the duration of Skill Object
     public float CalculateDuration(float duration)
     {
         float totalDuration = duration + duration*durationEffect;
         return totalDuration;
     }
     
-    public int CalculateThrowSpeed(int damage)
+    //Set the throwSpeed of Skill Object
+    public float CalculateThrowSpeed(float throwSpeed)
     {
-        int totalDamage = damage + (int)(damage*mightEffect);
-        Debug.Log(damage);
-        Debug.Log(mightEffect);
-        return totalDamage;
+        float totalThrowSpeed = throwSpeed + (int)(throwSpeed*speedEffect);
+        return totalThrowSpeed;
     }
 }

@@ -12,10 +12,8 @@ public class SkillObject_ThunderStrike : BaseSkillObject
 
     private async void OnEnable()
     {
-        Debug.Log("OnEnable");
         await UniTask.WaitUntil(() => initCompleted).ContinueWith(() =>
         {
-            Debug.Log("OnEnable2");
             count = SkillData.targetCount;
             targetEnemy = GetComponentInParent<Enemy>();
             transform.position = new Vector3(transform.position.x, 3, transform.position.z);
@@ -24,19 +22,17 @@ public class SkillObject_ThunderStrike : BaseSkillObject
         });
     }
 
-
     public async void Action()
     {
         while (count > 0)
         {
-            Debug.Log(count);
             area.SetActive(true);
             Collider[] targets = Physics.OverlapSphere(transform.position, SkillData.radius, targetLayer);
             if (targets.Length > 0)
             {
                 for (int i = 0; i < targets.Length; i++)
                 {
-                    targets[i].GetComponent<Enemy>().GetHurt(owner.GetComponent<PlayerController>().CalculateDamage(SkillData.damage));
+                    targets[i].GetComponent<Enemy>().GetHurt(damage);
                 }
             }
             if (targetEnemy.isDead)

@@ -13,7 +13,6 @@ public class SkillObject_Chronosphere : BaseSkillObject
         {
             transform.localScale = Vector3.one * SkillData.radius * 2;
             Attack();
-            float duration = owner.GetComponent<PlayerController>().CalculateDuration(SkillData.duration);
             UniTask.Delay((int) (duration * 1000))
                 .ContinueWith(() =>
                 {
@@ -39,7 +38,7 @@ public class SkillObject_Chronosphere : BaseSkillObject
             {
                 foreach (var target in colls)
                 {
-                    target.GetComponent<Enemy>().GetHurt(owner.GetComponent<PlayerController>().CalculateDamage(SkillData.damage));
+                    target.GetComponent<Enemy>().GetHurt(damage);
                 }
             }
             await UniTask.Delay((int) (SkillData.actionInterval * 1000));

@@ -8,7 +8,7 @@ public class EnemyDeadState : BaseEnemyState
     public override async void OnEnter()
     {
         enemy.isDead = true;
-        enemy.rb.velocity = Vector2.zero;
+        enemy.rb.velocity = Vector3.zero;
         enemy.GetComponent<Collider>().enabled = false;
         // enemy.GetComponentInChildren<MeshRenderer>().enabled = false;
         await UniTask.Delay(1000).ContinueWith(()=>

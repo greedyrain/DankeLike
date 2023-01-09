@@ -12,7 +12,6 @@ public class SkillObject_DeathWard : BaseSkillObject
         UniTask.WaitUntil(() => initCompleted).ContinueWith(async () =>
         {
             transform.position = new Vector3(transform.position.x, 1.334f, transform.position.z);
-            float duration = owner.GetComponent<PlayerController>().CalculateDuration(SkillData.duration);
             UniTask.Delay((int) (duration * 1000))
                 .ContinueWith(() => PoolManager.Instance.PushObj(gameObject.name, gameObject));
             while (gameObject.activeSelf)
@@ -34,7 +33,7 @@ public class SkillObject_DeathWard : BaseSkillObject
             {
                 obj.transform.position = owner.position;
                 obj.GetComponent<HitEffect_DeathWard>().count = count;
-                obj.GetComponent<HitEffect_DeathWard>().InitData(SkillData);
+                obj.GetComponent<HitEffect_DeathWard>().InitData(SkillData,player);
                 obj.GetComponent<HitEffect_DeathWard>().Init(hitTarget, owner);
             });
         }

@@ -18,7 +18,7 @@ public class HitEffect_Bedlam : BaseSkillObject
         {
             targetPos = target.position;
             transform.forward = targetPos - transform.position;
-            transform.position = Vector3.MoveTowards(transform.position, targetPos, SkillData.throwSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, throwSpeed * Time.deltaTime);
         }
 
         //如果子弹的目标已经死亡，则让子弹飞到目标位置后回收
@@ -33,7 +33,7 @@ public class HitEffect_Bedlam : BaseSkillObject
     {
         if (collision.transform == target)
         {
-            collision.transform.GetComponent<Enemy>().GetHurt(owner.GetComponent<PlayerController>().CalculateDamage(SkillData.damage));
+            collision.transform.GetComponent<Enemy>().GetHurt(damage);
             PoolManager.Instance.PushObj(gameObject.name, gameObject);
         }
     }

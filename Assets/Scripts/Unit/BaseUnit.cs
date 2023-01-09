@@ -30,6 +30,7 @@ public class BaseUnit : MonoBehaviour
     public float cooldownEffect;
     public float magnetEffect;
 
+    
     [HideInInspector] public Rigidbody rb;
     [HideInInspector] public Animator anim;
 

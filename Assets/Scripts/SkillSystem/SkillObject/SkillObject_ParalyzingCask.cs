@@ -35,7 +35,7 @@ public class SkillObject_ParalyzingCask : BaseSkillObject
             targetPos = target.position;
             transform.forward = targetPos - transform.position;
             transform.position =
-                Vector3.MoveTowards(transform.position, targetPos, SkillData.throwSpeed * Time.deltaTime);
+                Vector3.MoveTowards(transform.position, targetPos, throwSpeed * Time.deltaTime);
         }
 
         //如果子弹的目标已经死亡，则让子弹飞到目标位置后回收
@@ -51,7 +51,7 @@ public class SkillObject_ParalyzingCask : BaseSkillObject
         if (other.CompareTag("Enemy"))
         {
             Debug.Log(count);
-            other.transform.GetComponent<Enemy>().GetHurt(owner.GetComponent<PlayerController>().CalculateDamage(SkillData.damage));
+            other.transform.GetComponent<Enemy>().GetHurt(damage);
             if (count <= 0)
             {
                 PoolManager.Instance.PushObj(gameObject.name, gameObject);
