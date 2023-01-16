@@ -9,18 +9,20 @@ using UnityEngine.Serialization;
 public class PlayerController : BaseUnit
 {
     private float moveAngle;
-    private float baseMagneticRadius;
+
 
     [HideInInspector] public string userName;
     [HideInInspector] public int level;
 
-    [Header("------------Player Status------------")] 
+    [Header("------------Player Status------------")]
     public PlayerData playerData;
+
     private bool controllable = true;
 
 
     [Header("------------player Component------------")]
     public PlayerInput input;
+
     private PlayerExperience playerExperience;
     public SkillManager playerSkillManager;
     public ItemManager playerItemManager;
@@ -36,12 +38,9 @@ public class PlayerController : BaseUnit
         playerExperience.Init();
         playerSkillManager = GetComponent<SkillManager>();
         playerItemManager = GetComponent<ItemManager>();
-        baseMagneticRadius = magneticArea.radius;
-        
-        playerItemManager.onItemObtain += SetMagneticArea;
-        playerItemManager.onItemObtain += SetPlayerSpeed;
-        playerItemManager.onItemObtain += SetPlayerRecovery;
-        playerItemManager.onItemObtain += SetPlayerArmor;
+        basicMagneticRadius = magneticArea.radius;
+
+        playerItemManager.onItemObtain += OnItemObtain;
     }
 
     protected override void OnEnable()
@@ -51,7 +50,7 @@ public class PlayerController : BaseUnit
         UniTask.WaitUntil(() => UIManager.Instance.GetPanel<JoyStickPanel>()).ContinueWith(() =>
         {
             UIManager.Instance.GetPanel<JoyStickPanel>().OnDrag += Move;
-            input.onGetHurt += ()=>{GetHurt(10);};
+            input.onGetHurt += () => { GetHurt(10); };
         });
     }
 
@@ -59,24 +58,6 @@ public class PlayerController : BaseUnit
     {
         base.Start();
         input.EnableGamePlayInput();
-    }
-
-    public void GetHurt(int damage)
-    {
-        damage -= totalArmor;
-        if (damage <= 0)
-            damage = 0;
-        HP -= damage;
-        
-        Debug.Log($"Damage is : {damage}, current HP is {HP}.");
-        
-        if (HP <= 0)
-        {
-            isDead = true;
-            Dead();
-        }
-
-        // healthBar.ShowHP(baseMaxHP, HP);
     }
 
     public virtual void Move(Vector2 dir)
@@ -90,30 +71,25 @@ public class PlayerController : BaseUnit
         }
     }
 
-    private void Dead()
-    {
-        Debug.Log("Dead");
-    }
 
     public void InitData()
     {
         playerData = GameDataManager.Instance.PlayerData;
-        
+
         userName = playerData.userName;
         level = playerData.level;
-        
-        baseMaxHP = playerData.baseMaxHP;
-        HP = baseMaxHP;
 
-        baseMoveSpeed = playerData.baseMoveSpeed;
-        baseRecovery = playerData.baseRecovery;
-        baseArmor = playerData.baseArmor;
+        basicMaxHP = playerData.basicMaxHP;
+        maxHP = basicMaxHP;
+        HP = basicMaxHP;
 
-        experienceEffect = playerData.baseExperienceEffect;
+        basicMoveSpeed = playerData.basicMoveSpeed;
+        basicRecoveryEffect = playerData.basicRecovery;
+        basicArmor = playerData.basicArmor;
+        basicExperienceEffect = playerData.basicExperienceEffect;
 
-        totalMoveSpeed = baseMoveSpeed;
-        totalArmor = baseArmor;
-        totalRecovery = baseRecovery;
+        totalMoveSpeed = basicMoveSpeed;
+        totalRecoveryEffect = basicRecoveryEffect;
     }
 
     private async void Recover()
@@ -122,10 +98,10 @@ public class PlayerController : BaseUnit
         {
             await UniTask.Delay(1000).ContinueWith(() =>
             {
-                HP += totalRecovery;
-                if (HP >= (int) (baseMaxHP + baseMaxHP * maxHPEffect))
+                HP += recoveryEffect;
+                if (HP >= (int) (maxHP + maxHP * totalMaxHPEffect))
                 {
-                    HP = (int) (baseMaxHP + baseMaxHP * maxHPEffect);
+                    HP = (int) (maxHP + maxHP * totalMaxHPEffect);
                 }
             });
         }
@@ -136,57 +112,88 @@ public class PlayerController : BaseUnit
         controllable = status;
     }
 
+    #region Calculating Function
 
-    void SetPlayerArmor()
-    {
-        totalArmor = baseArmor + armorEffect;
-    }
-    
-    //Set the damage of Skill Object
+    //Calculate the damage of Skill Object
     public int CalculateDamage(int damage)
     {
-        int totalDamage = damage + (int)(damage*mightEffect);
+        int totalDamage = damage + (int) (damage * totalMightEffect);
         return totalDamage;
     }
-    
-    //Set the duration of Skill Object
+
+    //Calculate the duration of Skill Object
     public float CalculateDuration(float duration)
     {
-        float totalDuration = duration + duration*durationEffect;
-        return totalDuration;
+        float resultDuration = duration + duration * totalDurationEffect;
+        return resultDuration;
     }
-    
-    //Set the throwSpeed of Skill Object
+
+    //Calculate the throwSpeed of Skill Object
     public float CalculateThrowSpeed(float throwSpeed)
     {
-        float totalThrowSpeed = throwSpeed + (int)(throwSpeed*speedEffect);
-        return totalThrowSpeed;
+        float resultThrowSpeed = throwSpeed + (int) (throwSpeed * totalThrowSpeedEffect);
+        return resultThrowSpeed;
     }
-    
+
+    //Calculate the cooldown of Skill
     public float CalculateCoolDown(float coolDown)
     {
-        float totalCoolDown = coolDown - coolDown*cooldownEffect;
-        return totalCoolDown;
-    }
-    
-    #region Functions of event
-
-    void SetMagneticArea()
-    {
-        magneticArea.radius = baseMagneticRadius + baseMagneticRadius * magnetEffect;
+        float resultCoolDown = coolDown - coolDown * totalCooldownEffect;
+        return resultCoolDown;
     }
 
-    void SetPlayerSpeed()
+    //Calculate the area of Skill
+    public float CalculateArea(float radius)
     {
-        totalMoveSpeed = baseMoveSpeed + baseMoveSpeed * speedEffect;
+        float resultRadius = radius + radius * totalAreaEffect;
+        return resultRadius;
     }
-
-    void SetPlayerRecovery()
-    {
-        totalRecovery = baseRecovery + recoveryEffect;
-    } 
 
     #endregion
 
 
+    #region Functions of event
+    //
+    void OnItemObtain()
+    {
+        totalMaxHPEffect = basicMaxHPEffect + maxHPEffect;
+        totalArmorEffect = basicArmorEffect + armorEffect;
+        totalRecoveryEffect = basicRecoveryEffect + recoveryEffect;
+        totalMoveSpeedEffect = basicMoveSpeedEffect + moveSpeedEffect;
+        totalThrowSpeedEffect = basicThrowSpeedEffect + throwSpeedEffect;
+        totalExperienceEffect = basicExperienceEffect + experienceEffect;
+        totalMightEffect = basicMightEffect + mightEffect;
+        totalDurationEffect = basicDurationEffect + durationEffect;
+        totalAreaEffect = basicAreaEffect + areaEffect;
+        totalCooldownEffect = basicCooldownEffect + cooldownEffect;
+        totalMagnetEffect = basicMagneticRadius + basicMagneticRadius * magnetEffect;
+        
+        
+        SetMagneticArea();
+        SetPlayerMoveSpeed();
+        SetMaxHP();
+        SetArmor();
+    }
+
+    void SetMagneticArea()
+    {
+        magneticArea.radius = basicMagneticRadius + basicMagneticRadius * totalMagnetEffect;
+    }
+
+    void SetPlayerMoveSpeed()
+    {
+        totalMoveSpeed = basicMoveSpeed + basicMoveSpeed * moveSpeedEffect;
+    }
+
+    void SetMaxHP()
+    {
+        maxHP = basicMaxHP + basicMaxHP * totalMaxHPEffect;
+    }
+
+    void SetArmor()
+    {
+        armor = basicArmor + basicArmor * totalArmorEffect;
+    }
+
+    #endregion
 }

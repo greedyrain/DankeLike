@@ -58,7 +58,7 @@ public class Enemy : BaseUnit
     public override void GetHurt(int damage)
     {
         if (isDead) return;
-        HP -= damage;
+        base.GetHurt(damage);
         
         //Show the damage popup;
         DamagePopupManager.Instance.ShowDamage(damage, damageDisplayPos);
@@ -109,15 +109,15 @@ public class Enemy : BaseUnit
             }
         }
 
-        baseMoveSpeed = enemyData.moveSpeed;
-        totalMoveSpeed = baseMoveSpeed;
+        basicMoveSpeed = enemyData.moveSpeed;
+        totalMoveSpeed = basicMoveSpeed;
         originalMoveSpeed = enemyData.moveSpeed;
         objName = enemyData.name;
         description = enemyData.description;
-        baseMaxHP = enemyData.maxHP;
+        basicMaxHP = enemyData.maxHP;
         HP = enemyData.HP;
         baseAtk = enemyData.atk;
-        baseArmor = enemyData.def;
+        basicArmor = enemyData.def;
         patrolRadius = enemyData.patrolRadius;
         alertRadius = enemyData.alertRadius;
         minDrop = enemyData.minDrop;
@@ -126,11 +126,11 @@ public class Enemy : BaseUnit
 
     public void SetMoveSpeed(float facotr)
     {
-        baseMoveSpeed *= facotr;
+        basicMoveSpeed *= facotr;
     }
 
     public void ResetMoveSpeed()
     {
-        baseMoveSpeed = originalMoveSpeed;
+        basicMoveSpeed = originalMoveSpeed;
     }
 }

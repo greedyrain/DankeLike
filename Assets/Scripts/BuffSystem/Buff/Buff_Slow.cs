@@ -20,7 +20,7 @@ public class Buff_Slow : BaseBuff
 
     public override void Action()
     {
-        float effect = recipient.baseMoveSpeed * proportion;
+        float effect = recipient.basicMoveSpeed * proportion;
         recipient.totalMoveSpeed -= effect;
         UniTask.WaitUntil(() => remainTime <= 0).ContinueWith(() => recipient.totalMoveSpeed += effect);
     }

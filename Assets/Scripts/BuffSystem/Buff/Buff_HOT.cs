@@ -35,7 +35,7 @@ public class Buff_HOT : BaseBuff
             switch (figureType)
             {
                 case FigureType.PROPORTION:
-                    recipient.HP += (int) (recipient.baseMaxHP * proportion);
+                    recipient.HP += (int) (recipient.basicMaxHP * proportion);
                     remainInterval = interval;
                     break;
 

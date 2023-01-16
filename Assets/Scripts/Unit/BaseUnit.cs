@@ -6,31 +6,62 @@ using Random = UnityEngine.Random;
 
 public class BaseUnit : MonoBehaviour
 {
-    [Header("---------Base Data----------")]
-    [HideInInspector] public int baseMaxHP;
+    [Header("---------Basic Data----------")] 
+    //original max health Point;
+    [HideInInspector] public int basicMaxHP;
+    //Current max health point;
+    [HideInInspector] public int maxHP;
+    //current health point;
     [HideInInspector] public int HP;
-    [HideInInspector] public int baseArmor;
-    [HideInInspector] public float baseMoveSpeed;
-    [HideInInspector] public int baseRecovery;
+    //Original armor point;
+    [HideInInspector] public int basicArmor;
+    //Current armor point;
+    [HideInInspector] public int armor;
+    //Original move speed;
+    [HideInInspector] public float basicMoveSpeed;
+    //Current move speed;
+    [HideInInspector] public float totalMoveSpeed;
+ 
+    [HideInInspector] public int basicMaxHPEffect;
+    [HideInInspector] public int basicRecoveryEffect;
+    [HideInInspector] public int basicArmorEffect;
+    [HideInInspector] public float basicMoveSpeedEffect;
+    [HideInInspector] public float basicThrowSpeedEffect;
+    [HideInInspector] public float basicExperienceEffect;
+    [HideInInspector] public float basicMightEffect;
+    [HideInInspector] public float basicDurationEffect;
+    [HideInInspector] public float basicAreaEffect;
+    [HideInInspector] public float basicCooldownEffect;
+    [HideInInspector] public float basicMagneticRadius;
 
-    [Header("---------Total Data---------")]
-    public int totalArmor;
-    public float totalMoveSpeed;
-    public int totalRecovery;
-    
 
-    [Header("---------Effect Data---------")]
-    public float experienceEffect;
-    public int recoveryEffect;
+    [Header("---------Effect data from item---------")]
     public int maxHPEffect;
     public int armorEffect;
-    public float speedEffect;
+    public int recoveryEffect;
+    public float moveSpeedEffect;
+    public float throwSpeedEffect;
+    public float experienceEffect;
     public float mightEffect;
     public float durationEffect;
+    public float areaEffect;
     public float cooldownEffect;
     public float magnetEffect;
 
-    
+    [Header("---------Total Data---------")]
+    public int totalMaxHPEffect;
+    public int totalArmorEffect;
+    public int totalRecoveryEffect;
+    public float totalMoveSpeedEffect;
+    public float totalThrowSpeedEffect;
+    public float totalExperienceEffect;
+    public float totalMightEffect;
+    public float totalDurationEffect;
+    public float totalAreaEffect;
+    public float totalCooldownEffect;
+    public float totalMagnetEffect;
+
+
     [HideInInspector] public Rigidbody rb;
     [HideInInspector] public Animator anim;
 
@@ -59,7 +90,23 @@ public class BaseUnit : MonoBehaviour
         rb.velocity = Vector3.zero;
     }
 
+    protected virtual void Dead()
+    {
+        Debug.Log("Dead");
+    }
+
     public virtual void GetHurt(int damage)
     {
+        damage -= armor;
+        if (damage <= 0)
+            damage = 0;
+        HP -= damage;
+
+
+        if (HP <= 0)
+        {
+            isDead = true;
+            Dead();
+        }
     }
 }
