@@ -98,7 +98,7 @@ public class PlayerController : BaseUnit
         {
             await UniTask.Delay(1000).ContinueWith(() =>
             {
-                HP += recoveryEffect;
+                HP += totalRecoveryEffect;
                 if (HP >= (int) (maxHP + maxHP * totalMaxHPEffect))
                 {
                     HP = (int) (maxHP + maxHP * totalMaxHPEffect);
@@ -166,7 +166,7 @@ public class PlayerController : BaseUnit
         totalDurationEffect = basicDurationEffect + durationEffect;
         totalAreaEffect = basicAreaEffect + areaEffect;
         totalCooldownEffect = basicCooldownEffect + cooldownEffect;
-        totalMagnetEffect = basicMagneticRadius + basicMagneticRadius * magnetEffect;
+        totalMagnetEffect = basicMagneticEffect + magnetEffect;
         
         
         SetMagneticArea();
@@ -182,7 +182,7 @@ public class PlayerController : BaseUnit
 
     void SetPlayerMoveSpeed()
     {
-        totalMoveSpeed = basicMoveSpeed + basicMoveSpeed * moveSpeedEffect;
+        totalMoveSpeed = basicMoveSpeed + basicMoveSpeed * totalMoveSpeedEffect;
     }
 
     void SetMaxHP()

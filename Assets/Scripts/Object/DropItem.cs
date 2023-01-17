@@ -17,14 +17,12 @@ public class DropItem : MonoBehaviour
     {
         if (other.transform.CompareTag("Player"))
         {
-            Debug.Log(other.name);
             PoolManager.Instance.PushObj("DropItem",gameObject);
             other.transform.GetComponent<PlayerExperience>().ObtainDropItem(experience);
         }
         
         if (other.transform.CompareTag("MagneticArea"))
         {
-            Debug.Log(other.name);
             PoolManager.Instance.PushObj("DropItem",gameObject);
             other.transform.GetComponentInParent<PlayerExperience>().ObtainDropItem(experience);
         }

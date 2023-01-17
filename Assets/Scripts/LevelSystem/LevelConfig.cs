@@ -11,13 +11,13 @@ public class LevelConfig : ScriptableObject
 
     public Dictionary<int, List<EnemyGenerator>> generateTimingDic = new Dictionary<int, List<EnemyGenerator>>();
 
-    public async void Action(int nowTime)
+    public void Action(int nowTime)
     {
         foreach (KeyValuePair<int, List<EnemyGenerator>> kvp in generateTimingDic)
         {
             if (kvp.Key == nowTime && kvp.Value.Count > 0)
             {
-                bool check = false;
+                // bool check = false;
                 for (int i = 0; i < kvp.Value.Count; i++)
                 {
                     kvp.Value[i].GenerateEnemy();

@@ -21,6 +21,9 @@ public class BaseUnit : MonoBehaviour
     [HideInInspector] public float basicMoveSpeed;
     //Current move speed;
     [HideInInspector] public float totalMoveSpeed;
+    //original magnetic radius;    
+    [HideInInspector] public float basicMagneticRadius;
+
  
     [HideInInspector] public int basicMaxHPEffect;
     [HideInInspector] public int basicRecoveryEffect;
@@ -32,7 +35,7 @@ public class BaseUnit : MonoBehaviour
     [HideInInspector] public float basicDurationEffect;
     [HideInInspector] public float basicAreaEffect;
     [HideInInspector] public float basicCooldownEffect;
-    [HideInInspector] public float basicMagneticRadius;
+    [HideInInspector] public float basicMagneticEffect;
 
 
     [Header("---------Effect data from item---------")]
