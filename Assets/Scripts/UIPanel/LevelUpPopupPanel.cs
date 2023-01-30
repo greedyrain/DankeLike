@@ -38,7 +38,7 @@ public class LevelUpPopupPanel : BasePanel
     {
         base.Show();
         GenerateRandomSkillsOrItems();
-        UniTask.Delay(300).ContinueWith(() => Time.timeScale = 0);
+        UniTask.WaitUntil(()=>canvasGroup.alpha >= 0.99f).ContinueWith(() => Time.timeScale = 0);
     }
 
     public async void GenerateRandomSkillsOrItems()

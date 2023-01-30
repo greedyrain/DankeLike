@@ -15,7 +15,9 @@ public class PlayerExperience : MonoBehaviour
 
     public void ObtainDropItem(int exp)
     {
-        exp += exp + (int)(exp* player.totalExperienceEffect);
+        exp += Mathf.CeilToInt(exp * player.totalExperienceEffect);
+        Debug.Log(exp);
+        
         currentExp += exp;
         if (currentExp >= maxExp)
         {

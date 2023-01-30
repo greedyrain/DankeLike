@@ -87,7 +87,7 @@ public class Enemy : BaseUnit
     }
 
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player") && remainAtkCD <= 0)
         {

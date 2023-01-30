@@ -7,12 +7,10 @@ using UnityEngine.Events;
 
 public class SkillObject_SunRay : BaseSkillObject
 {
-    private Collider coll;
     private Vector3 dir;
     private List<Collider> colls = new List<Collider>();
     private void OnEnable()
     {
-        coll = GetComponent<Collider>();
         UniTask.WaitUntil(() => initCompleted).ContinueWith(() =>
         {
             transform.localScale = new Vector3(1, 1,SkillData.range);

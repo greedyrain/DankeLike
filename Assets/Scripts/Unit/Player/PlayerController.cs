@@ -10,7 +10,6 @@ public class PlayerController : BaseUnit
 {
     private float moveAngle;
 
-
     [HideInInspector] public string userName;
     [HideInInspector] public int level;
 
@@ -24,10 +23,10 @@ public class PlayerController : BaseUnit
     public PlayerInput input;
 
     private PlayerExperience playerExperience;
-    public SkillManager playerSkillManager;
-    public ItemManager playerItemManager;
-    public HealthBar healthBar;
+    [SerializeField] private HealthBar healthBar;
     [SerializeField] private SphereCollider magneticArea;
+    [HideInInspector] public SkillManager playerSkillManager;
+    [HideInInspector] public ItemManager playerItemManager;
 
 
     public override void Awake()
@@ -92,6 +91,12 @@ public class PlayerController : BaseUnit
         totalRecoveryEffect = basicRecoveryEffect;
     }
 
+    public override void GetHurt(int damage)
+    {
+        base.GetHurt(damage);
+        healthBar.ShowHP(maxHP, HP);
+    }
+
     private async void Recover()
     {
         while (!isDead)
@@ -103,6 +108,8 @@ public class PlayerController : BaseUnit
                 {
                     HP = (int) (maxHP + maxHP * totalMaxHPEffect);
                 }
+
+                healthBar.ShowHP(maxHP, HP);
             });
         }
     }
@@ -153,6 +160,7 @@ public class PlayerController : BaseUnit
 
 
     #region Functions of event
+
     //
     void OnItemObtain()
     {
@@ -167,8 +175,8 @@ public class PlayerController : BaseUnit
         totalAreaEffect = basicAreaEffect + areaEffect;
         totalCooldownEffect = basicCooldownEffect + cooldownEffect;
         totalMagnetEffect = basicMagneticEffect + magnetEffect;
-        
-        
+
+
         SetMagneticArea();
         SetPlayerMoveSpeed();
         SetMaxHP();
@@ -187,7 +195,12 @@ public class PlayerController : BaseUnit
 
     void SetMaxHP()
     {
-        maxHP = basicMaxHP + basicMaxHP * totalMaxHPEffect;
+        float hpRatio = HP / (float)maxHP;
+        maxHP = basicMaxHP + totalMaxHPEffect;
+
+        //Keep hp at the same ratio as max hp.
+        HP = Mathf.CeilToInt(maxHP * hpRatio);
+        healthBar.ShowHP(maxHP,HP);
     }
 
     void SetArmor()

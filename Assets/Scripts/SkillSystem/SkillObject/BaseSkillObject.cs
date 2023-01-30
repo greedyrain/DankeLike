@@ -31,8 +31,6 @@ public class BaseSkillObject : MonoBehaviour
         throwSpeed = player.CalculateThrowSpeed(SkillData.throwSpeed);
         damage = player.CalculateDamage(SkillData.damage);
         
-        Debug.Log($"Damage is {damage}, damage in skill data is {SkillData.damage}");
-
         initCompleted = true;
     }
 

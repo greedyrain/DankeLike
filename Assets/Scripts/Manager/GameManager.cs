@@ -1,17 +1,43 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-public class GameManager : MonoBehaviour
+public class GameManager : SingletonUnity<GameManager>
 {
     public Camera mainCamera;
-    public PlayerController player;
-    // Start is called before the first frame update
+    
+    [SerializeField] private PlayerController player;
+    [SerializeField] private GameObject plane;
+    [SerializeField] private DropItem dropItem;
+
     void Start()
     {
-        UIManager.Instance.ShowPanel<GamePanel>();
-        UIManager.Instance.HidePanel<GamePanel>();
-        UIManager.Instance.ShowPanel<LevelUpPopupPanel>();
+        UIManager.Instance.ShowPanel<MainMenuPanel>();
+        // UIManager.Instance.ShowPanel<GamePanel>();
+        // UIManager.Instance.HidePanel<GamePanel>();
+        // UIManager.Instance.ShowPanel<LevelUpPopupPanel>();
+    }
+
+    public void StartGame(int levelID)
+    {
+        Instantiate(plane).transform.position = Vector3.zero;
+        UniTask.DelayFrame(2);
+        Instantiate(player).transform.position = Vector3.zero + Vector3.up;
+        float x, z;
+        for (int i = 0; i < 5; i++)
+        {
+            x = Random.Range(0, 10);
+            z = Random.Range(0, 10);
+            Instantiate(dropItem).transform.position = new Vector3(x, 1, z);
+        }
+    }
+
+    public void Reset()
+    {
+        FindObjectsOfType<BaseUnit>();
     }
 }

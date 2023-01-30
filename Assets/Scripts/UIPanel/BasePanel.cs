@@ -3,12 +3,11 @@ using UnityEngine.Events;
 
 public abstract class BasePanel : MonoBehaviour
 {
-    bool isShow;
-    CanvasGroup canvasGroup;
+    protected bool isShow;
+    protected CanvasGroup canvasGroup;
 
     float alphaSpeed = 10;
     public UnityAction hideCallBack;
-    // Start is called before the first frame update
     protected virtual void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
@@ -22,7 +21,6 @@ public abstract class BasePanel : MonoBehaviour
         Init();
     }
 
-    // Update is called once per frame
     protected virtual void Update()
     {
         //淡入淡出
@@ -51,7 +49,7 @@ public abstract class BasePanel : MonoBehaviour
         canvasGroup.alpha = 0;
     }
 
-    public virtual void Hide(UnityAction callBack)
+    public virtual void Hide(UnityAction callBack = null)
     {
         isShow = false;
         canvasGroup.alpha = 1;
