@@ -17,9 +17,6 @@ public class GameManager : SingletonUnity<GameManager>
     void Start()
     {
         UIManager.Instance.ShowPanel<MainMenuPanel>();
-        // UIManager.Instance.ShowPanel<GamePanel>();
-        // UIManager.Instance.HidePanel<GamePanel>();
-        // UIManager.Instance.ShowPanel<LevelUpPopupPanel>();
     }
 
     public void StartGame(int levelID)

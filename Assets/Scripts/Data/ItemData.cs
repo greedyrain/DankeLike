@@ -9,7 +9,7 @@ public class ItemData
     public string iconName;
     public string name;
     public string description;
-    public int maxHPEffect;
+    public float maxHPEffect;
     public int recoveryEffect;
     public int armorEffect;
     public float mightEffect;

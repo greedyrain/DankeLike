@@ -12,7 +12,7 @@ public class ItemManager : MonoBehaviour
     BaseUnit owner;
     public List<BaseItem> ownedItemList = new List<BaseItem>();
     
-    public int totalMaxHPEffect;
+    public float totalMaxHPEffect;
     public int totalArmorEffect;
     public float totalMoveSpeedEffect;
     public float totalMightEffect;

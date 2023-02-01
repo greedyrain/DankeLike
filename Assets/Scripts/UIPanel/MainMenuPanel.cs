@@ -22,7 +22,7 @@ public class MainMenuPanel : BasePanel
 
         powerUpBtn.onClick.AddListener(() =>
         {
-            
+            UIManager.Instance.ShowPanel<PowerUpPanel>();
         });
 
         quitBtn.onClick.AddListener(() => { });

@@ -196,7 +196,7 @@ public class PlayerController : BaseUnit
     void SetMaxHP()
     {
         float hpRatio = HP / (float)maxHP;
-        maxHP = basicMaxHP + totalMaxHPEffect;
+        maxHP = basicMaxHP + Mathf.CeilToInt(basicMaxHP * totalMaxHPEffect);
 
         //Keep hp at the same ratio as max hp.
         HP = Mathf.CeilToInt(maxHP * hpRatio);

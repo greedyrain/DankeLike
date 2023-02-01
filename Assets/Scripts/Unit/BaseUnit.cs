@@ -25,7 +25,7 @@ public class BaseUnit : MonoBehaviour
     [HideInInspector] public float basicMagneticRadius;
 
  
-    [HideInInspector] public int basicMaxHPEffect;
+    [HideInInspector] public float basicMaxHPEffect;
     [HideInInspector] public int basicRecoveryEffect;
     [HideInInspector] public int basicArmorEffect;
     [HideInInspector] public float basicMoveSpeedEffect;
@@ -39,7 +39,7 @@ public class BaseUnit : MonoBehaviour
 
 
     [Header("---------Effect data from item---------")]
-    public int maxHPEffect;
+    public float maxHPEffect;
     public int armorEffect;
     public int recoveryEffect;
     public float moveSpeedEffect;
@@ -52,7 +52,7 @@ public class BaseUnit : MonoBehaviour
     public float magnetEffect;
 
     [Header("---------Total Data---------")]
-    public int totalMaxHPEffect;
+    public float totalMaxHPEffect;
     public int totalArmorEffect;
     public int totalRecoveryEffect;
     public float totalMoveSpeedEffect;
