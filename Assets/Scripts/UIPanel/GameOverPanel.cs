@@ -19,7 +19,7 @@ public class GameOverPanel : BasePanel
         {
             UIManager.Instance.HidePanel<GamePanel>();
             UIManager.Instance.HidePanel<JoyStickPanel>();
-            Hide();
+            UIManager.Instance.HidePanel<GameOverPanel>(); 
             UIManager.Instance.ShowPanel<MainMenuPanel>();
         }));
         

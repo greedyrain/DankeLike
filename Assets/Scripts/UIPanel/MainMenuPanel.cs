@@ -13,11 +13,16 @@ public class MainMenuPanel : BasePanel
 
     public override void Init()
     {
-        startBtn.onClick.AddListener(() =>
+        startBtn.onClick.AddListener(async () =>
         {
+            GameManager.Instance.isPaused = false;
+            int levelIndex = GameDataManager.Instance.InGameData.currentLevel == null
+                ? 1
+                : GameDataManager.Instance.InGameData.currentLevel;
+            await GameManager.Instance.StartGame(levelIndex);
             UIManager.Instance.ShowPanel<GamePanel>();
-            UIManager.Instance.HidePanel<GamePanel>();
             UIManager.Instance.ShowPanel<LevelUpPopupPanel>();
+            UIManager.Instance.HidePanel<MainMenuPanel>();
         });
 
         powerUpBtn.onClick.AddListener(() =>

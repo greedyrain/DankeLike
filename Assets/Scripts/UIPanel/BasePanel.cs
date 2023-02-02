@@ -6,6 +6,10 @@ public abstract class BasePanel : MonoBehaviour
     protected bool isShow;
     protected CanvasGroup canvasGroup;
 
+    private float lastFrameTime;
+    private float currentFrameTime;
+    private float deltaTime;
+
     float alphaSpeed = 10;
     public UnityAction hideCallBack;
     protected virtual void Awake()
@@ -26,13 +30,17 @@ public abstract class BasePanel : MonoBehaviour
         //淡入淡出
         if (isShow && canvasGroup.alpha != 1)
         {
-            canvasGroup.alpha += Time.deltaTime * alphaSpeed;
+            currentFrameTime = Time.realtimeSinceStartup;
+            deltaTime = currentFrameTime - lastFrameTime;
+            canvasGroup.alpha += deltaTime * alphaSpeed;
             if (canvasGroup.alpha > 1)
                 canvasGroup.alpha = 1;
         }
         else if (!isShow && canvasGroup.alpha >0)
         {
-            canvasGroup.alpha -= Time.deltaTime * alphaSpeed;
+            currentFrameTime = Time.realtimeSinceStartup;
+            deltaTime = currentFrameTime - lastFrameTime;
+            canvasGroup.alpha -= deltaTime * alphaSpeed;
             if (canvasGroup.alpha <= 0)
             {
                 canvasGroup.alpha = 0;
@@ -47,6 +55,8 @@ public abstract class BasePanel : MonoBehaviour
     {
         isShow = true;
         canvasGroup.alpha = 0;
+        lastFrameTime = Time.realtimeSinceStartup;
+        currentFrameTime = Time.realtimeSinceStartup;
     }
 
     public virtual void Hide(UnityAction callBack = null)

@@ -17,6 +17,7 @@ public class SkillOptionObject : MonoBehaviour
         {
             UIManager.Instance.GetPanel<LevelUpPopupPanel>().UpdatePanelData(data.description);
             UIManager.Instance.GetPanel<LevelUpPopupPanel>().currentSelectedSkill = this;
+            UIManager.Instance.GetPanel<LevelUpPopupPanel>().confirmBtn.gameObject.SetActive(true);
             UIManager.Instance.GetPanel<LevelUpPopupPanel>().currentSelectedItem = null;
         });
     }

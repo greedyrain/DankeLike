@@ -43,7 +43,7 @@ public class PowerUpPanel : BasePanel
         backBtn.onClick.AddListener(() =>
         {
             UIManager.Instance.ShowPanel<MainMenuPanel>();
-            Hide();
+            UIManager.Instance.HidePanel<PowerUpPanel>();
         });
         
         buyBtn.onClick.AddListener(()=>Upgrade(selectedEffectName));

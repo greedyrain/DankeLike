@@ -8,6 +8,8 @@ public class GamePanel : BasePanel
 {
     public Text timeText;
     public Text levelText;
+    [SerializeField] private Button pauseBtn; 
+    
     public float time;
 
     public Image expBar;
@@ -19,6 +21,7 @@ public class GamePanel : BasePanel
     public override void Init()
     {
         Show();
+        pauseBtn.onClick.AddListener(PressPauseBtn);
         UpdateExperience(0, 1);
         UpdateLevelText(1);
     }
@@ -30,9 +33,12 @@ public class GamePanel : BasePanel
 
     void UpdateTime()
     {
-        time += Time.fixedDeltaTime;
-        LevelManager.Instance.gameTime = (int)time;
-        timeText.text = System.TimeSpan.FromSeconds(time).ToString(format: @"mm\:ss\:ff");
+        if (!GameManager.Instance.isPaused)
+        {
+            time += Time.fixedDeltaTime;
+            LevelManager.Instance.gameTime = (int) time;
+            timeText.text = System.TimeSpan.FromSeconds(time).ToString(format: @"mm\:ss\:ff");
+        }
     }
 
     public void UpdateExperience(int currentExp,int maxExp)
@@ -71,5 +77,12 @@ public class GamePanel : BasePanel
         
         itemList[itemCount].Initialize(baseItem);
         itemCount++;
+    }
+
+    void PressPauseBtn()
+    {
+        GameManager.Instance.PauseGame();
+        UIManager.Instance.HidePanel<JoyStickPanel>();
+        UIManager.Instance.ShowPanel<PausePanel>();
     }
 }

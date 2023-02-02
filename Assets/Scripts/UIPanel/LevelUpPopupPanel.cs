@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class LevelUpPopupPanel : BasePanel
@@ -38,7 +39,13 @@ public class LevelUpPopupPanel : BasePanel
     {
         base.Show();
         GenerateRandomSkillsOrItems();
-        UniTask.WaitUntil(()=>canvasGroup.alpha >= 0.99f).ContinueWith(() => Time.timeScale = 0);
+        GameManager.Instance.PauseGame(); 
+    }
+
+    public override void Hide(UnityAction callBack = null)
+    {
+        base.Hide(callBack);
+        GameManager.Instance.ResumeGame();
     }
 
     public async void GenerateRandomSkillsOrItems()

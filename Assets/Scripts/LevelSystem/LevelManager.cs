@@ -11,6 +11,8 @@ public class LevelManager : SingletonUnity<LevelManager>
     public int gameTime;
     public List<LevelConfig> LevelConfigs;
 
+    private bool levelActivated;
+
     public override void Awake()
     {
         base.Awake();
@@ -18,16 +20,6 @@ public class LevelManager : SingletonUnity<LevelManager>
         {
             SetLevel(1);
         }
-    }
-
-    private void OnEnable()
-    {
-        CumulateGenerateTiming();
-    }
-
-    private void Update()
-    {
-         // currentLevel.Action(gameTime);
     }
 
     public void SetLevel(int id)
@@ -41,12 +33,14 @@ public class LevelManager : SingletonUnity<LevelManager>
         }
     }
 
-    public async void CumulateGenerateTiming()
+    public async void CumulateTimingOfGeneration()
     {
-        while (true)
+        GameManager.Instance.isPaused = false;
+        while (!GameManager.Instance.isPaused)
         {
-            currentLevel.Action(gameTime);
-            await UniTask.Delay(1000).ContinueWith(() => gameTime++);
+            currentLevel.Activate(gameTime);
+            // await UniTask.Delay(1000).ContinueWith(() => gameTime++);
+            await UniTask.Delay(1000);
         }
     }
 }

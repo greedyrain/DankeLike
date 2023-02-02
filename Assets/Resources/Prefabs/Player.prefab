@@ -2460,33 +2460,57 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66b5de1e6e2794b998ea5ebbaf24dabf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseMaxHP: 0
+  basicMaxHP: 0
+  maxHP: 0
   HP: 0
-  baseArmor: 0
-  baseMoveSpeed: 0
-  baseRecovery: 0
-  totalArmor: 0
+  basicArmor: 0
+  armor: 0
+  basicMoveSpeed: 0
   totalMoveSpeed: 0
-  totalRecovery: 0
-  experienceEffect: 0
-  recoveryEffect: 0
+  basicMagneticRadius: 0
+  basicMaxHPEffect: 0
+  basicRecoveryEffect: 0
+  basicArmorEffect: 0
+  basicMoveSpeedEffect: 0
+  basicThrowSpeedEffect: 0
+  basicExperienceEffect: 0
+  basicMightEffect: 0
+  basicDurationEffect: 0
+  basicAreaEffect: 0
+  basicCooldownEffect: 0
+  basicMagneticEffect: 0
   maxHPEffect: 0
   armorEffect: 0
-  speedEffect: 0
+  recoveryEffect: 0
+  moveSpeedEffect: 0
+  throwSpeedEffect: 0
+  experienceEffect: 0
   mightEffect: 0
   durationEffect: 0
+  areaEffect: 0
   cooldownEffect: 0
   magnetEffect: 0
+  totalMaxHPEffect: 0
+  totalArmorEffect: 0
+  totalRecoveryEffect: 0
+  totalMoveSpeedEffect: 0
+  totalThrowSpeedEffect: 0
+  totalExperienceEffect: 0
+  totalMightEffect: 0
+  totalDurationEffect: 0
+  totalAreaEffect: 0
+  totalCooldownEffect: 0
+  totalMagnetEffect: 0
   rb: {fileID: 0}
   anim: {fileID: 0}
   isDead: 0
   userName: 
   level: 0
   input: {fileID: 11400000, guid: c68eb0c94360047888e4ea2c4467bb80, type: 2}
+  healthBar: {fileID: 4266741534040438303, guid: 74135f383056d2a43a26339cab7e0a58, type: 3}
+  magneticArea: {fileID: 4237806280560627028}
   playerSkillManager: {fileID: 0}
   playerItemManager: {fileID: 0}
-  healthBar: {fileID: 0}
-  magneticArea: {fileID: 4237806280560627028}
 --- !u!114 &1382808353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2499,16 +2523,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10dafc19fe1b3af4082a68d095e2bee9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ownedItemList: []
   totalMaxHPEffect: 0
   totalArmorEffect: 0
-  totalSpeedEffect: 0
+  totalMoveSpeedEffect: 0
   totalMightEffect: 0
   totalDurationEffect: 0
   totalRecoveryEffect: 0
   totalCooldownEffect: 0
   totalMagnetEffect: 0
   totalExperienceEffect: 0
+  totalThrowSpeedEffect: 0
+  totalAreaEffect: 0
 --- !u!1 &7869946003227586798
 GameObject:
   m_ObjectHideFlags: 0

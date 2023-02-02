@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class InGameData
 {
+    public int currentLevel;
     public int money;
     public int totalUpgradeCost;
 }

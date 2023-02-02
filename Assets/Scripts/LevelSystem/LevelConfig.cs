@@ -11,7 +11,7 @@ public class LevelConfig : ScriptableObject
 
     public Dictionary<int, List<EnemyGenerator>> generateTimingDic = new Dictionary<int, List<EnemyGenerator>>();
 
-    public void Action(int nowTime)
+    public void Activate(int nowTime)
     {
         foreach (KeyValuePair<int, List<EnemyGenerator>> kvp in generateTimingDic)
         {

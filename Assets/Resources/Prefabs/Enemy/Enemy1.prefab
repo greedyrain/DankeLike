@@ -101,25 +101,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 928f1ea8c422e4b10bbfca50192f7b88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseMaxHP: 0
+  basicMaxHP: 0
+  maxHP: 0
   HP: 0
-  baseArmor: 0
-  baseMoveSpeed: 0
-  totalMight: 0
-  totalArmor: 0
+  basicArmor: 0
+  armor: 0
+  basicMoveSpeed: 0
   totalMoveSpeed: 0
+  basicMagneticRadius: 0
+  basicMaxHPEffect: 0
+  basicRecoveryEffect: 0
+  basicArmorEffect: 0
+  basicMoveSpeedEffect: 0
+  basicThrowSpeedEffect: 0
+  basicExperienceEffect: 0
+  basicMightEffect: 0
+  basicDurationEffect: 0
+  basicAreaEffect: 0
+  basicCooldownEffect: 0
+  basicMagneticEffect: 0
+  maxHPEffect: 0
+  armorEffect: 0
+  recoveryEffect: 0
+  moveSpeedEffect: 0
+  throwSpeedEffect: 0
+  experienceEffect: 0
+  mightEffect: 0
+  durationEffect: 0
+  areaEffect: 0
+  cooldownEffect: 0
+  magnetEffect: 0
   totalMaxHPEffect: 0
   totalArmorEffect: 0
-  totalSpeedEffect: 0
+  totalRecoveryEffect: 0
+  totalMoveSpeedEffect: 0
+  totalThrowSpeedEffect: 0
+  totalExperienceEffect: 0
   totalMightEffect: 0
   totalDurationEffect: 0
-  totalRecoveryEffect: 0
+  totalAreaEffect: 0
   totalCooldownEffect: 0
   totalMagnetEffect: 0
   rb: {fileID: 0}
   anim: {fileID: 0}
   isDead: 0
-  player: {fileID: 0}
   center: {fileID: 3752960044313490994}
   damageDisplayPos: {fileID: 2661469551950006461}
   id: 1001
